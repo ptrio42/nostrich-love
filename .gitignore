@@ -38,3 +38,6 @@ learning
 !.claude/launch.json
 !.claude/skills/
 .opencode/
+
+# Local Search Console exports
+raports/

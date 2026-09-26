@@ -26,10 +26,10 @@ const localized = (path: string) =>
 const navLabel = (id: string) => t(`header.nav.${id}`, currentLocale);
 
 const navItems = [
-  { label: navLabel('tools'), href: localized('/tools') },
-  { label: navLabel('glossary'), href: localized('/glossary') },
-  { label: navLabel('resources'), href: localized('/resources') },
-  { label: navLabel('about'), href: localized('/about') },
+  { label: navLabel('tools'), href: localized('/tools/') },
+  { label: navLabel('glossary'), href: localized('/glossary/') },
+  { label: navLabel('resources'), href: localized('/resources/') },
+  { label: navLabel('about'), href: localized('/about/') },
 ];
 
 // NOTE: "Client Recommender" was removed here — it pointed at /tools#client-recommender,
@@ -37,13 +37,13 @@ const navItems = [
 // rendered anywhere; see docs/audit-2026-07/market-research.md §2.3). Restore it only
 // together with a page that actually hosts the component.
 const toolItems = [
-  { label: t('header.tools.keyGenerator', currentLocale), href: localized('/tools/key-generator') },
-  { label: t('header.tools.nip05Checker', currentLocale), href: localized('/tools/nip05-checker') },
-  { label: t('header.tools.twitterBridge', currentLocale), href: localized('/twitter-bridge') },
+  { label: t('header.tools.keyGenerator', currentLocale), href: localized('/tools/key-generator/') },
+  { label: t('header.tools.nip05Checker', currentLocale), href: localized('/tools/nip05-checker/') },
+  { label: t('header.tools.twitterBridge', currentLocale), href: localized('/twitter-bridge/') },
 ];
 
-const progressHref = localized('/progress');
-const settingsHref = localized('/settings');
+const progressHref = localized('/progress/');
+const settingsHref = localized('/settings/');
 const homeAria = t('header.aria.home', currentLocale).replace('{site}', siteConfig.name);
 ---
 

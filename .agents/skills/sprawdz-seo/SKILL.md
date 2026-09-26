@@ -22,7 +22,10 @@ Skrypt przelatuje wszystkie strony i 7 języków. Sprawdza: sitemapę z adnotacj
 
 - **Google Search Console jest już zweryfikowane przez DNS.** Grep po repo tego nie znajdzie — nie ma pliku weryfikacyjnego ani meta taga. Nie proponuj ponownej weryfikacji.
 - Stronę serwują cztery hosty.
-- **Wąskim gardłem są linki zewnętrzne, nie technikalia.** Techniczne SEO jest w dobrym stanie; rekomendacja „popraw meta description" nie ruszy pozycji. Jeśli pytanie brzmi „dlaczego nie rośniemy", odpowiedź prawie na pewno leży poza tym plikiem.
+- **Raport GSC trzeba rozbić na adresy.** Eksport strony zbiorczej zawiera tylko liczby. Otwórz daną przyczynę i sprawdź tabelę `Examples`, daty ostatniego skanowania oraz odpowiedź produkcyjną. W 2026 roku wcześniejsze błędne hreflang ogłaszały nieistniejące wersje językowe, także ścieżki z dwoma prefiksami locale. Te adresy mogą nadal występować jako 404, choć nie ma ich w obecnej sitemapie ani linkach. Nie dodawaj masowych przekierowań tylko po to, by zmniejszyć licznik 404. Dla strony przeniesionej do konkretnego odpowiednika dodaj przekierowanie obejmujące oba warianty końcowego ukośnika.
+- **„Crawled - currently not indexed” wymaga osobnej diagnozy.** Oddziel aktualne adresy kanoniczne z sitemapy od dawnych tras, zasobów i wariantów bez końcowego ukośnika. Poprawny build, sitemapa i canonical nie dowodzą, że Google zaindeksuje stronę. Nie przypisuj braku indeksacji wyłącznie słabym linkom zewnętrznym bez danych dla konkretnych URL-i.
+- **„Discovered - currently not indexed” sprawdzaj w grafie linków.** Porównaj adresy z produkcyjną sitemapą, odpowiedzią HTTP, `robots`, canonical i zwykłymi linkami `<a>` ze strony głównej. Data `1970-01-01` w eksporcie CSV to brak daty skanowania, a nie rzeczywista data. Gdy te kontrole przechodzą, sprawdź w Search Console ostatni odczyt sitemapy, Crawl stats i Test live URL zamiast zgadywać zmianę w kodzie.
+- **Końcowy ukośnik wymaga spójnej zmiany.** Vercel obecnie zwraca 200 dla obu wariantów ścieżki, a sitemapa i canonical używają ukośnika. Wiele linków wewnętrznych go pomija. Przed ustawieniem `trailingSlash: true` popraw linki emitowane przez stronę, inaczej każda taka nawigacja dostanie przekierowanie.
 
 ## Referencje
 

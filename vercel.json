@@ -74,6 +74,26 @@
       "permanent": true
     },
     {
+      "source": "/:oldLocale([a-z][a-z])/:locale([a-z][a-z])/guides",
+      "destination": "/:locale/guides/",
+      "permanent": true
+    },
+    {
+      "source": "/:oldLocale([a-z][a-z])/:locale([a-z][a-z])/guides/",
+      "destination": "/:locale/guides/",
+      "permanent": true
+    },
+    {
+      "source": "/:oldLocale([a-z][a-z])/:locale([a-z][a-z])/guides/:slug",
+      "destination": "/:locale/guides/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/:oldLocale([a-z][a-z])/:locale([a-z][a-z])/guides/:slug/",
+      "destination": "/:locale/guides/:slug/",
+      "permanent": true
+    },
+    {
       "source": "/en/guides",
       "destination": "/guides",
       "permanent": true
@@ -125,6 +145,11 @@
     },
     {
       "source": "/damus-demo",
+      "destination": "https://sandstr.app",
+      "permanent": true
+    },
+    {
+      "source": "/damus-demo/",
       "destination": "https://sandstr.app",
       "permanent": true
     },
