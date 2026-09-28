@@ -3608,40 +3608,40 @@
     "hero": {
       "problem": "Auf den meisten sozialen Plattformen sind deine Beiträge und Follower an ein Unternehmen gebunden.",
       "rules": "Dort können sich die Regeln an einem Dienstag ändern, ohne dass dich vorher jemand warnen muss.",
-      "cue": "Nostr funktioniert anders",
+      "cue": "Nostr funktioniert anders.",
+      "answer": "Kein einzelnes Unternehmen betreibt das gesamte Netzwerk. Du kannst wählen, welche Apps und Server du nutzt.",
       "title": "Nostr Schritt für Schritt lernen",
-      "description": "Ein kostenloser Kurs für Menschen, die Nostr gerade erst kennenlernen. Beginne mit den Grundlagen, veröffentliche deinen ersten Beitrag und finde Menschen zum Folgen. Lies der Reihe nach oder springe zu dem, was du brauchst.",
+      "description": "Ein kostenloser Kurs für alle, die Nostr gerade erst kennenlernen. Beginne mit den Grundlagen und lerne dann, eine App zu nutzen, Menschen zu finden und Beiträge zu veröffentlichen. Lies der Reihe nach oder wähle die Anleitung, die du brauchst.",
       "primaryCta": "Mit der ersten Anleitung beginnen",
-      "secondaryCta": "Alle Anleitungen ansehen",
-      "note": "Open Source und in sieben Sprachen verfügbar, darunter Arabisch und Hindi."
+      "secondaryCta": "Alle Anleitungen ansehen"
     },
     "firstGuides": {
       "title": "Deine ersten vier Anleitungen",
       "allGuides": "Alle 16 Anleitungen ansehen"
+    },
+    "comparisons": {
+      "title": "Wie unterscheidet sich Nostr?",
+      "description": "Entdecke die Unterschiede zu Twitter/X, Mastodon und Bluesky."
     },
     "closing": {
       "title": "Finde deine nächste Anleitung",
       "description": "Der vollständige Kurs behandelt Privatsphäre, verschiedene Apps und die Technik hinter Nostr.",
       "cta": "Alle Anleitungen ansehen"
     },
-    "whatFeelsFamiliar": {
-      "title": "Was sich vertraut anfühlt",
-      "description": "Du nutzt weiterhin eine App, um Beiträge zu lesen, Menschen zu folgen und an Gesprächen teilzunehmen. Du kannst anfangen, ohne erst die Technik des Netzwerks zu verstehen."
-    },
     "whatChanges": {
       "title": "Was sich bei Nostr ändert",
       "points": [
         {
-          "title": "Eine Identität für mehrere Apps",
-          "description": "Ein Nostr-Konto basiert auf Schlüsseln. Du kannst dieselbe Identität in einer anderen Nostr-App verwenden."
+          "title": "Du kannst dein Konto in verschiedenen Apps nutzen",
+          "description": "Du kannst dasselbe Nostr-Konto in einer anderen App nutzen, ohne ein neues anzulegen."
         },
         {
-          "title": "Apps gestalten deinen Feed",
-          "description": "Jede App entscheidet, wie sie Beiträge anzeigt. Du kannst eine passende App wählen und später wechseln."
+          "title": "Apps bestimmen, was du siehst",
+          "description": "Verschiedene Apps zeigen Beiträge unterschiedlich an und bieten andere Funktionen. Du kannst eine andere ausprobieren, wenn sie besser zu dir passt."
         },
         {
-          "title": "Beiträge können auf mehreren Relays liegen",
-          "description": "Relays speichern Beiträge. Wenn ein Beitrag mehrere Relays erreicht, kann er verfügbar bleiben, auch wenn eines ausfällt oder ihn löscht."
+          "title": "Beiträge können an mehreren Orten gespeichert sein",
+          "description": "Ein Beitrag kann auf mehreren Servern gespeichert sein. Das kann helfen, ihn verfügbar zu halten, wenn ein Server ausfällt oder ihn löscht."
         }
       ]
     }

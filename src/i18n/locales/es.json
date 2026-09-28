@@ -3608,40 +3608,40 @@
     "hero": {
       "problem": "En la mayoría de las redes sociales, tus publicaciones y seguidores están vinculados a una sola empresa.",
       "rules": "Las reglas pueden cambiar un martes cualquiera, sin que nadie tenga que avisarte antes.",
-      "cue": "Nostr funciona de otra manera",
+      "cue": "Nostr funciona de otra manera.",
+      "answer": "Ninguna empresa controla toda la red. Puedes elegir qué aplicaciones y servidores usar.",
       "title": "Aprende Nostr paso a paso",
-      "description": "Un curso gratuito para quienes acaban de descubrir Nostr. Empieza por lo básico, publica tu primer mensaje y encuentra personas a quienes seguir. Lee las guías en orden o ve directamente a lo que necesitas.",
+      "description": "Un curso gratuito para cualquiera que esté descubriendo Nostr. Empieza por lo básico y aprende a usar una aplicación, encontrar personas y publicar. Lee las guías en orden o elige la que necesites.",
       "primaryCta": "Empieza con la primera guía",
-      "secondaryCta": "Ver todas las guías",
-      "note": "De código abierto y disponible en siete idiomas, incluidos árabe e hindi."
+      "secondaryCta": "Ver todas las guías"
     },
     "firstGuides": {
       "title": "Tus primeras cuatro guías",
       "allGuides": "Ver las 16 guías"
+    },
+    "comparisons": {
+      "title": "¿En qué se diferencia Nostr?",
+      "description": "Explora las diferencias con Twitter/X, Mastodon y Bluesky."
     },
     "closing": {
       "title": "Encuentra tu próxima guía",
       "description": "El curso completo cubre privacidad, distintas aplicaciones y cómo funciona Nostr por dentro.",
       "cta": "Ver todas las guías"
     },
-    "whatFeelsFamiliar": {
-      "title": "Lo que sigue siendo familiar",
-      "description": "Sigues usando una aplicación para leer publicaciones, seguir a personas y participar en conversaciones. Puedes empezar sin aprender cómo funciona toda la red."
-    },
     "whatChanges": {
       "title": "Qué cambia en Nostr",
       "points": [
         {
-          "title": "Tu identidad te acompaña",
-          "description": "Una cuenta de Nostr se basa en claves. Puedes usar la misma identidad en otra aplicación de Nostr."
+          "title": "Puedes usar tu cuenta en distintas aplicaciones",
+          "description": "Puedes usar la misma cuenta de Nostr en otra aplicación sin crear una nueva."
         },
         {
-          "title": "Cada aplicación organiza tu feed",
-          "description": "Cada aplicación decide cómo mostrar las publicaciones. Puedes elegir la que prefieras y cambiarla más adelante."
+          "title": "Las aplicaciones influyen en lo que ves",
+          "description": "Distintas aplicaciones muestran las publicaciones de manera diferente y ofrecen funciones distintas. Puedes probar otra si te resulta mejor."
         },
         {
-          "title": "Tus publicaciones pueden estar en varios relays",
-          "description": "Los relays almacenan publicaciones. Si una llega a varios, puede seguir disponible aunque uno deje de funcionar o la elimine."
+          "title": "Las publicaciones pueden guardarse en varios lugares",
+          "description": "Una publicación puede guardarse en varios servidores. Eso puede ayudar a que siga disponible si uno deja de funcionar o la elimina."
         }
       ]
     }

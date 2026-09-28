@@ -3608,40 +3608,40 @@
     "hero": {
       "problem": "Na większości platform społecznościowych Twoje wpisy i obserwujący są związani z jedną firmą.",
       "rules": "Zasady mogą się tam zmienić w zwykły wtorek, a nikt nie musi Cię uprzedzić.",
-      "cue": "Nostr działa inaczej",
+      "cue": "Nostr działa inaczej.",
+      "answer": "Całą siecią nie zarządza jedna firma. Możesz wybrać aplikacje i serwery, z których korzystasz.",
       "title": "Poznaj Nostr krok po kroku",
-      "description": "Bezpłatny kurs dla osób, które dopiero poznają Nostr. Zacznij od podstaw, opublikuj pierwszy wpis i znajdź osoby do obserwowania. Czytaj po kolei albo wybierz to, czego potrzebujesz.",
+      "description": "Bezpłatny kurs dla każdej osoby, która dopiero poznaje Nostr. Zacznij od podstaw, a potem naucz się korzystać z aplikacji, znajdować ludzi i publikować wpisy. Czytaj po kolei albo wybierz potrzebny poradnik.",
       "primaryCta": "Zacznij od pierwszego poradnika",
-      "secondaryCta": "Przejrzyj wszystkie poradniki",
-      "note": "Projekt ma otwarty kod i jest dostępny w siedmiu językach, w tym po arabsku i hindi."
+      "secondaryCta": "Przejrzyj wszystkie poradniki"
     },
     "firstGuides": {
       "title": "Twoje pierwsze cztery poradniki",
       "allGuides": "Zobacz wszystkie 16 poradników"
+    },
+    "comparisons": {
+      "title": "Jak Nostr wypada w porównaniu?",
+      "description": "Zobacz różnice między Nostrem a Twitterem/X, Mastodonem i Bluesky."
     },
     "closing": {
       "title": "Znajdź kolejny poradnik",
       "description": "Pełny kurs obejmuje prywatność, różne aplikacje i to, jak Nostr działa od środka.",
       "cta": "Przejrzyj wszystkie poradniki"
     },
-    "whatFeelsFamiliar": {
-      "title": "Co będzie znajome",
-      "description": "Nadal korzystasz z aplikacji, żeby czytać wpisy, obserwować ludzi i dołączać do rozmów. Możesz zacząć bez poznawania działania całej sieci."
-    },
     "whatChanges": {
       "title": "Co zmienia się w Nostr",
       "points": [
         {
-          "title": "Ta sama tożsamość w różnych aplikacjach",
-          "description": "Konto Nostr opiera się na kluczach. Możesz używać tej samej tożsamości w innej aplikacji Nostr."
+          "title": "Możesz używać konta w różnych aplikacjach",
+          "description": "Możesz użyć tego samego konta Nostr w innej aplikacji bez zakładania nowego."
         },
         {
-          "title": "Aplikacja układa Twój strumień wpisów",
-          "description": "Każda aplikacja decyduje, jak wyświetlać wpisy. Możesz wybrać taką, która Ci odpowiada, i później ją zmienić."
+          "title": "Aplikacje wpływają na to, co widzisz",
+          "description": "Różne aplikacje pokazują wpisy na różne sposoby i oferują inne funkcje. Możesz wypróbować inną, jeśli lepiej Ci odpowiada."
         },
         {
-          "title": "Wpisy mogą być na kilku przekaźnikach",
-          "description": "Przekaźniki przechowują wpisy. Jeśli wpis trafi na kilka z nich, może pozostać dostępny, gdy jeden przestanie działać lub go usunie."
+          "title": "Wpisy mogą być zapisane w kilku miejscach",
+          "description": "Wpis może być zapisany na kilku serwerach. To może pomóc zachować do niego dostęp, jeśli jeden serwer przestanie działać albo go usunie."
         }
       ]
     }

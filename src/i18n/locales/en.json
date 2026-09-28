@@ -3608,37 +3608,37 @@
     "hero": {
       "problem": "On most social platforms, your posts and followers are tied to one company.",
       "rules": "The rules there can change on a Tuesday, and nobody has to warn you first.",
-      "cue": "Nostr works differently",
+      "cue": "Nostr works differently.",
+      "answer": "No single company runs the whole network. You can choose which apps and servers you use.",
       "title": "Learn Nostr, step by step",
-      "description": "A free course for people new to Nostr. Start with the basics, make your first post, and find people to follow. Read in order or jump to what you need.",
+      "description": "A free course for anyone new to Nostr. Start with the basics, then learn how to use an app, find people, and post. Read in order or choose the guide you need.",
       "primaryCta": "Start with the first guide",
-      "secondaryCta": "Browse all guides",
-      "note": "Open source and available in seven languages, including Arabic and Hindi."
-    },
-    "whatFeelsFamiliar": {
-      "title": "What feels familiar",
-      "description": "You still use an app to read posts, follow people, and join conversations. You can get started without learning how the network works."
+      "secondaryCta": "Browse all guides"
     },
     "whatChanges": {
       "title": "What changes on Nostr",
       "points": [
         {
-          "title": "Your identity can move with you",
-          "description": "A Nostr account is based on keys. You can use the same identity in another Nostr app."
+          "title": "Your account can move between apps",
+          "description": "You can use the same Nostr account in another app without creating a new account."
         },
         {
-          "title": "Apps shape your feed",
-          "description": "Each app decides how to show posts. You can choose the app that suits you and change it later."
+          "title": "Apps shape what you see",
+          "description": "Different apps show posts in different ways and offer different features. You can try another one if it suits you better."
         },
         {
-          "title": "Posts can live on several relays",
-          "description": "Relays store posts. If a post reaches more than one, it may remain available when one relay goes offline or removes it."
+          "title": "Posts can be stored in more than one place",
+          "description": "A post can be stored on several servers. That may help it stay available if one server goes offline or removes it."
         }
       ]
     },
     "firstGuides": {
       "title": "Your first four guides",
       "allGuides": "See all 16 guides"
+    },
+    "comparisons": {
+      "title": "How does Nostr compare?",
+      "description": "Explore the differences with Twitter/X, Mastodon, and Bluesky."
     },
     "closing": {
       "title": "Find your next guide",

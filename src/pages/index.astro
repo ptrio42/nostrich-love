@@ -82,17 +82,17 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
   <ResumeBanner client:idle />
 
   <main id="main-content">
-    <!-- Keep the opening problem and the course promise in one reading column. -->
+    <!-- Answer the opening problem before introducing the course. -->
     <section class="border-b border-gray-200 dark:border-gray-800">
       <div class="container mx-auto grid max-w-6xl gap-y-3 px-4 pb-8 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(17rem,0.6fr)] lg:gap-x-16 lg:gap-y-0 lg:px-8 lg:pb-12 lg:pt-20">
         <div class="max-w-measure border-s-2 border-primary-600 py-1 ps-4 dark:border-primary-400 sm:ps-6">
           <p class="text-h4 font-semibold text-gray-900 dark:text-white">{translations.homePage.hero.problem}</p>
           <p class="mt-3 text-body text-gray-600 dark:text-gray-400">{translations.homePage.hero.rules}</p>
+          <p class="mt-5 text-body text-gray-900 dark:text-gray-200"><strong class="font-semibold">{translations.homePage.hero.cue}</strong> {translations.homePage.hero.answer}</p>
         </div>
-        <img src="/illustrations/hero-platform-cabinet.webp" alt="" width="640" height="729" loading="eager" decoding="async" class="ms-auto h-auto w-24 sm:w-32 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-auto lg:w-64 lg:self-center" />
+        <img src="/illustrations/hero-platform-cabinet.webp" alt="" width="640" height="729" loading="eager" decoding="async" class="ms-auto h-auto w-20 sm:w-28 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-auto lg:w-64 lg:self-center" />
         <div class="lg:col-start-1 lg:row-start-2">
-          <p class="mb-5 mt-2 text-micro uppercase text-gray-500 dark:text-gray-400 lg:mt-9">{translations.homePage.hero.cue}</p>
-          <h1 class="max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white">
+          <h1 class="mt-2 max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white lg:mt-9">
             {translations.homePage.hero.title}
           </h1>
           <p class="mt-6 max-w-measure text-lead text-gray-600 dark:text-gray-400">
@@ -107,32 +107,23 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
             </a>
             <a href={guidesIndexPath(DEFAULT_LOCALE)} class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.hero.secondaryCta}</a>
           </div>
-          <p class="mt-4 text-body-sm text-gray-500 dark:text-gray-400">
-            {translations.homePage.hero.note}
-          </p>
         </div>
       </div>
 
       <div class="container mx-auto max-w-6xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
         <div class="grid gap-8 border-t border-gray-200 pt-8 dark:border-gray-800 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16 lg:pt-10">
-          <div class="grid grid-cols-[minmax(0,1fr)_6rem] items-end gap-4 lg:block">
-            <div>
-              <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.whatFeelsFamiliar.title}</h2>
-              <p class="mt-3 text-body text-gray-600 dark:text-gray-400">{translations.homePage.whatFeelsFamiliar.description}</p>
-            </div>
-            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 lg:mt-6 lg:w-48" />
-          </div>
-          <div>
+          <div class="flex items-center justify-between gap-4 lg:block">
             <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.whatChanges.title}</h2>
-            <dl class="mt-3 border-t border-gray-200 dark:border-gray-800">
-              {translations.homePage.whatChanges.points.map((point) => (
-                <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
-                  <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
-                  <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
-                </div>
-              ))}
-            </dl>
+            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 shrink-0 lg:mt-6 lg:w-48" />
           </div>
+          <dl class="border-t border-gray-200 dark:border-gray-800">
+            {translations.homePage.whatChanges.points.map((point) => (
+              <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
+                <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
+                <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
@@ -179,11 +170,9 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
       <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="mb-8 flex items-center justify-between gap-4">
           <div>
-            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">
-              Coming from another platform?
-            </h2>
+            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.comparisons.title}</h2>
             <p class="mt-3 max-w-measure text-lead text-gray-600 dark:text-gray-400">
-              How Nostr differs from the network you are leaving, and what carries over
+              {translations.homePage.comparisons.description}
             </p>
           </div>
           <img src="/illustrations/compare-paths.webp" alt="" width="480" height="545" loading="lazy" decoding="async" class="h-auto w-20 shrink-0 sm:w-28 lg:w-32" />

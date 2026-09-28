@@ -31,20 +31,20 @@ that structure. Decoration cannot make a generic arrangement distinctive.
   the concept they explain. Visuals should help the reader decide or learn.
 - On the home page, use three compact scenes with the same purple ostrich and
   its angular lightning-bolt beak: the cabinet beside the introductory problem
-  statement, the two app views within the familiar/change pair, and the map
+  and answer, the two app views beside "What changes on Nostr", and the map
   beside the platform-comparison heading. Their files are in
   `public/illustrations/`. Keep text selectable. Place art beside section
   headings or the whole statement, never in only one row of a parallel list.
   Keep it small enough on narrow screens that links remain easy to reach.
-- Keep the home hero's problem statement, "Nostr works differently" cue, and
-  course introduction in one reading column. The cabinet scene sits beside
-  that sequence on wide screens and follows the problem statement on narrow
-  screens.
-- Extend the home hero with an editorial pair: "What feels familiar" sets out
-  the actions readers already know, and "What changes on Nostr" explains the
-  differences. Keep the two app views with this pair. Follow it with the first
-  four guides as full-width numbered rows. The course index holds the complete
-  three-level outline; do not repeat it in a separate home-page section.
+- Keep the home hero's problem, concrete Nostr answer, and course introduction
+  in one reading column. On wide screens, the cabinet sits beside the opening
+  block. On narrow screens it follows the complete problem and answer, never
+  interrupting them.
+- Use "What changes on Nostr" to expand the answer in three plain-language
+  points, then show the first four guides as full-width numbered rows. Keep
+  platform comparisons optional and do not assume every beginner is leaving
+  another platform. The course index holds the complete three-level outline;
+  do not repeat it in a separate home-page section.
 - In a lesson, separate comparisons and quiz answers with rules and spacing.
   Avoid nesting bordered panels. A quiz result needs clear feedback, not an
   animated reveal.
