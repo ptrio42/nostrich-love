@@ -7,8 +7,10 @@ import { siteConfig } from '../config/site';
 import { COMPARISON_PAGES } from '../config/comparison-pages';
 import { getCollection } from 'astro:content';
 import { SKILL_LEVELS } from '../data/learning-paths';
-import { DEFAULT_LOCALE, guidePath } from '../i18n/paths';
+import { DEFAULT_LOCALE, guidePath, guidesIndexPath } from '../i18n/paths';
 import { getTranslations } from '../i18n';
+
+const translations = getTranslations(DEFAULT_LOCALE) as typeof import('../i18n/locales/en.json');
 
 // The title template (src/config/site.ts) already appends "| Nostrich.love",
 // so the brand must NOT be repeated here — it was, producing
@@ -20,8 +22,8 @@ import { getTranslations } from '../i18n';
 // while this page, which takes most of the inbound links, sold a quick start;
 // a reader arriving here had no way to know a structured course existed one
 // click away. Still leads with "Learn Nostr" for the reasons in the note above.
-const title = 'Learn Nostr: A Free Course, Beginner to Advanced';
-const description = 'A structured course in Nostr: 16 guides across three levels, most ending in a quiz. Keys, relays, zaps and clients. Free, no account, in seven languages.';
+const title = translations.homePage.meta.title;
+const description = translations.homePage.meta.description;
 
 // Entity anchor. Every Organization reference elsewhere on the site is an
 // anonymous inline `publisher` stub inside a guide's LearningResource; this is
@@ -67,25 +69,7 @@ const jsonLd = [
   },
 ];
 
-// The `icon` field on the value props held decorative emoji that repeated the
-// words next to them, so the field went with the rest of the ornament.
-const valueProps = [
-  {
-    title: 'A quiz at the end',
-    description: 'Most guides finish with one, so you leave knowing which parts you understood and which to read again.'
-  },
-  {
-    title: 'Seven languages',
-    description: 'Every guide is fully translated, Hindi included. In Arabic the whole layout mirrors, right to left.'
-  },
-];
-
 const englishGuides = await getCollection('guides', (entry) => entry.slug.startsWith(`${DEFAULT_LOCALE}/`));
-const translations = getTranslations(DEFAULT_LOCALE) as typeof import('../i18n/locales/en.json');
-const coursePreview = Object.values(SKILL_LEVELS).map((level) => ({
-  level,
-  openingGuide: englishGuides.find((entry) => entry.slug === `${DEFAULT_LOCALE}/${level.sequence[0]}`),
-}));
 const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
   .map((slug) => englishGuides.find((entry) => entry.slug === `${DEFAULT_LOCALE}/${slug}`))
   .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
@@ -98,81 +82,62 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
   <ResumeBanner client:idle />
 
   <main id="main-content">
-    <!-- Keep the problem, the change, and the course in one reading column. -->
+    <!-- Keep the opening problem and the course promise in one reading column. -->
     <section class="border-b border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(17rem,0.6fr)] lg:items-center lg:gap-16 lg:px-8 lg:py-20">
-        <div>
-          <div class="max-w-measure border-s-2 border-primary-600 py-1 ps-4 dark:border-primary-400 sm:ps-6">
-            <p class="text-h4 font-semibold text-gray-900 dark:text-white">Everything you have posted, and everyone who follows you, sits on a server that belongs to somebody else.</p>
-            <p class="mt-3 text-body text-gray-600 dark:text-gray-400">The rules there can change on a Tuesday, and nobody has to warn you first.</p>
-          </div>
-          <p class="mb-5 mt-9 text-micro uppercase text-gray-500 dark:text-gray-400">Nostr works differently</p>
+      <div class="container mx-auto grid max-w-6xl gap-y-3 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(17rem,0.6fr)] lg:gap-x-16 lg:gap-y-0 lg:px-8 lg:py-20">
+        <div class="max-w-measure border-s-2 border-primary-600 py-1 ps-4 dark:border-primary-400 sm:ps-6">
+          <p class="text-h4 font-semibold text-gray-900 dark:text-white">{translations.homePage.hero.problem}</p>
+          <p class="mt-3 text-body text-gray-600 dark:text-gray-400">{translations.homePage.hero.rules}</p>
+        </div>
+        <img src="/illustrations/hero-platform-cabinet.webp" alt="" width="640" height="729" loading="eager" decoding="async" class="ms-auto h-auto w-24 sm:w-32 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-auto lg:w-64 lg:self-center" />
+        <div class="lg:col-start-1 lg:row-start-2">
+          <p class="mb-5 mt-2 text-micro uppercase text-gray-500 dark:text-gray-400 lg:mt-9">{translations.homePage.hero.cue}</p>
           <h1 class="max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white">
-            Learn Nostr, step by step
+            {translations.homePage.hero.title}
           </h1>
           <p class="mt-6 max-w-measure text-lead text-gray-600 dark:text-gray-400">
-            From your first key to the protocol itself. Sixteen guides, sorted into three levels. Most of them end in a quiz, so you find out what actually stuck. Nothing is locked. The levels are only a sensible order to read in.
+            {translations.homePage.hero.description}
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a href="/guides/what-is-nostr" class="inline-flex items-center justify-center rounded-md bg-primary-600 px-6 py-3 text-body font-semibold text-white transition-colors hover:bg-primary-700">
-              Start the course
+            <a href={guidePath('what-is-nostr', DEFAULT_LOCALE)} class="inline-flex items-center justify-center rounded-md bg-primary-600 px-6 py-3 text-body font-semibold text-white transition-colors hover:bg-primary-700">
+              {translations.homePage.hero.primaryCta}
               <svg class="ms-2 h-5 w-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
-            <a href="/guides" class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">See the whole course first</a>
+            <a href={guidesIndexPath(DEFAULT_LOCALE)} class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.hero.secondaryCta}</a>
           </div>
           <p class="mt-4 text-body-sm text-gray-500 dark:text-gray-400">
-            Free and open source, in <span class="font-semibold text-gray-700 dark:text-gray-300">seven languages</span>. That includes Arabic and Hindi, which almost nothing else in Nostr covers.
+            {translations.homePage.hero.note}
           </p>
         </div>
-        <img src="/illustrations/hero-platform-cabinet.webp" alt="" width="640" height="729" loading="eager" decoding="async" class="ms-auto h-auto w-28 sm:w-36 lg:mx-auto lg:w-64" />
       </div>
     </section>
 
-    <!-- Show the real three-level course spine before readers open the index. -->
     <section class="py-14">
       <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
-          <div class="max-w-measure">
-            <h2 class="mb-3 text-h2 font-semibold text-gray-900 dark:text-white">
-              How the course works
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
+          <div class="flex items-center justify-between gap-4 lg:block">
+            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">
+              {translations.homePage.whatChanges.title}
             </h2>
-            <p class="text-lead text-gray-600 dark:text-gray-400">
-              Read it in order, or skip to the part you need. Both work.
-            </p>
+            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 shrink-0 sm:w-32 lg:mt-6 lg:w-48" />
           </div>
-
-          <ol class="border-s-2 border-gray-200 dark:border-gray-700 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-            {coursePreview.map(({ level, openingGuide }) => (
-              <li class="relative border-b border-gray-200 py-5 ps-6 last:border-b-0 dark:border-gray-800">
-                <span class="absolute -start-[5px] top-7 h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400" aria-hidden="true"></span>
-                <a href={guidePath(level.sequence[0], DEFAULT_LOCALE)} class="group block">
-                  <h3 class="text-h3 font-semibold text-gray-900 underline-offset-2 group-hover:underline dark:text-white">{level.label}</h3>
-                  <p class="mt-1 text-body-sm text-gray-600 dark:text-gray-400">{openingGuide?.data.title ?? level.description}</p>
-                </a>
-              </li>
-            ))}
-          </ol>
-
-          <div class="grid gap-6 border-t border-gray-200 pt-6 dark:border-gray-800 sm:grid-cols-2 lg:col-start-1 lg:row-start-2 lg:grid-cols-1">
-            {valueProps.map((prop) => (
-              <div>
-                <h3 class="text-h4 font-semibold text-gray-900 dark:text-white">{prop.title}</h3>
-                <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{prop.description}</p>
+          <dl class="border-t border-gray-200 dark:border-gray-800">
+            {translations.homePage.whatChanges.points.map((point) => (
+              <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
+                <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
+                <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </div>
     </section>
 
     <section class="border-t border-gray-200 py-16 dark:border-gray-800">
       <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="mb-8">
-          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">Quick Start Guides</h2>
-          <p class="mt-3 text-lead text-gray-600 dark:text-gray-400">Four places people usually start</p>
-        </div>
+        <h2 class="mb-8 text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.firstGuides.title}</h2>
         <ol class="border-t border-gray-200 dark:border-gray-800">
           {firstSteps.map((guide, index) => (
             <li>
@@ -196,27 +161,7 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-
-    <section class="border-t border-gray-200 py-14 dark:border-gray-800">
-      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
-          <div class="flex items-center justify-between gap-4 lg:block">
-            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">
-              {translations.homePage.whatChanges.title}
-            </h2>
-            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 shrink-0 sm:w-32 lg:mt-6 lg:w-48" />
-          </div>
-          <dl class="border-t border-gray-200 dark:border-gray-800">
-            {translations.homePage.whatChanges.points.map((point) => (
-              <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
-                <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
-                <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <a href={guidesIndexPath(DEFAULT_LOCALE)} class="mt-6 inline-block text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.firstGuides.allGuides}</a>
       </div>
     </section>
 
@@ -286,18 +231,16 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
     <section class="border-t border-gray-200 bg-gray-50 py-16 dark:border-gray-800 dark:bg-gray-900">
       <div class="container mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:px-8">
         <div>
-        <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-4">
-          Ready to take control?
-        </h2>
-        <p class="max-w-measure text-lead text-gray-600 dark:text-gray-400">
-          The course begins at beginner level and ends at the protocol itself. Or open the index and pick.
-        </p>
+          <h2 class="mb-4 text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.closing.title}</h2>
+          <p class="max-w-measure text-lead text-gray-600 dark:text-gray-400">
+            {translations.homePage.closing.description}
+          </p>
         </div>
         <a
-          href="/guides"
+          href={guidesIndexPath(DEFAULT_LOCALE)}
           class="inline-flex items-center justify-center rounded-md bg-primary-600 px-8 py-4 text-body font-semibold text-white transition-colors hover:bg-primary-700 lg:justify-self-end"
         >
-          Start Learning
+          {translations.homePage.closing.cta}
           <svg class="ms-2 h-5 w-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>

@@ -3601,6 +3601,29 @@
     }
   },
   "homePage": {
+    "meta": {
+      "title": "Nostr lernen: kostenloser Kurs für Einsteiger",
+      "description": "Lerne Nostr Schritt für Schritt in einem kostenlosen Einsteigerkurs. Erfahre, was sich ändert, veröffentliche deinen ersten Beitrag und finde Menschen, denen du folgen möchtest. 16 Anleitungen in sieben Sprachen."
+    },
+    "hero": {
+      "problem": "Auf den meisten sozialen Plattformen sind deine Beiträge und Follower an ein Unternehmen gebunden.",
+      "rules": "Dort können sich die Regeln an einem Dienstag ändern, ohne dass dich vorher jemand warnen muss.",
+      "cue": "Nostr funktioniert anders",
+      "title": "Nostr Schritt für Schritt lernen",
+      "description": "Ein kostenloser Kurs für Menschen, die Nostr gerade erst kennenlernen. Beginne mit den Grundlagen, veröffentliche deinen ersten Beitrag und finde Menschen zum Folgen. Lies der Reihe nach oder springe zu dem, was du brauchst.",
+      "primaryCta": "Mit der ersten Anleitung beginnen",
+      "secondaryCta": "Alle Anleitungen ansehen",
+      "note": "Open Source und in sieben Sprachen verfügbar, darunter Arabisch und Hindi."
+    },
+    "firstGuides": {
+      "title": "Deine ersten vier Anleitungen",
+      "allGuides": "Alle 16 Anleitungen ansehen"
+    },
+    "closing": {
+      "title": "Finde deine nächste Anleitung",
+      "description": "Der vollständige Kurs behandelt Privatsphäre, verschiedene Apps und die Technik hinter Nostr.",
+      "cta": "Alle Anleitungen ansehen"
+    },
     "whatChanges": {
       "title": "Was sich bei Nostr ändert",
       "points": [

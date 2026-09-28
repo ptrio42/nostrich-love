@@ -3601,6 +3601,20 @@
     }
   },
   "homePage": {
+    "meta": {
+      "title": "Learn Nostr: Free Course for Beginners",
+      "description": "Learn Nostr step by step with a free beginner course. Understand what changes, make your first post, and find people to follow. Read 16 guides in seven languages."
+    },
+    "hero": {
+      "problem": "On most social platforms, your posts and followers are tied to one company.",
+      "rules": "The rules there can change on a Tuesday, and nobody has to warn you first.",
+      "cue": "Nostr works differently",
+      "title": "Learn Nostr, step by step",
+      "description": "A free course for people new to Nostr. Start with the basics, make your first post, and find people to follow. Read in order or jump to what you need.",
+      "primaryCta": "Start with the first guide",
+      "secondaryCta": "Browse all guides",
+      "note": "Open source and available in seven languages, including Arabic and Hindi."
+    },
     "whatChanges": {
       "title": "What changes on Nostr",
       "points": [
@@ -3617,6 +3631,15 @@
           "description": "Relays store posts. If a post reaches more than one, it may remain available when one relay goes offline or removes it."
         }
       ]
+    },
+    "firstGuides": {
+      "title": "Your first four guides",
+      "allGuides": "See all 16 guides"
+    },
+    "closing": {
+      "title": "Find your next guide",
+      "description": "The full course covers privacy, different apps, and how Nostr works behind the scenes.",
+      "cta": "Browse all guides"
     }
   },
   "glossary": {

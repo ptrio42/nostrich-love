@@ -3601,6 +3601,29 @@
     }
   },
   "homePage": {
+    "meta": {
+      "title": "Poznaj Nostr: bezpłatny kurs dla początkujących",
+      "description": "Poznaj Nostr krok po kroku w bezpłatnym kursie dla początkujących. Dowiedz się, co się zmienia, opublikuj pierwszy wpis i znajdź osoby do obserwowania. 16 poradników w siedmiu językach."
+    },
+    "hero": {
+      "problem": "Na większości platform społecznościowych Twoje wpisy i obserwujący są związani z jedną firmą.",
+      "rules": "Zasady mogą się tam zmienić w zwykły wtorek, a nikt nie musi Cię uprzedzić.",
+      "cue": "Nostr działa inaczej",
+      "title": "Poznaj Nostr krok po kroku",
+      "description": "Bezpłatny kurs dla osób, które dopiero poznają Nostr. Zacznij od podstaw, opublikuj pierwszy wpis i znajdź osoby do obserwowania. Czytaj po kolei albo wybierz to, czego potrzebujesz.",
+      "primaryCta": "Zacznij od pierwszego poradnika",
+      "secondaryCta": "Przejrzyj wszystkie poradniki",
+      "note": "Projekt ma otwarty kod i jest dostępny w siedmiu językach, w tym po arabsku i hindi."
+    },
+    "firstGuides": {
+      "title": "Twoje pierwsze cztery poradniki",
+      "allGuides": "Zobacz wszystkie 16 poradników"
+    },
+    "closing": {
+      "title": "Znajdź kolejny poradnik",
+      "description": "Pełny kurs obejmuje prywatność, różne aplikacje i to, jak Nostr działa od środka.",
+      "cta": "Przejrzyj wszystkie poradniki"
+    },
     "whatChanges": {
       "title": "Co zmienia się w Nostr",
       "points": [

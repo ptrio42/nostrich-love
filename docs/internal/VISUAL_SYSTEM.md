@@ -31,18 +31,18 @@ that structure. Decoration cannot make a generic arrangement distinctive.
   the concept they explain. Visuals should help the reader decide or learn.
 - On the home page, use three compact scenes with the same purple ostrich and
   its angular lightning-bolt beak: the cabinet beside the introductory problem
-  statement, the two app views beside the Nostr concept heading, and the map
+  statement, the two app views beside "What changes on Nostr", and the map
   beside the platform-comparison heading. Their files are in
-  `public/illustrations/`. Keep text selectable and the first guide links ahead
-  of the Nostr concept summary. Place art beside section headings or the whole
-  statement, never in only one row of a parallel list. Keep it small enough on
-  narrow screens that links remain easy to reach.
+  `public/illustrations/`. Keep text selectable. Place art beside section
+  headings or the whole statement, never in only one row of a parallel list.
+  Keep it small enough on narrow screens that links remain easy to reach.
 - Keep the home hero's problem statement, "Nostr works differently" cue, and
   course introduction in one reading column. The cabinet scene sits beside
-  that sequence on wide screens and follows it on narrow screens.
-- On the home page, place the course's supporting facts beside its three-level
-  outline. Let the four Quick Start guides use the full content width as
-  numbered rows. Neither section needs an illustration to fill a blank column.
+  that sequence on wide screens and follows the problem statement on narrow
+  screens.
+- Follow the home hero with "What changes on Nostr", then the first four
+  guides as full-width numbered rows. The course index holds the complete
+  three-level outline; do not repeat it in a separate home-page section.
 - In a lesson, separate comparisons and quiz answers with rules and spacing.
   Avoid nesting bordered panels. A quiz result needs clear feedback, not an
   animated reveal.
