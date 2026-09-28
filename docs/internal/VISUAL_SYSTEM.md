@@ -39,9 +39,12 @@ that structure. Decoration cannot make a generic arrangement distinctive.
 - Keep the home hero's problem, concrete Nostr answer, and course introduction
   in one reading column. On wide screens, the cabinet sits beside the opening
   block. On narrow screens it follows the complete problem and answer, never
-  interrupting them.
+  interrupting them. Set the problem as an editorial lead, keep the consequence
+  quieter, and reserve the purple rule for the Nostr answer. Do not enclose all
+  three statements in the same callout.
 - Use "What changes on Nostr" to expand the answer in three plain-language
-  points, then show the first four guides as full-width numbered rows. Keep
+  points. Its section divider is enough; do not add another rule above the
+  first point. Then show the first four guides as full-width numbered rows. Keep
   platform comparisons optional and do not assume every beginner is leaving
   another platform. The course index holds the complete three-level outline;
   do not repeat it in a separate home-page section.
