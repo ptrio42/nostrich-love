@@ -3624,6 +3624,10 @@
       "description": "Der vollständige Kurs behandelt Privatsphäre, verschiedene Apps und die Technik hinter Nostr.",
       "cta": "Alle Anleitungen ansehen"
     },
+    "whatFeelsFamiliar": {
+      "title": "Was sich vertraut anfühlt",
+      "description": "Du nutzt weiterhin eine App, um Beiträge zu lesen, Menschen zu folgen und an Gesprächen teilzunehmen. Du kannst anfangen, ohne erst die Technik des Netzwerks zu verstehen."
+    },
     "whatChanges": {
       "title": "Was sich bei Nostr ändert",
       "points": [

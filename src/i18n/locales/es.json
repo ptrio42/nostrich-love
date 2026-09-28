@@ -3624,6 +3624,10 @@
       "description": "El curso completo cubre privacidad, distintas aplicaciones y cómo funciona Nostr por dentro.",
       "cta": "Ver todas las guías"
     },
+    "whatFeelsFamiliar": {
+      "title": "Lo que sigue siendo familiar",
+      "description": "Sigues usando una aplicación para leer publicaciones, seguir a personas y participar en conversaciones. Puedes empezar sin aprender cómo funciona toda la red."
+    },
     "whatChanges": {
       "title": "Qué cambia en Nostr",
       "points": [

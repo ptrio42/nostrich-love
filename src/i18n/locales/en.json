@@ -3615,6 +3615,10 @@
       "secondaryCta": "Browse all guides",
       "note": "Open source and available in seven languages, including Arabic and Hindi."
     },
+    "whatFeelsFamiliar": {
+      "title": "What feels familiar",
+      "description": "You still use an app to read posts, follow people, and join conversations. You can get started without learning how the network works."
+    },
     "whatChanges": {
       "title": "What changes on Nostr",
       "points": [

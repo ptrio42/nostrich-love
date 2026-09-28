@@ -3624,6 +3624,10 @@
       "description": "Pełny kurs obejmuje prywatność, różne aplikacje i to, jak Nostr działa od środka.",
       "cta": "Przejrzyj wszystkie poradniki"
     },
+    "whatFeelsFamiliar": {
+      "title": "Co będzie znajome",
+      "description": "Nadal korzystasz z aplikacji, żeby czytać wpisy, obserwować ludzi i dołączać do rozmów. Możesz zacząć bez poznawania działania całej sieci."
+    },
     "whatChanges": {
       "title": "Co zmienia się w Nostr",
       "points": [

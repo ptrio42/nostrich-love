@@ -3624,6 +3624,10 @@
       "description": "完整课程涵盖隐私、不同的应用，以及 Nostr 背后的工作原理。",
       "cta": "浏览所有指南"
     },
+    "whatFeelsFamiliar": {
+      "title": "熟悉的部分",
+      "description": "你仍然通过应用阅读帖子、关注他人和参与讨论。不必先弄懂整个网络的运作方式，也能开始使用。"
+    },
     "whatChanges": {
       "title": "Nostr 有什么不同",
       "points": [

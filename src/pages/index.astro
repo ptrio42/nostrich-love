@@ -84,7 +84,7 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
   <main id="main-content">
     <!-- Keep the opening problem and the course promise in one reading column. -->
     <section class="border-b border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto grid max-w-6xl gap-y-3 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(17rem,0.6fr)] lg:gap-x-16 lg:gap-y-0 lg:px-8 lg:py-20">
+      <div class="container mx-auto grid max-w-6xl gap-y-3 px-4 pb-8 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(17rem,0.6fr)] lg:gap-x-16 lg:gap-y-0 lg:px-8 lg:pb-12 lg:pt-20">
         <div class="max-w-measure border-s-2 border-primary-600 py-1 ps-4 dark:border-primary-400 sm:ps-6">
           <p class="text-h4 font-semibold text-gray-900 dark:text-white">{translations.homePage.hero.problem}</p>
           <p class="mt-3 text-body text-gray-600 dark:text-gray-400">{translations.homePage.hero.rules}</p>
@@ -112,25 +112,27 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
           </p>
         </div>
       </div>
-    </section>
 
-    <section class="py-14">
-      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
-          <div class="flex items-center justify-between gap-4 lg:block">
-            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">
-              {translations.homePage.whatChanges.title}
-            </h2>
-            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 shrink-0 sm:w-32 lg:mt-6 lg:w-48" />
+      <div class="container mx-auto max-w-6xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
+        <div class="grid gap-8 border-t border-gray-200 pt-8 dark:border-gray-800 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16 lg:pt-10">
+          <div class="grid grid-cols-[minmax(0,1fr)_6rem] items-end gap-4 lg:block">
+            <div>
+              <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.whatFeelsFamiliar.title}</h2>
+              <p class="mt-3 text-body text-gray-600 dark:text-gray-400">{translations.homePage.whatFeelsFamiliar.description}</p>
+            </div>
+            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 lg:mt-6 lg:w-48" />
           </div>
-          <dl class="border-t border-gray-200 dark:border-gray-800">
-            {translations.homePage.whatChanges.points.map((point) => (
-              <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
-                <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
-                <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
-              </div>
-            ))}
-          </dl>
+          <div>
+            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">{translations.homePage.whatChanges.title}</h2>
+            <dl class="mt-3 border-t border-gray-200 dark:border-gray-800">
+              {translations.homePage.whatChanges.points.map((point) => (
+                <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
+                  <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
+                  <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </section>
