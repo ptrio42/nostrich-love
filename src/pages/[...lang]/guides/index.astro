@@ -5,10 +5,9 @@ import Footer from '../../../components/layout/Footer.astro';
 import { GamificationExplainerWrapper } from '../../../components/gamification/GamificationExplainerWrapper';
 import { GuidesContainer } from '../../../components/guides/GuidesContainer';
 import { SKILL_LEVELS, type SkillLevel } from '../../../data/learning-paths';
-import { getTranslations, type Locale } from '../../../i18n';
+import { t, type Locale } from '../../../i18n';
 import { locales } from '../../../config/locales';
 import { langParam, isLocale, DEFAULT_LOCALE, guidePath } from '../../../i18n/paths';
-import { COMPARISON_PAGES } from '../../../config/comparison-pages';
 import { breadcrumbList } from '../../../lib/breadcrumbs';
 import { getLocaleConfig } from '../../../config/locales';
 import { getCollection } from 'astro:content';
@@ -22,9 +21,6 @@ export async function getStaticPaths() {
 // Detect current locale from URL
 const { lang } = Astro.params;
 const currentLocale: Locale = isLocale(lang) ? lang : DEFAULT_LOCALE;
-
-// Get translations
-const translations = getTranslations(currentLocale);
 
 // Load guides from content collection
 const allGuides = await getCollection('guides', (entry) => {
@@ -55,22 +51,21 @@ const skillLevelsData = Object.entries(SKILL_LEVELS).map(([levelId, levelConfig]
     guides: levelGuides,
   };
 });
-const firstGuide = skillLevelsData[0]?.guides[0];
-
-const title = translations.guidesPage?.hero?.title || 'Learn Nostr';
-const description = translations.guidesPage?.hero?.description || 'Interactive step-by-step guides to understand Nostr';
-
-// The hub is the parent of 16 guides but declared itself to be nothing. A
-// CollectionPage listing them in reading order gives crawlers and answer
-// engines the parent-child map that a flat sitemap cannot express.
+// The CollectionPage describes the syllabus and its reading order in the
+// static HTML, alongside the visible numbered list.
 const hubUrl = new URL(Astro.url.pathname, 'https://nostrich.love').toString();
 const orderedGuides = skillLevelsData.flatMap((level) => level.guides);
+const guideCount = new Intl.NumberFormat(currentLocale).format(orderedGuides.length);
+const heading = t('guidesPage.title', currentLocale);
+const intro = t('guidesPage.description', currentLocale).replace('{count}', guideCount);
+const metaTitle = t('guidesPage.metaTitle', currentLocale);
+const metaDescription = t('guidesPage.metaDescription', currentLocale).replace('{count}', guideCount);
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: title,
-    description,
+    name: heading,
+    description: metaDescription,
     url: hubUrl,
     inLanguage: getLocaleConfig(currentLocale).htmlLang,
     isPartOf: { '@id': 'https://nostrich.love/#website' },
@@ -85,88 +80,22 @@ const jsonLd = [
       })),
     },
   },
-  breadcrumbList([{ name: title, path: Astro.url.pathname }]),
+  breadcrumbList([{ name: heading, path: Astro.url.pathname }]),
 ];
 ---
 
 <Layout 
-  title={title}
-  description={description}
+  title={metaTitle}
+  description={metaDescription}
   locale={currentLocale}
   jsonLd={jsonLd}
 >
   <Header />
   
   <main id="main-content">
-    <section>
-      <div class="container mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-center lg:gap-16 lg:px-8 lg:py-14">
-        <div>
-          <h1 class="max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white">
-            {translations.guidesPage?.hero?.title || 'Learn Nostr'}
-          </h1>
-          <p class="mt-5 max-w-measure text-lead text-gray-600 dark:text-gray-300">
-            {translations.guidesPage?.hero?.description || 'Interactive step-by-step guides to understand Nostr'}
-          </p>
-        </div>
-        {firstGuide && (
-          <div class="border-s-2 border-primary-600 ps-5 dark:border-primary-400">
-            <p class="text-micro font-semibold uppercase text-primary-text dark:text-primary-400">
-              {translations.guideSection?.startHere}
-            </p>
-            <a href={firstGuide.href} class="group mt-2 block text-h3 font-semibold text-gray-900 dark:text-white">
-              <span class="underline-offset-2 group-hover:underline">{firstGuide.title}</span>
-              <span class="ms-2 inline-block text-primary-text rtl:rotate-180 dark:text-primary-400" aria-hidden="true">→</span>
-            </a>
-            <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{firstGuide.description}</p>
-          </div>
-        )}
-        <GamificationExplainerWrapper client:idle />
-      </div>
-    </section>
-
-    {/* Guides Section */}
-    {/* The one flat band on this page. Everything else sits on the page ground. */}
-    <section class="border-y border-gray-200 bg-gray-50 py-10 dark:border-gray-800 dark:bg-gray-900 lg:py-12">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* client:idle, not client:load — the guide list is server-rendered, so
-            hydration only powers search and the interest filter. */}
-        <GuidesContainer
-          client:idle
-          skillLevels={skillLevelsData}
-          locale={currentLocale}
-        />
-      </div>
-    </section>
-
-    {/* Comparison pages — English only.
-        src/pages/nostr-vs-*.astro are top-level routes with no [...lang]
-        variants, so linking them from a localized hub would send a Polish or
-        Arabic reader to an English dead end. When they gain locale variants,
-        drop this gate and add them to localizedLocales() in src/i18n/paths.ts. */}
-    {currentLocale === DEFAULT_LOCALE && (
-      <section class="py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-2">
-            Switching from another network?
-          </h2>
-          <p class="text-body text-gray-600 dark:text-gray-400 max-w-measure mb-6">
-            These side-by-side comparisons cover what changes, what carries over, and what does not.
-          </p>
-          <ul class="grid grid-cols-1 sm:grid-cols-3 gap-4" role="list">
-            {COMPARISON_PAGES.map((page) => (
-              <li>
-                <a
-                  href={page.href}
-                  class="block p-4 rounded-lg border border-gray-200 bg-white text-body-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-700 dark:hover:bg-gray-800"
-                >
-                  {page.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    )}
+    {/* The list is server-rendered; hydration only powers search. */}
+    <GuidesContainer client:idle skillLevels={skillLevelsData} locale={currentLocale} heading={heading} intro={intro} />
+    <GamificationExplainerWrapper client:idle />
   </main>
 
   <Footer />

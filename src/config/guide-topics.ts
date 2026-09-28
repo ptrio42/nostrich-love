@@ -1,17 +1,15 @@
 import { SKILL_LEVELS } from '../data/learning-paths';
 
 /**
- * Topic map for the "Filter by interest" chips on /guides.
+ * Topic map for searching the guide syllabus by subject.
  *
  * SINGLE SOURCE OF TRUTH for which guide belongs to which topic. The guide set
  * is identical in all seven locales (same 16 slugs under src/content/guides/<locale>/),
  * so one map keyed by slug serves every locale.
  *
- * Why a map and not frontmatter: the filter used to substring-match an English
- * chip value ("privacy", "relays") against the *translated* title and
- * description. In Polish, Chinese, Arabic and Hindi that matched almost nothing,
- * so most chips rendered an empty guides page. Frontmatter tags would fix it too,
- * but at the cost of 112 files that then have to stay in sync by hand.
+ * Titles and descriptions do not name every topic covered by a guide. The
+ * search also matches these topic IDs and their translated labels, so a topic
+ * query can find broad references such as the FAQ and tools directory.
  *
  * How topics were assigned: by what a guide is actually about, not by what it
  * mentions in passing. Two guides are deliberately broad because they really are
@@ -22,8 +20,8 @@ import { SKILL_LEVELS } from '../data/learning-paths';
  * Security, Community Resources).
  *
  * Two guides carry no topic on purpose: what-is-nostr and protocol-comparison
- * are orientation pieces about the protocol as a whole. Filing them under a
- * topic would be stretching. They are always reachable under "All Guides".
+ * are orientation pieces about the protocol as a whole. They remain visible
+ * in the full syllabus and searchable by title or description.
  */
 
 export const GUIDE_TOPIC_IDS = [
@@ -63,23 +61,28 @@ const GUIDE_TOPICS = {
 
 export type GuideSlug = keyof typeof GUIDE_TOPICS;
 
-/** True when `value` is one of the six chip ids (and not free text from the search box). */
-export function isGuideTopicId(value: string): value is GuideTopicId {
-  return (GUIDE_TOPIC_IDS as readonly string[]).includes(value);
-}
-
 /** Topics for a guide slug. Unknown slugs get an empty list rather than throwing. */
 export function getGuideTopics(slug: string): readonly GuideTopicId[] {
   return (GUIDE_TOPICS as Record<string, readonly GuideTopicId[]>)[slug] ?? [];
 }
 
-export function guideMatchesTopic(slug: string, topic: GuideTopicId): boolean {
-  return getGuideTopics(slug).includes(topic);
+/** Match guide copy and localized topic names without changing syllabus order. */
+export function guideMatchesSearch(
+  guide: { id: string; title: string; description: string },
+  query: string,
+  topicLabel: (topic: GuideTopicId) => string
+): boolean {
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+  if (!normalizedQuery) return true;
+
+  const topics = getGuideTopics(guide.id);
+  return [guide.title, guide.description, ...topics, ...topics.map(topicLabel)]
+    .some((value) => value.toLocaleLowerCase().includes(normalizedQuery));
 }
 
 /**
- * Dev-only drift guard: a 17th guide added to SKILL_LEVELS without an entry here
- * would silently disappear from every chip. Warn loudly during development.
+ * Dev-only drift guard: a new guide without a topic entry might not appear in
+ * subject searches. An empty topic list is explicit for orientation guides.
  */
 if (import.meta.env?.DEV) {
   const missing = Object.values(SKILL_LEVELS)
@@ -88,7 +91,7 @@ if (import.meta.env?.DEV) {
   if (missing.length > 0) {
     console.warn(
       `[guide-topics] No topic entry for: ${missing.join(', ')}. ` +
-        'These guides will never appear under an interest filter.'
+        'Add a topic list so subject search includes these guides.'
     );
   }
 }

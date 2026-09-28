@@ -1831,13 +1831,11 @@
     }
   },
   "guidesPage": {
-    "hero": {
-      "title": "循序渐进学习 Nostr",
-      "description": "从入门到进阶的循序渐进等级。所有内容都已开放，等级只是给出一个合理的阅读顺序。"
-    },
-    "filter": {
-      "filterByInterest": "按兴趣筛选"
-    }
+    "title": "Nostr 指南",
+    "description": "按建议的顺序浏览 {count} 篇指南，或直接选择你需要的主题。",
+    "metaTitle": "Nostr 新手指南",
+    "metaDescription": "浏览 {count} 篇适合新手的 Nostr 指南，学习使用应用、发帖、寻找他人和保护隐私。",
+    "clearSearch": "清除搜索"
   },
   "skillLevels": {
     "beginner": {
@@ -3412,8 +3410,7 @@
       }
     }
   },
-  "interestFilter": {
-    "allGuides": "所有指南",
+  "guideTopics": {
     "bitcoin": "比特币",
     "privacy": "隐私",
     "security": "安全",

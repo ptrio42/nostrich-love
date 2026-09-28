@@ -3372,13 +3372,11 @@
     }
   },
   "guidesPage": {
-    "hero": {
-      "title": "Nostr सीखें",
-      "description": "विकेन्द्रीकृत सोशल मीडिया को अंतरंगिक रूप से समझें। बिना तकनीकी ज्ञान के आसान पाठ।"
-    },
-    "filter": {
-      "filterByInterest": "रुचि के अनुसार फ़िल्टर करें"
-    }
+    "title": "Nostr गाइड",
+    "description": "सुझाए गए क्रम में {count} गाइड देखें, या सीधे अपनी ज़रूरत के विषय पर जाएँ।",
+    "metaTitle": "शुरुआती लोगों के लिए Nostr गाइड",
+    "metaDescription": "शुरुआती लोगों के लिए {count} Nostr गाइड देखें। ऐप इस्तेमाल करना, पोस्ट करना, लोगों को ढूँढना और गोपनीयता समझें।",
+    "clearSearch": "खोज साफ़ करें"
   },
   "skillLevels": {
     "beginner": {
@@ -3400,8 +3398,7 @@
       "description": "कस्टम रिले, प्रोटोकॉल विस्तार, और Nostr इकोसिस्टम में योगदान जैसे उन्नत विषय।"
     }
   },
-  "interestFilter": {
-    "allGuides": "सभी गाइड",
+  "guideTopics": {
     "bitcoin": "Bitcoin",
     "privacy": "गोपनीयता",
     "security": "सुरक्षा",

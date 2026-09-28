@@ -6,9 +6,15 @@ that structure. Decoration cannot make a generic arrangement distinctive.
 ## 0. Layout follows the reader's task
 
 - The course index is a numbered syllabus. Keep its order visible, including
-  when a topic filter is active. A lesson row shows its title, full useful
+  when search narrows the list. A lesson row shows its title, full useful
   description, reading time, and completion state. Do not render the syllabus
   as a grid of equal marketing cards.
+- Give the guide index a compact heading and one search field. Align them in
+  the same row on wide screens; on phones the field uses the available width.
+  Search matches guide copy and translated topic names. Keep the first lesson
+  in the syllabus rather than repeating it in a hero callout. Topic chips and
+  platform comparisons do not belong on the course index. Section headings
+  carry the level name and meaningful completion state without generic slogans.
 - Keep the syllabus text-led. Do not add a thumbnail to every lesson. Use an
   image only when it identifies a real app, shows a real interface, or explains
   a step that text alone makes difficult to picture.

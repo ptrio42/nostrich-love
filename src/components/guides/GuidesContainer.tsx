@@ -1,12 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useId } from 'react';
-import { Search } from 'lucide-react';
-import { InterestFilter } from './InterestFilter';
+import React, { useEffect, useId, useState } from 'react';
+import { Search, SearchX } from 'lucide-react';
 import { GuideSection } from './GuideSection';
-import type { SkillLevel } from './GuideCard';
-import type { Guide } from './GuideCard';
-import { getLastInterestFilterLocal, setLastInterestFilterLocal } from '../../lib/progress';
+import type { Guide, SkillLevel } from './GuideCard';
+import { guideMatchesSearch } from '../../config/guide-topics';
 import { type Locale, t as translate } from '../../i18n';
 
 interface GuideLevelData {
@@ -16,10 +14,11 @@ interface GuideLevelData {
 
 interface GuidesContainerProps {
   skillLevels: GuideLevelData[];
-  locale?: Locale;
+  locale: Locale;
+  heading: string;
+  intro: string;
 }
 
-// Helper to get last viewed guide from localStorage
 function getLastViewedGuide(): { slug: string; timestamp: number } | null {
   if (typeof window === 'undefined') return null;
   try {
@@ -28,140 +27,106 @@ function getLastViewedGuide(): { slug: string; timestamp: number } | null {
       const data = JSON.parse(stored);
       return { slug: data.slug, timestamp: data.timestamp };
     }
-  } catch (e) {
-    console.error('Error reading last viewed guide:', e);
+  } catch (error) {
+    console.error('Error reading last viewed guide:', error);
   }
   return null;
 }
 
-/**
- * GuidesContainer Component
- * Manages filter state and search functionality
- */
+/** Server-render the full syllabus; hydrate only the search and reading state. */
 export const GuidesContainer: React.FC<GuidesContainerProps> = ({
   skillLevels,
-  locale = 'en',
+  locale,
+  heading,
+  intro,
 }) => {
-  // Bind translations to the locale the page was built for. useTranslation()
-  // derives the locale from window.location, which is empty during SSR, so it
-  // rendered every locale's guides hub in English.
   const t = (key: string) => translate(key, locale);
-  // Ties the visible caption above the search box to the input as its
-  // accessible name; useId keeps it unique if the container is ever mounted twice.
-  const searchLabelId = useId();
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const searchInputId = useId();
   const [searchQuery, setSearchQuery] = useState('');
   const [inProgressGuideIds, setInProgressGuideIds] = useState<string[]>([]);
 
-  // Load saved filter and in-progress guides on mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedFilter = getLastInterestFilterLocal();
-      setActiveFilter(savedFilter);
-      
-      // Load last viewed guide as in-progress (if viewed within last 7 days)
-      const lastViewed = getLastViewedGuide();
-      if (lastViewed) {
-        const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
-        if (lastViewed.timestamp > sevenDaysAgo) {
-          setInProgressGuideIds([lastViewed.slug]);
-        }
-      }
+    const lastViewed = getLastViewedGuide();
+    if (!lastViewed) return;
+
+    const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+    if (lastViewed.timestamp > sevenDaysAgo) {
+      setInProgressGuideIds([lastViewed.slug]);
     }
   }, []);
 
-  // Save filter when it changes
-  const handleFilterChange = (filter: string | null) => {
-    setActiveFilter(filter);
-    setSearchQuery(''); // Clear search when filter changes
-    if (typeof window !== 'undefined') {
-      setLastInterestFilterLocal(filter);
+  const visibleGuideIds = React.useMemo(() => {
+    if (!searchQuery.trim()) return null;
+
+    const matches = new Set<string>();
+    for (const level of skillLevels) {
+      for (const guide of level.guides) {
+        if (guideMatchesSearch(guide, searchQuery, (topic) => translate(`guideTopics.${topic}`, locale))) {
+          matches.add(guide.id);
+        }
+      }
     }
-  };
+    return matches;
+  }, [skillLevels, searchQuery, locale]);
 
-
-  // Combine filter and search
-  const getActiveSearch = () => {
-    if (searchQuery.trim()) return searchQuery.toLowerCase();
-    return activeFilter;
-  };
-
-  // No client-only gate: this component must server-render the real guide list.
-  // Initial state (no filter, nothing in progress) matches what the server
-  // produces, so the first client render is identical and hydration is clean.
-  // localStorage-derived state is applied by the effect above, after mount.
   return (
     <>
-
-    {/* <section className="py-8 bg-gray-50 dark:bg-gray-900/30 border-b border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
-          <div className="relative mb-4">
-            <svg className="absolute start-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+      <section className="border-b border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,27rem)] lg:items-center lg:gap-16 lg:px-8 lg:py-10">
+          <div>
+            <h1 className="text-h1 font-bold text-gray-900 dark:text-white">{heading}</h1>
+            <p className="mt-3 max-w-measure text-body text-gray-600 dark:text-gray-400">{intro}</p>
+          </div>
+          <div className="relative">
+            <label htmlFor={searchInputId} className="sr-only">{t('ui.search.placeholder')}</label>
+            <Search
+              className="pointer-events-none absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
             <input
-            type="text"
-            placeholder="Type to search guides..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full ps-12 pe-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-friendly-purple-400 focus:border-transparent"
-          />
+              id={searchInputId}
+              type="search"
+              placeholder={t('ui.search.placeholder')}
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              className="w-full rounded-md border border-gray-200 bg-white py-3 pe-4 ps-11 text-body text-gray-900 placeholder-gray-500 transition-colors hover:border-gray-300 dark:border-gray-800 dark:bg-gray-900 dark:text-white dark:placeholder-gray-400 dark:hover:border-gray-700"
+            />
           </div>
         </div>
-      </div>
-    </section> */}
+      </section>
 
-
-      {/* Search */}
-      <div className="mb-6">
-        <p id={searchLabelId} className="mb-2 text-micro font-semibold uppercase text-gray-500 dark:text-gray-400">
-          {t('ui.search.placeholder')}
-        </p>
-        <div className="relative max-w-xl">
-          <Search
-            className="absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
-          <input
-            type="text"
-            aria-labelledby={searchLabelId}
-            placeholder={t('ui.search.placeholder')}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full ps-11 pe-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md text-body text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors hover:border-gray-300 dark:hover:border-gray-700"
-          />
+      <section className="bg-gray-50 py-8 dark:bg-gray-900 lg:py-10">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          {visibleGuideIds !== null && visibleGuideIds.size === 0 ? (
+            <div className="flex flex-wrap items-center gap-3 py-8">
+              <SearchX className="h-5 w-5 text-gray-400 dark:text-gray-500" strokeWidth={1.5} aria-hidden="true" />
+              <p className="text-body-sm text-gray-600 dark:text-gray-400">{t('ui.search.noResults')}</p>
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400"
+              >
+                {t('guidesPage.clearSearch')}
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-12">
+              {skillLevels.map((level, levelIndex) => (
+                <GuideSection
+                  key={level.id}
+                  level={level.id}
+                  startIndex={skillLevels.slice(0, levelIndex).reduce((count, item) => count + item.guides.length, 0)}
+                  totalCount={level.guides.length}
+                  guides={level.guides}
+                  inProgressGuideIds={inProgressGuideIds}
+                  visibleGuideIds={visibleGuideIds}
+                />
+              ))}
+            </div>
+          )}
         </div>
-      </div>
-
-      {/* Interest Filter */}
-      <div className="mb-10">
-        <p className="mb-2 text-micro font-semibold uppercase text-gray-500 dark:text-gray-400">
-          {t('guidesPage.filter.filterByInterest')}
-        </p>
-        <div className="flex">
-          <InterestFilter 
-            activeFilter={activeFilter}
-            onFilterChange={handleFilterChange}
-          />
-        </div>
-      </div>
-
-      {/* Guide Sections */}
-      <div className="space-y-12">
-        {skillLevels.map((level, levelIndex) => (
-          <GuideSection
-            key={level.id}
-            level={level.id}
-            startIndex={skillLevels.slice(0, levelIndex).reduce((count, item) => count + item.guides.length, 0)}
-            totalCount={level.guides.length}
-            guides={level.guides}
-            inProgressGuideIds={inProgressGuideIds}
-            activeFilter={getActiveSearch()}
-          />
-        ))}
-      </div>
+      </section>
     </>
   );
 };

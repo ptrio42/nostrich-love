@@ -3372,13 +3372,11 @@
     }
   },
   "guidesPage": {
-    "hero": {
-      "title": "Aprende Nostr Paso a Paso",
-      "description": "Niveles progresivos, de principiante a avanzado. Todo está disponible: los niveles solo sugieren un orden sensato de lectura."
-    },
-    "filter": {
-      "filterByInterest": "Filtrar por interés"
-    }
+    "title": "Guías de Nostr",
+    "description": "Explora {count} guías en el orden sugerido o ve directamente al tema que necesitas.",
+    "metaTitle": "Guías de Nostr para principiantes",
+    "metaDescription": "Explora {count} guías de Nostr para principiantes. Aprende a usar una aplicación, publicar, encontrar personas y cuidar tu privacidad.",
+    "clearSearch": "Borrar búsqueda"
   },
   "skillLevels": {
     "beginner": {
@@ -3400,8 +3398,7 @@
       "description": "Domina el protocolo con temas de privacidad, seguridad y análisis técnico profundo."
     }
   },
-  "interestFilter": {
-    "allGuides": "Todas las Guías",
+  "guideTopics": {
     "bitcoin": "Bitcoin",
     "privacy": "Privacidad",
     "security": "Seguridad",

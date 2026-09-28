@@ -66,13 +66,11 @@ export interface Translations {
     };
   };
   guidesPage?: {
-    hero: {
-      title: string;
-      description: string;
-    };
-    filter: {
-      filterByInterest: string;
-    };
+    title: string;
+    description: string;
+    metaTitle: string;
+    metaDescription: string;
+    clearSearch: string;
   };
   skillLevels?: {
     beginner: {
@@ -94,8 +92,7 @@ export interface Translations {
       description: string;
     };
   };
-  interestFilter?: {
-    allGuides: string;
+  guideTopics?: {
     bitcoin: string;
     privacy: string;
     security: string;

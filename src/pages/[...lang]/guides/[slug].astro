@@ -238,7 +238,7 @@ const jsonLd = {
 // Locale passed explicitly, never inferred: page frontmatter runs BEFORE
 // Layout.astro calls setServerLocale, so a bare t() here would resolve against
 // whichever page the build rendered previously.
-const guidesHubLabel = t('guidesPage.hero.title', locale as Locale) || 'Guides';
+const guidesHubLabel = t('guidesPage.title', locale as Locale);
 const breadcrumbs = breadcrumbList([
   { name: guidesHubLabel, path: guidesIndexPath(locale as Locale) },
   { name: guide.data.title, path: Astro.url.pathname },

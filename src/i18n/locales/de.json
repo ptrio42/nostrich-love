@@ -3372,13 +3372,11 @@
     }
   },
   "guidesPage": {
-    "hero": {
-      "title": "Lerne Nostr Schritt für Schritt",
-      "description": "Stufen von Anfänger bis Fortgeschritten. Alles ist frei zugänglich, die Stufen zeigen nur eine sinnvolle Reihenfolge."
-    },
-    "filter": {
-      "filterByInterest": "Nach Interesse filtern"
-    }
+    "title": "Nostr-Anleitungen",
+    "description": "Entdecke {count} Anleitungen in der empfohlenen Reihenfolge oder wähle direkt das Thema, das du brauchst.",
+    "metaTitle": "Nostr-Anleitungen für Einsteiger",
+    "metaDescription": "Entdecke {count} Nostr-Anleitungen für Einsteiger. Lerne, eine App zu nutzen, Beiträge zu veröffentlichen, Menschen zu finden und deine Privatsphäre zu schützen.",
+    "clearSearch": "Suche löschen"
   },
   "skillLevels": {
     "beginner": {
@@ -3400,8 +3398,7 @@
       "description": "Meistere das Protokoll mit Privatsphäre, Sicherheit und technischen Tiefgängen."
     }
   },
-  "interestFilter": {
-    "allGuides": "Alle Anleitungen",
+  "guideTopics": {
     "bitcoin": "Bitcoin",
     "privacy": "Privatsphäre",
     "security": "Sicherheit",

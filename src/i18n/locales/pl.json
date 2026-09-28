@@ -3372,13 +3372,11 @@
     }
   },
   "guidesPage": {
-    "hero": {
-      "title": "Ucz się Nostr krok po kroku",
-      "description": "Stopniowe poziomy od początkującego do zaawansowanego. Wszystko jest dostępne, a poziomy pokazują tylko sensowną kolejność czytania."
-    },
-    "filter": {
-      "filterByInterest": "Filtruj według zainteresowań"
-    }
+    "title": "Poradniki Nostr",
+    "description": "Przejrzyj {count} poradników w proponowanej kolejności albo wybierz temat, którego teraz potrzebujesz.",
+    "metaTitle": "Poradniki Nostr dla początkujących",
+    "metaDescription": "Przejrzyj {count} poradników Nostr dla początkujących. Dowiedz się, jak korzystać z aplikacji, publikować, znajdować ludzi i dbać o prywatność.",
+    "clearSearch": "Wyczyść wyszukiwanie"
   },
   "skillLevels": {
     "beginner": {
@@ -3400,8 +3398,7 @@
       "description": "Opanuj protokół dzięki tematom związanym z prywatnością, bezpieczeństwem i głębokim wglądem technicznym."
     }
   },
-  "interestFilter": {
-    "allGuides": "Wszystkie przewodniki",
+  "guideTopics": {
     "bitcoin": "Bitcoin",
     "privacy": "Prywatność",
     "security": "Bezpieczeństwo",
