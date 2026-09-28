@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export type SkillLevel = 'beginner' | 'intermediate' | 'advanced';
 
@@ -8,12 +9,6 @@ export interface LevelProgressBarProps {
   level: SkillLevel;
   className?: string;
 }
-
-const levelNames = {
-  beginner: 'Beginner',
-  intermediate: 'Intermediate',
-  advanced: 'Advanced',
-};
 
 /**
  * LevelProgressBar Component
@@ -29,7 +24,11 @@ export const LevelProgressBar: React.FC<LevelProgressBarProps> = ({
   level,
   className = '',
 }) => {
+  const { t } = useTranslation();
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  const countLabel = t('guideSection.progressCount')
+    .replace('{completed}', String(completed))
+    .replace('{total}', String(total));
 
   // The fill used to be green at Beginner, yellow at Intermediate, red at
   // Advanced. Three problems in one bar: green is the completion colour on the
@@ -44,7 +43,7 @@ export const LevelProgressBar: React.FC<LevelProgressBarProps> = ({
         aria-valuenow={completed}
         aria-valuemin={0}
         aria-valuemax={total}
-        aria-label={`${levelNames[level]} progress: ${completed} of ${total} guides completed`}
+        aria-label={`${t(`skillLevels.${level}.label`)}: ${countLabel}`}
       >
         <div
           className="h-full rounded-full bg-primary-600 transition-[width] duration-500 ease-out motion-reduce:transition-none"
@@ -54,10 +53,7 @@ export const LevelProgressBar: React.FC<LevelProgressBarProps> = ({
 
       <div className="mt-2 flex items-center justify-between text-caption">
         <span className="text-gray-600 dark:text-gray-400">
-          <span className="font-semibold text-gray-900 dark:text-white">{completed}</span>
-          {' '}of{' '}
-          <span className="font-semibold text-gray-900 dark:text-white">{total}</span>
-          {' '}guides completed
+          {countLabel}
         </span>
         <span className="font-semibold text-gray-900 dark:text-white">
           {percentage}%

@@ -55,6 +55,7 @@ const skillLevelsData = Object.entries(SKILL_LEVELS).map(([levelId, levelConfig]
     guides: levelGuides,
   };
 });
+const firstGuide = skillLevelsData[0]?.guides[0];
 
 const title = translations.guidesPage?.hero?.title || 'Learn Nostr';
 const description = translations.guidesPage?.hero?.description || 'Interactive step-by-step guides to understand Nostr';
@@ -97,26 +98,35 @@ const jsonLd = [
   <Header />
   
   <main id="main-content">
-    {/* Hero Section */}
     <section>
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div class="text-center max-w-3xl mx-auto">
-          <h1 class="text-display font-bold text-gray-900 dark:text-white mb-6">
+      <div class="container mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-center lg:gap-16 lg:px-8 lg:py-14">
+        <div>
+          <h1 class="max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white">
             {translations.guidesPage?.hero?.title || 'Learn Nostr'}
           </h1>
-          <p class="text-lead text-gray-600 dark:text-gray-300 mb-8">
+          <p class="mt-5 max-w-measure text-lead text-gray-600 dark:text-gray-300">
             {translations.guidesPage?.hero?.description || 'Interactive step-by-step guides to understand Nostr'}
           </p>
-
-          {/* Gamification Explainer */}
-          <GamificationExplainerWrapper client:idle />
         </div>
+        {firstGuide && (
+          <div class="border-s-2 border-primary-600 ps-5 dark:border-primary-400">
+            <p class="text-micro font-semibold uppercase text-primary-text dark:text-primary-400">
+              {translations.guideSection?.startHere}
+            </p>
+            <a href={firstGuide.href} class="group mt-2 block text-h3 font-semibold text-gray-900 dark:text-white">
+              <span class="underline-offset-2 group-hover:underline">{firstGuide.title}</span>
+              <span class="ms-2 inline-block text-primary-text rtl:rotate-180 dark:text-primary-400" aria-hidden="true">→</span>
+            </a>
+            <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{firstGuide.description}</p>
+          </div>
+        )}
+        <GamificationExplainerWrapper client:idle />
       </div>
     </section>
 
     {/* Guides Section */}
     {/* The one flat band on this page. Everything else sits on the page ground. */}
-    <section class="py-16 border-y border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
+    <section class="border-y border-gray-200 bg-gray-50 py-10 dark:border-gray-800 dark:bg-gray-900 lg:py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* client:idle, not client:load — the guide list is server-rendered, so
             hydration only powers search and the interest filter. */}

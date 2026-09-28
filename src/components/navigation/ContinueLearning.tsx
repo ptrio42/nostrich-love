@@ -14,6 +14,7 @@ import {
 } from './continueLearningPlan';
 import { useTranslation } from '../../hooks/useTranslation';
 import { guidesIndexPath } from "../../i18n/paths";
+import { GAMIFICATION_UPDATED_EVENT } from '../../utils/gamificationEngine';
 import type { Locale } from '../../config/locales';
 
 // Session-scoped dismissal. Deliberately plain sessionStorage, NOT routed
@@ -161,6 +162,7 @@ export function ContinueLearning({
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(readSessionDismissed);
   const [isViewingQuiz, setIsViewingQuiz] = useState(false);
+  const [isViewingFooter, setIsViewingFooter] = useState(false);
   const [model, setModel] = useState<ContinueLearningPlan | null>(null);
 
   const dismiss = useCallback(() => {
@@ -216,9 +218,20 @@ export function ContinueLearning({
       setIsViewingQuiz(false);
       if (!readSessionDismissed()) setIsVisible(true);
     };
+    const onProgressChanged = () => {
+      try {
+        setModel(buildModel());
+      } catch {
+        // Keep the current suggestion if storage is unavailable.
+      }
+    };
 
     window.addEventListener(QUIZ_COMPLETED_EVENT, onQuizCompleted);
-    return () => window.removeEventListener(QUIZ_COMPLETED_EVENT, onQuizCompleted);
+    window.addEventListener(GAMIFICATION_UPDATED_EVENT, onProgressChanged);
+    return () => {
+      window.removeEventListener(QUIZ_COMPLETED_EVENT, onQuizCompleted);
+      window.removeEventListener(GAMIFICATION_UPDATED_EVENT, onProgressChanged);
+    };
   }, [buildModel]);
 
   const quizPending = Boolean(model?.quiz && !model.quiz.attempted);
@@ -251,6 +264,8 @@ export function ContinueLearning({
       const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
 
       checkQuizVisibility();
+      const footer = document.querySelector('footer[role="contentinfo"]');
+      setIsViewingFooter(Boolean(footer && footer.getBoundingClientRect().top < window.innerHeight));
 
       if (scrollPercent >= threshold && !isDismissed) {
         setIsVisible(true);
@@ -317,7 +332,7 @@ export function ContinueLearning({
     </div>
   );
 
-  if (!isVisible || isDismissed || isViewingQuiz || !model) return null;
+  if (!isVisible || isDismissed || isViewingQuiz || isViewingFooter || !model) return null;
 
   const { target } = model;
   const targetTitle = target ? titleOf(target.slug) : '';

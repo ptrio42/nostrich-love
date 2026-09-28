@@ -7,25 +7,25 @@
         "title": "Quiz: Fundamentos de Nostr",
         "questions": [
           {
-            "id": "nostr-acronym",
-            "title": "Nombre del protocolo",
-            "prompt": "¿Qué significa NOSTR?",
+            "id": "switching-apps",
+            "title": "Cambiar de aplicación",
+            "prompt": "Quieres probar otra aplicación de Nostr. ¿Qué pasa con tu identidad?",
             "options": [
               {
                 "id": "a",
-                "label": "Notes and Other Stuff Transmitted by Relays"
+                "label": "La misma identidad funciona en la nueva aplicación"
               },
               {
                 "id": "b",
-                "label": "Red de Recursos de Transmisión Segura"
+                "label": "Debes pedir a la aplicación anterior que transfiera tu cuenta"
               },
               {
                 "id": "c",
-                "label": "Nuevo Recurso de Tecnología Social en Línea"
+                "label": "Tienes que crear una identidad nueva"
               }
             ],
             "correctId": "a",
-            "explanation": "NOSTR significa 'Notes and Other Stuff Transmitted by Relays', o sea, notas y otras cosas transmitidas por relays: un protocolo abierto y sencillo para redes sociales descentralizadas.",
+            "explanation": "Tu identidad está vinculada a tus claves, no a una aplicación. Puedes usarla en otra aplicación. Las publicaciones anteriores aparecen donde los relays todavía las conservan.",
             "severity": "info"
           },
           {
@@ -286,8 +286,8 @@
       }
     },
     "quickstart": {
-      "title": "Inicio Rápido",
-      "description": "Comienza a usar Nostr en minutos."
+      "title": "Inicio rápido",
+      "description": "Instala una app de Nostr, protege tu identidad, publica una nota breve y comprueba si otros pueden verla."
     },
     "findingCommunity": {
       "title": "Encontrar Comunidad",
@@ -3337,13 +3337,16 @@
       "mobileNav": "Navegación móvil"
     }
   },
+  "aboutPage": {
+    "missionIntro": "Nostrich.love se creó para acercar el protocolo Nostr a cualquier persona que esté empezando. Las redes sociales descentralizadas no deberían exigir conocimientos técnicos para entrar.",
+    "accessibility": "Escrito para quienes empiezan en Nostr. Cuando un término es necesario, lo explicamos antes de usarlo."
+  },
   "footer": {
     "languages": {
       "thisPage": "Lee esta página en",
       "guides": "Lee las guías en"
     },
-    "tagline": "Una guía de Nostr pensada para quien empieza. Aprende, explora y súmate a la revolución social descentralizada.",
-    "privacyNote": "Las claves se generan en tu navegador. No guardamos nada en nuestros servidores.",
+    "tagline": "Un curso gratuito y práctico de Nostr para principiantes.",
     "copyright": "© {year} {site}. Código abierto e impulsado por la comunidad.",
     "homeAria": "Inicio de {site}",
     "externalLinkAria": "{label} (se abre en una pestaña nueva)",
@@ -3420,7 +3423,8 @@
   },
   "guideSection": {
     "startHere": "Comienza Aquí",
-    "complete": "Completado"
+    "complete": "Completado",
+    "progressCount": "{completed} de {total} completadas"
   },
   "relayFeedBrowser": {
     "title": "Explorar Feeds de Relays",
@@ -3479,6 +3483,11 @@
   "tableOfContents": {
     "title": "En esta página",
     "ariaLabel": "Secciones de la guía"
+  },
+  "guideReadAction": {
+    "prompt": "¿Terminaste de leer?",
+    "markAsRead": "Marcar como leído",
+    "markedAsRead": "Marcado como leído"
   },
   "guideFooter": {
     "improvePage": "Mejora esta página",
@@ -3589,6 +3598,25 @@
         "name": "Muy específico",
         "description": "Intereses muy concretos y perspectivas poco comunes que no encontrarás en otro sitio."
       }
+    }
+  },
+  "homePage": {
+    "whatChanges": {
+      "title": "Qué cambia en Nostr",
+      "points": [
+        {
+          "title": "Tu identidad te acompaña",
+          "description": "Una cuenta de Nostr se basa en claves. Puedes usar la misma identidad en otra aplicación de Nostr."
+        },
+        {
+          "title": "Cada aplicación organiza tu feed",
+          "description": "Cada aplicación decide cómo mostrar las publicaciones. Puedes elegir la que prefieras y cambiarla más adelante."
+        },
+        {
+          "title": "Tus publicaciones pueden estar en varios relays",
+          "description": "Los relays almacenan publicaciones. Si una llega a varios, puede seguir disponible aunque uno deje de funcionar o la elimine."
+        }
+      ]
     }
   },
   "glossary": {

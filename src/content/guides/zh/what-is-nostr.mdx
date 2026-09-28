@@ -10,9 +10,9 @@ import { HoverCard } from "@components/HoverCard";
 import { ProtocolComparison } from "@components/ProtocolComparison";
 import { WhatIsNostrQuiz } from "@components/interactive/WhatIsNostrQuiz";
 
-**Nostr（Notes and Other Stuff Transmitted by Relays 的缩写）是一个开放的社交媒体协议，不是一款应用。** 你的账号就是一对密码学密钥，你的帖子是签名过的事件，中继则是存储并转发它们的服务器。任何客户端都能读到这些内容，所以没有哪家公司能封掉你，也没法把你的粉丝扣在自己手里。
+想象你发布了一幅画、一首歌或一篇文章，之后想换一款社交应用试试。在多数平台上，你的账号和联系读者的方式都依赖那款应用。在 Nostr 上，你掌控自己的身份，因此换应用时无需重新创建账号。
 
-它由一位化名 fiatjaf 的开发者在 2020 年匿名发布，定义它的是一份份编号的规范（NIP），而不是某家公司。
+Nostr 是一套供社交应用共同使用的规则。密钥用来证明你的身份，客户端是你使用的应用，中继负责传递帖子。下面我们会逐一说明。
 
 ## 问题所在
 
@@ -58,7 +58,7 @@ Nostr 通过改变一个根本性的东西来解决这个问题：**它是一个
 
 ### 区别解释
 
-<ProtocolComparison client:idle />
+<ProtocolComparison />
 
 **中心化（Twitter、Facebook）：** 一家公司拥有一切。他们可以封你、改变规则，或完全关闭。
 

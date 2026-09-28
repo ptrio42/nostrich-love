@@ -1,268 +1,54 @@
 ---
-title: "快速开始：5 分钟启动"
-description: "你的 Nostr 快速通道。检查你的密钥，选择客户端，然后启动。全是能照着做的步骤。"
-estimatedTime: "5 分钟"
+title: "在 Nostr 发布第一条动态"
+seoTitle: "Nostr 快速入门：设置身份并发布第一条动态"
+description: "安装 Nostr 应用、备份身份、发布一条简短动态，并确认别人能否看到。"
+estimatedTime: "15-20 分钟"
 priority: 4
 category: "getting-started"
-prerequisites: ["what-is-nostr", "keys-and-security"]
+prerequisites: []
 ---
 
-<div className="text-center mb-8">
-  <p className="text-4xl md:text-5xl font-bold mb-4">
-    准备启动？
-  </p>
-  <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-    三个简单步骤，从零到第一条帖子。让我们带你进入 Nostr。
-  </p>
-</div>
+import { guidePath } from "@/i18n/paths";
 
----
-
-## 步骤 1：先决条件检查
-
-在我们启动之前，你准备好你的 Nostr 密钥了吗？
-
-<div className="my-8 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
-  <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-    <a 
-      href="#step-2" 
-      className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
-    >
-      <svg className="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-      </svg>
-      是的，我有密钥
-    </a>
-    <span className="text-gray-500">或</span>
-    <a 
-      href="/zh/guides/keys-and-security" 
-      className="inline-flex items-center px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
-    >
-      <svg className="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-      </svg>
-      先生成密钥（10 分钟）
-    </a>
-  </div>
-  
-  <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
-    你需要你的 <code>nsec</code>（私钥）才能继续。<code>npub</code>（公钥）会自动由它推导出来，所以不必两个都随身备着。
-  </p>
-</div>
-
----
+目标是在个人主页发布一条可以分享的动态。我们以**手机上的 Primal** 为例。以后你仍可以用同一个身份使用其他 Nostr 应用。按钮名称可能因版本而异。
 
 <span id="step-2"></span>
+## 1. 安装应用
 
-## 步骤 2：选择你的客户端
 
-Nostr 有几十个客户端。把它们想象成电子邮件应用，先挑一个用起来。
+在手机上打开 [Primal 官方下载页面](https://primal.net/download)，选择 iPhone 或 Android 版本，通过页面链接的应用商店安装，然后打开应用。
 
-<a href="https://sandstr.app" target="_blank" rel="noopener noreferrer" className="not-prose my-6 flex items-start gap-4 p-5 rounded-xl border-2 border-primary/30 bg-primary/5 dark:bg-primary/10 hover:border-primary/60 transition-colors">
-  <span>
-    <span className="block font-bold text-gray-900 dark:text-white mb-1">还没想好？先在浏览器里试用客户端</span>
-    <span className="block text-sm text-gray-600 dark:text-gray-400">Sandstr 让你直接点开体验 Damus、Amethyst、Primal 等客户端，不用密钥，不用安装，一切都是模拟的。找到合适的再回来。</span>
-  </span>
-</a>
+**检查：** 你应该能看到创建新身份或登录已有身份的入口。
 
-### 按设备快速选择
+## 2. 设置你的身份
 
-知道你想要什么？选择你的平台：
+- **第一次使用 Nostr？** 在应用中创建身份。继续之前，使用应用提供的备份功能，安全保存私钥。需要帮助时请阅读<a href={guidePath('keys-and-security', 'zh')}>密钥与安全</a>。
+- **已经有 Nostr 密钥？** 使用应用支持的方式登录现有身份。不要只为完成本指南而创建第二个身份。
 
-<div className="guide-table" tabIndex={0}>
-  <table className="w-full">
-    <thead>
-      <tr className="border-b-2 border-gray-200 dark:border-gray-700">
-        <th className="text-start py-3 px-4 font-semibold text-gray-900 dark:text-white">平台</th>
-        <th className="text-start py-3 px-4 font-semibold text-gray-900 dark:text-white">最适合新手</th>
-        <th className="text-start py-3 px-4 font-semibold text-gray-900 dark:text-white">替代方案</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr className="border-b border-gray-200 dark:border-gray-700">
-        <td className="py-3 px-4">
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.93-.74 3.2-.74c3.22.07 4.63 2.92 4.63 2.92s-2.66 1.33-2.66 4.09c0 3.24 3.92 4.09 3.92 4.09s-.48 2.21-2.17 4.61zm-5.85-15.1c.72-.87 1.2-2.07 1.07-3.28-1.05.05-2.32.7-3.07 1.57-.66.76-1.24 1.99-1.09 3.17 1.16.09 2.34-.75 3.09-1.46z"/></svg>
-            iPhone/iPad
-          </span>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://damus.io" target="_blank" rel="noopener noreferrer" className="text-friendly-purple-700 dark:text-friendly-purple-400 hover:text-friendly-purple-800 font-medium">
-            Damus →
-          </a>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://primal.net" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
-            Primal
-          </a>
-        </td>
-      </tr>
-      <tr className="border-b border-gray-200 dark:border-gray-700">
-        <td className="py-3 px-4">
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0225 3.503C15.5902 8.479 13.8532 8 12 8c-1.8532 0-3.5902.479-5.1371 1.2905l-2.0225-3.503a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.343 14.6589.343 18.6617h23.314c0-4.0028-2.3459-7.475-5.7785-9.3403"/></svg>
-            Android
-          </span>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://play.google.com/store/apps/details?id=com.vitorpamplona.amethyst" target="_blank" rel="noopener noreferrer" className="text-friendly-purple-700 dark:text-friendly-purple-400 hover:text-friendly-purple-800 font-medium">
-            Amethyst →
-          </a>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://primal.net" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
-            Primal
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td className="py-3 px-4">
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            网页/桌面
-          </span>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://primal.net" target="_blank" rel="noopener noreferrer" className="text-friendly-purple-700 dark:text-friendly-purple-400 hover:text-friendly-purple-800 font-medium">
-            Primal →
-          </a>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://iris.to" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
-            Iris
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+你的 **npub** 是公开的，可以分享。**nsec** 是私密的：不要发在动态中、发送给别人，也不要输入到网站里。备份应当在手机丢失后仍能找回。
 
----
+**检查：** 应用以你选择的身份显示主页或动态流，而且你已经备份了私钥。
 
-## 步骤 3：启动清单
+## 3. 简单介绍自己
 
-在你上线之前，最后一次检查：
+打开个人主页，添加名字或昵称，再用一句话说说你的兴趣或你来到这里的原因。例如：“我喜欢读书，也喜欢发现新地方。”头像可以以后再加。
 
-<div className="my-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl border-2 border-yellow-400 dark:border-yellow-600">
-  <h3 className="text-lg font-bold text-yellow-800 dark:text-yellow-400 mb-4 flex items-center gap-2">
-    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-    安全检查
-  </h3>
-  
-  <div className="space-y-3">
-    <label className="flex items-start gap-3 cursor-pointer">
-      <input type="checkbox" className="mt-1 w-5 h-5 text-friendly-purple-700 dark:text-friendly-purple-400 rounded" />
-      <span className="text-gray-800 dark:text-gray-200">
-        我已将密钥保存在 3 个以上的安全地方
-      </span>
-    </label>
-    <label className="flex items-start gap-3 cursor-pointer">
-      <input type="checkbox" className="mt-1 w-5 h-5 text-friendly-purple-700 dark:text-friendly-purple-400 rounded" />
-      <span className="text-gray-800 dark:text-gray-200">
-        我理解：丢失我的 nsec（私钥）= 永远丢失我的账号
-      </span>
-    </label>
-  </div>
-</div>
+**检查：** 返回个人主页时，你能看到名字和简介。
 
-### 你准备好了！
+## 4. 发布第一条动态
 
-打开你选择的客户端并登录。**如何**登录，比大多数教程愿意承认的更重要。
+找到应用中写新动态的入口。先用纯文字即可。你可以修改下面的例子：
 
-**在 Android 上**，装一个 [Amber](https://github.com/greenart7c3/Amber)，让它替你
-保管密钥。应用需要签名时会去请求 Amber，你在那里逐条批准，nsec 自始至终不会进入应用
-本身。Amber 没有上架 Google Play，请从 zap.store、F-Droid 或它的 GitHub releases
-页面获取。
+> 你好，Nostr。我刚来到这里，想找些好书推荐。你最近读了什么好书？
 
-**在 iPhone 上**没有对应的东西，所以把 nsec 粘贴进应用一次。存进应用里的东西留在那个
-应用里，但剪贴板是块公共地：只要密钥还躺在剪贴板上，别的应用就能读到它，而一个会把
-剪贴板同步到云端的输入法，能把它整个带出这台手机。粘贴之前先关掉这种同步，登录完成
-后马上复制一段无关紧要的文字把密钥盖掉。
+写一点你来这里的真实原因，然后发布。起步时无需完美的自我介绍、图片或话题标签。
 
-**在浏览器中，不要把 nsec 粘贴到网站里。** 改成安装签名扩展：
-[Alby](https://getalby.com)、[nos2x](https://chromewebstore.google.com/detail/nos2x/kpgefcfmnafjgpblomihpgmejjdanjjp)，或
-Safari 上的 [Nostash](https://apps.apple.com/us/app/nostash/id6744309333)。密钥留在
-扩展里；网站请求扩展为每个操作签名，自己从不接触密钥。所有正经的网页客户端都支持这
-一点（这叫 NIP-07），它把「一个坏网站让你失去身份」变成「一个坏网站什么也拿不到」。
+**检查：** 这条动态出现在你的个人主页。若暂时看不到，等一会儿再刷新一次。
 
-如果你根本不想把密钥放在自己的设备上，像 [nsec.app](https://use.nsec.app)（NIP-46）
-这样的远程签名器可以保管它，并从另一个应用中批准操作。
+## 5. 确认别人能看到
 
-<Callout variant="warning" title="向你索要 nsec 的网站是危险信号">
-  一旦某个网站拿到你的 nsec，它就永久拥有了你的身份。Nostr 密钥无法轮换，也无法撤销
-  访问权限。没有密码重置，也没有客服。
+从个人主页打开这条动态。如果应用有分享功能，复制链接，在浏览器中打开，或发给信任的人。能在自己的动态流之外看到它，是内容已传达到其他读者的更可靠迹象。
 
-正规的网页客户端只会请你连接签名器。如果某个网站要你把私钥输入或粘贴到表单里，
-请关闭该标签页。
+如果动态不见了，或链接无法打开，先检查网络连接，稍等后再试。动态会经过 relay，它们可能延迟或拒绝接收。排查时不要新建身份，也不要反复发布相同内容。更多方法见<a href={guidePath('troubleshooting', 'zh')}>故障排查指南</a>。
 
-</Callout>
-
-<div className="my-8 text-center">
-  <p className="text-gray-600 dark:text-gray-400 mb-4">
-    如果你在上方选择了客户端，点击打开它：
-  </p>
-  <a 
-    href="https://primal.net" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="inline-flex items-center px-8 py-4 bg-friendly-purple-700 hover:bg-friendly-purple-800 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl"
-  >
-    打开 Primal
-    <svg className="ms-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-    </svg>
-  </a>
-  <p className="mt-2 text-sm text-gray-500">
-    或从步骤 2 打开你选择的客户端
-  </p>
-</div>
-
----
-
-## 第一天的专业技巧
-
-一旦你进入，做这些来最大化你的体验：
-
-<div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
-    <div className="flex items-center gap-3 mb-3">
-      <h3 className="font-bold text-blue-800 dark:text-blue-400">先填满你的动态</h3>
-    </div>
-    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-      空动态是人们退出的第一大原因。立即关注 50+ 精选账号。
-    </p>
-    <a 
-      href="/follow-pack" 
-      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold"
-    >
-      找到关注的人
-      <svg className="ms-1 w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-  </div>
-  
-  <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
-    <div className="flex items-center gap-3 mb-3">
-      <h3 className="font-bold text-green-800 dark:text-green-400">继续学习</h3>
-    </div>
-    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-      通过我们的分步指南掌握 Nostr。从打赏（zap）到隐私，我们都讲到了。
-    </p>
-    <a 
-      href="/zh/guides" 
-      className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold"
-    >
-      探索所有指南
-      <svg className="ms-1 w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-  </div>
-</div>
-
----
-
-**欢迎来到 Nostr！** 去中心化社交革命从你开始。
+**当动态出现在个人主页，并且你检查过分享链接（如果有）时，就完成了。** 接下来通过<a href={guidePath('finding-community', 'zh')}>寻找你的社区</a>认识几位与你兴趣相近的人。

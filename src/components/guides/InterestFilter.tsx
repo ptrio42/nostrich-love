@@ -178,7 +178,7 @@ export const InterestFilter: React.FC<InterestFilterProps> = ({
   // A group of aria-pressed buttons is what they actually are.
   return (
     <div
-      className={`flex flex-wrap items-center justify-center gap-2 ${className}`}
+      className={`flex flex-wrap items-center justify-start gap-2 ${className}`}
       role="group"
       aria-label={t('guidesPage.filter.filterByInterest')}
     >

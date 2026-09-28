@@ -11,9 +11,9 @@ import { HoverCard } from "@components/HoverCard";
 import { ProtocolComparison } from "@components/ProtocolComparison";
 import { WhatIsNostrQuiz } from "@components/interactive/WhatIsNostrQuiz";
 
-**Nostr (short for Notes and Other Stuff Transmitted by Relays) is an open protocol for social media, not an app.** Your account is a cryptographic key pair, your posts are signed events, and relays are the servers that store and forward them. Any client can read them, so no company can ban you or lock in your followers.
+Imagine sharing a drawing, a song, or a story, then wanting to try a different social app. On most platforms, your account and the way you reach your audience are tied to that app. Nostr gives you an identity you control, so you can change apps without creating a new one.
 
-It was published anonymously by a developer known as fiatjaf in 2020, and it is defined by numbered specs called NIPs rather than by any company.
+Nostr is a shared set of rules for social apps. Your keys identify you, a client is the app you use, and relays carry your posts. We will explain each part below.
 
 ## The Problem
 
@@ -59,7 +59,7 @@ You probably use email every day without thinking about this magic:
 
 ### The Difference Explained
 
-<ProtocolComparison client:idle />
+<ProtocolComparison />
 
 **Centralized (Twitter, Facebook):** One company owns everything. They can ban you, change the rules, or shut down entirely.
 

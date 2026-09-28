@@ -1,277 +1,54 @@
 ---
-title: "त्वरित शुरुआत: 5 मिनट में लॉन्च करें"
-seoTitle: "5 मिनट में Nostr कैसे शुरू करें (2026)"
-description: "Nostr का आपका फास्ट ट्रैक। अपनी कुंजियाँ चेक करें, क्लाइंट चुनें, और लॉन्च करें। कोई झंझट नहीं, बस काम।"
-estimatedTime: "5 मिनट"
+title: "Nostr पर आपकी पहली पोस्ट"
+seoTitle: "Nostr पर शुरुआत: पहचान बनाएँ और पहली पोस्ट प्रकाशित करें"
+description: "Nostr ऐप इंस्टॉल करें, अपनी पहचान सुरक्षित रखें, छोटी पोस्ट प्रकाशित करें और जाँचें कि दूसरे उसे देख सकते हैं या नहीं।"
+estimatedTime: "15-20 मिनट"
 priority: 4
 category: "getting-started"
-prerequisites: ["what-is-nostr", "keys-and-security"]
+prerequisites: []
 ---
 
-<div className="text-center mb-8">
-  <p className="text-4xl md:text-5xl font-bold mb-4">
-    लॉन्च करने के लिए तैयार?
-  </p>
-  <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-    ज़ीरो से अपनी पहली पोस्ट तक तीन त्वरित कदम। आइए आपको Nostr पर लाते हैं।
-  </p>
-</div>
+import { guidePath } from "@/i18n/paths";
 
----
-
-## कदम 1: आवश्यक चीज़ें चेक करें
-
-लॉन्च करने से पहले, क्या आपके पास आपकी Nostr कुंजियाँ तैयार हैं?
-
-<div className="my-8 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
-  <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-    <a 
-      href="#step-2" 
-      className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
-    >
-      <svg className="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-      </svg>
-      हाँ, मेरे पास कुंजियाँ हैं
-    </a>
-    <span className="text-gray-500">या</span>
-    <a 
-      href="/hi/guides/keys-and-security" 
-      className="inline-flex items-center px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-colors"
-    >
-      <svg className="w-5 h-5 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-      </svg>
-      पहले कुंजियाँ बनाएं (10 मिनट)
-    </a>
-  </div>
-  
-  <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
-    जारी रखने के लिए आपको अपनी <code>nsec</code> (निजी कुंजी) चाहिए। आपकी <code>npub</code> (सार्वजनिक कुंजी) उसी से अपने आप बन जाती है, इसलिए दोनों साथ रखने की जरूरत नहीं।
-  </p>
-</div>
-
----
+लक्ष्य है कि आपकी प्रोफ़ाइल पर एक छोटी पोस्ट हो जिसे आप साझा कर सकें। हम **फ़ोन पर Primal** इस्तेमाल करेंगे। बाद में इसी पहचान से दूसरे Nostr ऐप में जा सकते हैं। बटन के नाम संस्करण के अनुसार बदल सकते हैं।
 
 <span id="step-2"></span>
+## 1. ऐप इंस्टॉल करें
 
-## कदम 2: अपना क्लाइंट चुनें
 
-Nostr में दर्जनों क्लाइंट हैं। उन्हें ईमेल ऐप्स की तरह समझें, और शुरू करने के लिए कोई एक चुन लें।
+फ़ोन पर [Primal का आधिकारिक डाउनलोड पेज](https://primal.net/download) खोलें। iPhone या Android संस्करण चुनें, वहाँ लिंक किए गए स्टोर से ऐप इंस्टॉल करें और उसे खोलें।
 
-<a href="https://sandstr.app" target="_blank" rel="noopener noreferrer" className="not-prose my-6 flex items-start gap-4 p-5 rounded-xl border-2 border-primary/30 bg-primary/5 dark:bg-primary/10 hover:border-primary/60 transition-colors">
-  <span>
-    <span className="block font-bold text-gray-900 dark:text-white mb-1">अभी तय नहीं किया? पहले ब्राउज़र में क्लाइंट आज़माएं</span>
-    <span className="block text-sm text-gray-600 dark:text-gray-400">Sandstr में आप Damus, Amethyst, Primal और दूसरे क्लाइंट क्लिक करके देख सकते हैं, बिना keys, बिना इंस्टॉल, कुछ भी असली नहीं। जो पसंद आए, तब वापस आएं।</span>
-  </span>
-</a>
+**जाँचें:** आपको नई पहचान बनाने या पहले से मौजूद पहचान से प्रवेश करने का विकल्प दिखना चाहिए।
 
-### डिवाइस से त्वरित चुनाव
+## 2. अपनी पहचान तैयार करें
 
-जानते हैं कि चाहिए क्या? अपना प्लेटफ़ॉर्म चुनें:
+- **Nostr पर नए हैं?** ऐप में पहचान बनाएँ। आगे बढ़ने से पहले ऐप के बैकअप विकल्प से अपनी निजी कुंजी सुरक्षित रखें। सहायता के लिए <a href={guidePath('keys-and-security', 'hi')}>कुंजियाँ और सुरक्षा</a> पढ़ें।
+- **पहले से Nostr कुंजियाँ हैं?** ऐप जिस तरीके का समर्थन करता हो उससे अपनी मौजूदा पहचान में प्रवेश करें। इस गाइड के लिए दूसरी पहचान न बनाएँ।
 
-<div className="guide-table" tabIndex={0}>
-  <table className="w-full">
-    <thead>
-      <tr className="border-b-2 border-gray-200 dark:border-gray-700">
-        <th className="text-start py-3 px-4 font-semibold text-gray-900 dark:text-white">प्लेटफ़ॉर्म</th>
-        <th className="text-start py-3 px-4 font-semibold text-gray-900 dark:text-white">शुरुआती लोगों के लिए सबसे अच्छा</th>
-        <th className="text-start py-3 px-4 font-semibold text-gray-900 dark:text-white">विकल्प</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr className="border-b border-gray-200 dark:border-gray-700">
-        <td className="py-3 px-4">
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.93-.74 3.2-.74c3.22.07 4.63 2.92 4.63 2.92s-2.66 1.33-2.66 4.09c0 3.24 3.92 4.09 3.92 4.09s-.48 2.21-2.17 4.61zm-5.85-15.1c.72-.87 1.2-2.07 1.07-3.28-1.05.05-2.32.7-3.07 1.57-.66.76-1.24 1.99-1.09 3.17 1.16.09 2.34-.75 3.09-1.46z"/></svg>
-            iPhone/iPad
-          </span>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://damus.io" target="_blank" rel="noopener noreferrer" className="text-friendly-purple-700 dark:text-friendly-purple-400 hover:text-friendly-purple-800 font-medium">
-            Damus →
-          </a>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://primal.net" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
-            Primal
-          </a>
-        </td>
-      </tr>
-      <tr className="border-b border-gray-200 dark:border-gray-700">
-        <td className="py-3 px-4">
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0225 3.503C15.5902 8.479 13.8532 8 12 8c-1.8532 0-3.5902.479-5.1371 1.2905l-2.0225-3.503a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.343 14.6589.343 18.6617h23.314c0-4.0028-2.3459-7.475-5.7785-9.3403"/></svg>
-            Android
-          </span>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://play.google.com/store/apps/details?id=com.vitorpamplona.amethyst" target="_blank" rel="noopener noreferrer" className="text-friendly-purple-700 dark:text-friendly-purple-400 hover:text-friendly-purple-800 font-medium">
-            Amethyst →
-          </a>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://primal.net" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
-            Primal
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td className="py-3 px-4">
-          <span className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            वेब/डेस्कटॉप
-          </span>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://primal.net" target="_blank" rel="noopener noreferrer" className="text-friendly-purple-700 dark:text-friendly-purple-400 hover:text-friendly-purple-800 font-medium">
-            Primal →
-          </a>
-        </td>
-        <td className="py-3 px-4">
-          <a href="https://iris.to" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300">
-            Iris
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+आपका **npub** सार्वजनिक है और उसे साझा करना सुरक्षित है। **nsec** निजी है: उसे पोस्ट में न डालें, किसी को न भेजें और किसी वेबसाइट में न लिखें। ऐसा बैकअप रखें जो फ़ोन खोने पर भी मिल सके।
 
----
+**जाँचें:** ऐप आपकी चुनी हुई पहचान के साथ प्रोफ़ाइल या फ़ीड दिखाता है और आपने निजी कुंजी का बैकअप रख लिया है।
 
-## कदम 3: लॉन्च चेकलिस्ट
+## 3. अपना परिचय दें
 
-लाइव होने से पहले एक आखिरी जाँच:
+प्रोफ़ाइल खोलें और अपना नाम या उपनाम जोड़ें। साथ में अपनी रुचि या यहाँ आने की वजह के बारे में एक वाक्य लिखें। उदाहरण: “मुझे किताबें पढ़ना और नई जगहें खोजना पसंद है।” प्रोफ़ाइल चित्र बाद में जोड़ सकते हैं।
 
-<div className="my-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl border-2 border-yellow-400 dark:border-yellow-600">
-  <h3 className="text-lg font-bold text-yellow-800 dark:text-yellow-400 mb-4 flex items-center gap-2">
-    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-    सुरक्षा जाँच
-  </h3>
-  
-  <div className="space-y-3">
-    <label className="flex items-start gap-3 cursor-pointer">
-      <input type="checkbox" className="mt-1 w-5 h-5 text-friendly-purple-700 dark:text-friendly-purple-400 rounded" />
-      <span className="text-gray-800 dark:text-gray-200">
-        मैंने अपनी कुंजियाँ 3+ सुरक्षित जगहों पर सेव की हैं
-      </span>
-    </label>
-    <label className="flex items-start gap-3 cursor-pointer">
-      <input type="checkbox" className="mt-1 w-5 h-5 text-friendly-purple-700 dark:text-friendly-purple-400 rounded" />
-      <span className="text-gray-800 dark:text-gray-200">
-        मैं समझता/समझती हूँ: मेरा nsec (निजी कुंजी) खोना = मेरा खाता हमेशा के लिए खोना
-      </span>
-    </label>
-  </div>
-</div>
+**जाँचें:** प्रोफ़ाइल पर लौटने पर नाम और छोटा परिचय दिखता है।
 
-### आप तैयार हैं!
+## 4. पहली पोस्ट प्रकाशित करें
 
-अपना चुना हुआ क्लाइंट खोलें और लॉग इन करें। आप **कैसे** लॉग इन करते हैं, यह
-ज़्यादातर गाइड जितना मानती हैं उससे कहीं ज़्यादा मायने रखता है।
+ऐप में नई पोस्ट लिखने का विकल्प खोजें। पहले केवल टेक्स्ट लिखें। इस उदाहरण को अपनी तरह बदल सकते हैं:
 
-**Android पर** [Amber](https://github.com/greenart7c3/Amber) इंस्टॉल करें और अपनी
-कुंजी उसी के पास रहने दें। ऐप्स हस्ताक्षर के लिए Amber से कहते हैं, हर रिक्वेस्ट को
-आप वहीं मंज़ूरी देते हैं, और आपका nsec ख़ुद ऐप के भीतर पहुँचता ही नहीं। Amber Google
-Play पर नहीं है, इसलिए उसे zap.store, F-Droid या उसके GitHub रिलीज़ पेज से लें।
+> नमस्ते Nostr। मैं यहाँ नया हूँ और अच्छी किताबों की सिफ़ारिशें ढूँढ रहा हूँ। आपने हाल में क्या अच्छा पढ़ा है?
 
-**iPhone पर** ऐसा कुछ है नहीं, इसलिए अपना nsec ऐप में एक बार पेस्ट कर दें। जो चीज़
-आप किसी ऐप के भीतर रखते हैं, वह उसी ऐप के भीतर रहती है, पर क्लिपबोर्ड साझा ज़मीन
-है: जब तक आपकी कुंजी वहाँ पड़ी है, दूसरे ऐप्स उसे पढ़ सकते हैं, और क्लिपबोर्ड को
-क्लाउड से सिंक करने वाला कीबोर्ड उसे फ़ोन से बाहर भी ले जा सकता है। पेस्ट करने से
-पहले वह सिंक बंद करें, और लॉग इन होते ही कुंजी के ऊपर कुछ बेकार सा टेक्स्ट कॉपी कर
-दें।
+यहाँ आने की अपनी वजह के बारे में कुछ सच्चा लिखें और प्रकाशित करें। शुरुआत के लिए आदर्श परिचय, तस्वीर या हैशटैग ज़रूरी नहीं हैं।
 
-**ब्राउज़र में अपना nsec वेबसाइट में मत पेस्ट कीजिए।** इसके बजाय एक साइनर एक्सटेंशन
-इंस्टॉल करें: [Alby](https://getalby.com),
-[nos2x](https://chromewebstore.google.com/detail/nos2x/kpgefcfmnafjgpblomihpgmejjdanjjp),
-या Safari पर [Nostash](https://apps.apple.com/us/app/nostash/id6744309333)। कुंजी एक्सटेंशन में
-रहती है; वेबसाइट हर क्रिया पर एक्सटेंशन से हस्ताक्षर माँगती है और कुंजी को कभी
-नहीं देखती। हर गंभीर वेब क्लाइंट यह सपोर्ट करता है (इसे NIP-07 कहते हैं), और यह
-"एक ख़राब वेबसाइट आपकी पहचान छीन लेती है" को "एक ख़राब वेबसाइट को कुछ नहीं मिलता"
-में बदल देता है।
+**जाँचें:** पोस्ट आपकी प्रोफ़ाइल पर दिखती है। न दिखे तो थोड़ी देर रुककर एक बार रीफ़्रेश करें।
 
-अगर आप कुंजी को अपने डिवाइस पर रखना ही नहीं चाहते, तो
-[nsec.app](https://use.nsec.app) (NIP-46) जैसा रिमोट साइनर उसे रखता है और अलग ऐप से
-क्रियाओं को मंज़ूरी देता है।
+## 5. जाँचें कि पोस्ट दूसरे देख सकते हैं
 
-<Callout variant="warning" title="जो साइट आपका nsec माँगे, वह ख़तरे का संकेत है">
-  किसी साइट के पास आपका nsec आ जाने पर उसके पास हमेशा के लिए आपकी पहचान आ जाती है।
-  Nostr कुंजी न बदली जा सकती है, न उसकी पहुँच रद्द की जा सकती है। न पासवर्ड रीसेट है,
-  न कोई सपोर्ट डेस्क।
+अपनी प्रोफ़ाइल से पोस्ट खोलें। ऐप में साझा करने का विकल्प हो तो लिंक कॉपी करके ब्राउज़र में खोलें या किसी भरोसेमंद व्यक्ति को भेजें। अपने फ़ीड के बाहर पोस्ट का दिखना उसके दूसरे पाठकों तक पहुँचने का बेहतर संकेत है।
 
-भरोसेमंद वेब क्लाइंट आपसे साइनर जोड़ने को कहते हैं। अगर कोई साइट आपसे निजी कुंजी
-फ़ॉर्म में लिखने या पेस्ट करने को कहे, तो टैब बंद कर दें।
+अगर पोस्ट नहीं दिखती या लिंक नहीं खुलता, कनेक्शन जाँचें और थोड़ी देर बाद फिर कोशिश करें। पोस्ट relay से होकर जाती हैं, जो उन्हें देर से पहुँचा सकते हैं या अस्वीकार कर सकते हैं। जाँच के दौरान नई पहचान न बनाएँ और वही पोस्ट बार-बार प्रकाशित न करें। मदद के लिए <a href={guidePath('troubleshooting', 'hi')}>समस्या निवारण गाइड</a> देखें।
 
-</Callout>
-
-<div className="my-8 text-center">
-  <p className="text-gray-600 dark:text-gray-400 mb-4">
-    यदि आपने ऊपर क्लाइंट चुना है, तो उसे खोलने के लिए क्लिक करें:
-  </p>
-  <a 
-    href="https://primal.net" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="inline-flex items-center px-8 py-4 bg-friendly-purple-700 hover:bg-friendly-purple-800 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl"
-  >
-    Primal खोलें
-    <svg className="ms-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-    </svg>
-  </a>
-  <p className="mt-2 text-sm text-gray-500">
-    या कदम 2 से अपना चुना हुआ क्लाइंट खोलें
-  </p>
-</div>
-
----
-
-## अपने पहले दिन के लिए प्रो टिप्स
-
-एक बार अंदर आने के बाद, अपना अनुभव अधिकतम करने के लिए ये करें:
-
-<div className="my-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
-    <div className="flex items-center gap-3 mb-3">
-      <h3 className="font-bold text-blue-800 dark:text-blue-400">पहले अपना फ़ीड भरें</h3>
-    </div>
-    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-      खाली फ़ीड लोगों को छोड़ने का सबसे बड़ा कारण है। 50+ क्यूरेटेड खातों को तुरंत फ़ॉलो करें।
-    </p>
-    <a 
-      href="/follow-pack" 
-      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold"
-    >
-      फ़ॉलो करने के लिए लोग खोजें
-      <svg className="ms-1 w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-  </div>
-  
-  <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
-    <div className="flex items-center gap-3 mb-3">
-      <h3 className="font-bold text-green-800 dark:text-green-400">सीखते रहें</h3>
-    </div>
-    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-      हमारे चरणबद्ध गाइड से Nostr में महारत हासिल करें। Zaps से लेकर प्राइवेसी तक, सब कवर किया है।
-    </p>
-    <a 
-      href="/hi/guides" 
-      className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold"
-    >
-      सभी गाइड एक्सप्लोर करें
-      <svg className="ms-1 w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-  </div>
-</div>
-
----
-
-**Nostr में आपका स्वागत है!** विकेन्द्रीकृत सामाजिक क्रांति आपसे शुरू होती है।
+**काम तब पूरा है जब पोस्ट आपकी प्रोफ़ाइल पर दिखे और उपलब्ध होने पर आप उसका साझा लिंक जाँच लें।** इसके बाद <a href={guidePath('finding-community', 'hi')}>अपना समुदाय खोजें</a> की मदद से समान रुचि वाले कुछ लोगों को ढूँढें।

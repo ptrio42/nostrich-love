@@ -7,25 +7,25 @@
         "title": "Nostr Fundamentals Quiz",
         "questions": [
           {
-            "id": "nostr-acronym",
-            "title": "Protocol Name",
-            "prompt": "What does NOSTR stand for?",
+            "id": "switching-apps",
+            "title": "Changing apps",
+            "prompt": "You want to try another Nostr app. What happens to your identity?",
             "options": [
               {
                 "id": "a",
-                "label": "Notes and Other Stuff Transmitted by Relays"
+                "label": "The same identity works in the new app"
               },
               {
                 "id": "b",
-                "label": "Network of Secure Transmission Resources"
+                "label": "You must ask the old app to transfer your account"
               },
               {
                 "id": "c",
-                "label": "New Online Social Technology Resource"
+                "label": "You need to create a new identity"
               }
             ],
             "correctId": "a",
-            "explanation": "NOSTR stands for 'Notes and Other Stuff Transmitted by Relays' - a simple, open protocol for decentralized social media.",
+            "explanation": "Your identity is tied to your keys rather than one app. Another app can use the same identity. Older posts appear where relays still store them.",
             "severity": "info"
           },
           {
@@ -287,7 +287,7 @@
     },
     "quickstart": {
       "title": "Quickstart",
-      "description": "Get up and running with Nostr in minutes with this hands-on quickstart guide."
+      "description": "Install a Nostr app, protect your identity, publish a short post, and check that others can see it."
     },
     "findingCommunity": {
       "title": "Finding Community",
@@ -3337,13 +3337,16 @@
       "mobileNav": "Mobile navigation"
     }
   },
+  "aboutPage": {
+    "missionIntro": "Nostrich.love was made to put the Nostr protocol within reach of anyone starting out. Decentralized social media should not ask for a technical background at the door.",
+    "accessibility": "Written for people new to Nostr. Where a term is unavoidable, we explain it before we use it."
+  },
   "footer": {
     "languages": {
       "thisPage": "Read this page in",
       "guides": "Read the guides in"
     },
-    "tagline": "A beginner-friendly guide to the Nostr protocol. Learn, explore, and join the decentralized social revolution.",
-    "privacyNote": "Keys generated in your browser. Nothing is stored on our servers.",
+    "tagline": "A free, practical Nostr course for beginners.",
     "copyright": "© {year} {site}. Open source and community-driven.",
     "homeAria": "{site} home",
     "externalLinkAria": "{label} (opens in new tab)",
@@ -3420,7 +3423,8 @@
   },
   "guideSection": {
     "startHere": "Start Here",
-    "complete": "Complete"
+    "complete": "Complete",
+    "progressCount": "{completed} of {total} completed"
   },
   "relayFeedBrowser": {
     "title": "Browse Relay Feeds",
@@ -3479,6 +3483,11 @@
   "tableOfContents": {
     "title": "On this page",
     "ariaLabel": "Guide sections"
+  },
+  "guideReadAction": {
+    "prompt": "Finished reading?",
+    "markAsRead": "Mark as read",
+    "markedAsRead": "Marked as read"
   },
   "guideFooter": {
     "improvePage": "Improve this page",
@@ -3589,6 +3598,25 @@
         "name": "Oddly Specific",
         "description": "Very narrow interests and unusual perspectives you will not find elsewhere."
       }
+    }
+  },
+  "homePage": {
+    "whatChanges": {
+      "title": "What changes on Nostr",
+      "points": [
+        {
+          "title": "Your identity can move with you",
+          "description": "A Nostr account is based on keys. You can use the same identity in another Nostr app."
+        },
+        {
+          "title": "Apps shape your feed",
+          "description": "Each app decides how to show posts. You can choose the app that suits you and change it later."
+        },
+        {
+          "title": "Posts can live on several relays",
+          "description": "Relays store posts. If a post reaches more than one, it may remain available when one relay goes offline or removes it."
+        }
+      ]
     }
   },
   "glossary": {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { SearchX } from 'lucide-react';
 import { GuideCard, type Guide } from './GuideCard';
 import { LevelProgressBar } from './LevelProgressBar';
@@ -13,6 +13,7 @@ export type SkillLevel = 'beginner' | 'intermediate' | 'advanced';
 
 export interface GuideSectionProps {
   level: SkillLevel;
+  startIndex: number;
   completedCount?: number;
   totalCount: number;
   guides: Guide[];
@@ -29,11 +30,12 @@ export interface GuideSectionProps {
 
 /**
  * GuideSection Component
- * Displays a skill level section with header, progress bar, and guide cards
+ * Displays a skill level section with a header, progress bar, and ordered guide list.
  * Reads completion progress from localStorage
  */
 export const GuideSection: React.FC<GuideSectionProps> = ({
   level,
+  startIndex,
   completedCount: completedCountProp,
   totalCount,
   guides,
@@ -42,6 +44,7 @@ export const GuideSection: React.FC<GuideSectionProps> = ({
   activeFilter = null,
 }) => {
   const { t } = useTranslation();
+  const headingId = useId();
   
   // Get translated level config
   const getLevelConfig = (levelId: SkillLevel) => ({
@@ -104,24 +107,21 @@ export const GuideSection: React.FC<GuideSectionProps> = ({
   // Reading order, exactly as SKILL_LEVELS lists it. This used to re-sort
   // completed guides to the end of the section, which quietly rearranged the
   // course as the reader progressed: finish guide 1 and 2, come back, and the
-  // section now starts at guide 3 with the first two at the bottom. The cards
-  // already say what is done (green start border, check icon, "Completed"), so
+  // section now starts at guide 3 with the first two at the bottom. The list
+  // already marks completed entries, so
   // the reordering only cost the reader the order they had learned.
   const sortedGuides = filteredGuides;
 
-  // The section is not a card any more. A card of cards made the guide cards
-  // disappear into the section's own white ground on light, and the page read
-  // as a marketing grid rather than an index. A hairline rule between levels
-  // does the grouping the border used to do.
+  // A numbered list exposes the course order and keeps it stable under filters.
   return (
     <section
       className="border-t border-gray-200 pt-10 first:border-t-0 first:pt-0 dark:border-gray-800"
-      aria-label={`${config.title} section`}
+      aria-labelledby={headingId}
     >
       {/* Header */}
       <div className="mb-6">
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="text-h2 font-semibold text-gray-900 dark:text-white">
+          <h2 id={headingId} className="text-h2 font-semibold text-gray-900 dark:text-white">
             {config.title}
           </h2>
           {level === 'beginner' && (
@@ -140,27 +140,24 @@ export const GuideSection: React.FC<GuideSectionProps> = ({
         </p>
       </div>
 
-      {/* Progress Bar - Show current level progress WITHOUT unlock status (that's for locked sections) */}
-      <div className="mb-6">
-        <LevelProgressBar
-          completed={completedCount}
-          total={totalCount}
-          level={level}
-        />
-      </div>
+      {completedCount > 0 && (
+        <div className="mb-6">
+          <LevelProgressBar completed={completedCount} total={totalCount} level={level} />
+        </div>
+      )}
 
-      {/* Guides Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sortedGuides.map((guide, index) => (
-          <GuideCard
-            key={guide.id}
-            guide={guide}
-            isCompleted={completedGuideIds.includes(guide.id)}
-            isInProgress={inProgressGuideIds.includes(guide.id)}
-            index={index}
-          />
+      <ol className="border-t border-gray-200 dark:border-gray-800">
+        {sortedGuides.map((guide) => (
+          <li key={guide.id}>
+            <GuideCard
+              guide={guide}
+              isCompleted={completedGuideIds.includes(guide.id)}
+              isInProgress={inProgressGuideIds.includes(guide.id)}
+              position={startIndex + guides.findIndex((item) => item.id === guide.id) + 1}
+            />
+          </li>
         ))}
-      </div>
+      </ol>
 
       {/* Empty state. A topic can legitimately have nothing at one level (there
           is no Bitcoin guide in Advanced), so this must always say so and offer

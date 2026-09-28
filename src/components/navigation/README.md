@@ -23,7 +23,7 @@ import { PrerequisiteWarning } from '../components/navigation/PrerequisiteWarnin
   currentGuideTitle="Get Your Human-Readable Identity"
   prerequisites={[
     { slug: 'keys-and-security', title: 'Your Keys, Your Identity', estimatedTime: '8 min' },
-    { slug: 'quickstart', title: 'Your First 5 Minutes on Nostr', estimatedTime: '5 min' },
+    { slug: 'quickstart', title: 'Publish Your First Nostr Post', estimatedTime: '15-20 min' },
   ]}
   dismissible={true}
 />

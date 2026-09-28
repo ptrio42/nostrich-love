@@ -2,7 +2,7 @@
 
 Platforma edukacyjna o Nostr. Astro + React + Tailwind. 7 języków: `en, pl, es, de, zh, ar` (RTL), `hi`. Po 16 poradników na język.
 
-**Odbiorca: twórcy** — piszący, artyści, muzycy. **Nie deweloperzy.** Nostr ma już narzędzia dla devów; tu budujemy drzwi wejściowe. Funkcja, która wymaga wiedzy technicznej, jest chybiona, nawet jeśli działa.
+**Odbiorca: każda osoba początkująca na Nostr.** Powód przyjścia może być dowolny: czytanie, rozmowa, publikowanie, wspieranie innych lub poznawanie protokołu. Twórcy są jedną z wielu grup, nie domyślnym odbiorcą. Wyjaśniaj podstawy bez zakładania wiedzy technicznej; tematy zaawansowane mogą być opcjonalnym rozwinięciem.
 
 ## Twarde reguły
 

@@ -43,7 +43,7 @@ export const SKILL_LEVELS: Record<SkillLevel, SkillLevelConfig> = {
       'relays-demystified',
       'outbox-model'
     ],
-    estimatedTotalTime: '75 min'
+    estimatedTotalTime: '90 min'
   },
   
   intermediate: {

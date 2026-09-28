@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { recordQuizResult } from '../utils/gamification';
+import { markGuideComplete } from '../utils/gamificationEngine';
 
 /** The shape every quiz on the site uses for a question. */
 interface ScorableQuestion {
@@ -55,6 +56,7 @@ export function useQuizCompletion(
     );
 
     recorded.current = true;
+    markGuideComplete(guideSlug);
     recordQuizResult(guideSlug, score, questions.length);
     // `answers` is intentionally not a dependency: the effect fires on the
     // transition into the results screen, and the answers behind that screen

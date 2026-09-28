@@ -13,10 +13,12 @@ import {
   saveGamificationData,
   completeGuide,
   completeGuideInLevel,
+  isGuideCompleted,
   recordActivity as recordGamificationActivity
 } from './gamification';
 
 const STORAGE_KEY = 'nostrich-gamification-v1';
+export const GAMIFICATION_UPDATED_EVENT = 'gamification-updated';
 
 // Storage format - MUST match gamification.ts interface
 interface GamificationData {
@@ -100,7 +102,7 @@ export function recordActivity(
   
   // Dispatch event for real-time updates
   if (isBrowser()) {
-    window.dispatchEvent(new Event('gamification-updated'));
+    window.dispatchEvent(new Event(GAMIFICATION_UPDATED_EVENT));
   }
 }
 
@@ -204,7 +206,8 @@ function dispatchBadgeEarnedFromConfig(badgeId: BadgeId): void {
  * Mark a guide as completed
  * Delegates to gamification.ts to avoid data conflicts
  */
-export function markGuideComplete(guideId: string): void {
+export function markGuideComplete(guideId: string): boolean {
+  if (isGuideCompleted(guideId)) return true;
   const guideLevel = getGuideLevel(guideId);
   
   if (guideLevel) {
@@ -214,6 +217,11 @@ export function markGuideComplete(guideId: string): void {
     // Fallback: use completeGuide for guides not in any level
     completeGuide(guideId);
   }
+  const completed = isGuideCompleted(guideId);
+  if (completed && isBrowser()) {
+    window.dispatchEvent(new Event(GAMIFICATION_UPDATED_EVENT));
+  }
+  return completed;
 }
 
 /**

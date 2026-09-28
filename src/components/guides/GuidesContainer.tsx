@@ -114,11 +114,11 @@ export const GuidesContainer: React.FC<GuidesContainerProps> = ({
 
 
       {/* Search */}
-      <div className="mb-8">
-        <p id={searchLabelId} className="mb-4 text-center text-micro font-semibold uppercase text-gray-500 dark:text-gray-400">
+      <div className="mb-6">
+        <p id={searchLabelId} className="mb-2 text-micro font-semibold uppercase text-gray-500 dark:text-gray-400">
           {t('ui.search.placeholder')}
         </p>
-        <div className="relative max-w-xl mx-auto">
+        <div className="relative max-w-xl">
           <Search
             className="absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500"
             strokeWidth={1.5}
@@ -136,11 +136,11 @@ export const GuidesContainer: React.FC<GuidesContainerProps> = ({
       </div>
 
       {/* Interest Filter */}
-      <div className="mb-8 text-center">
-        <p className="mb-4 text-micro font-semibold uppercase text-gray-500 dark:text-gray-400">
+      <div className="mb-10">
+        <p className="mb-2 text-micro font-semibold uppercase text-gray-500 dark:text-gray-400">
           {t('guidesPage.filter.filterByInterest')}
         </p>
-        <div className="flex justify-center">
+        <div className="flex">
           <InterestFilter 
             activeFilter={activeFilter}
             onFilterChange={handleFilterChange}
@@ -149,11 +149,12 @@ export const GuidesContainer: React.FC<GuidesContainerProps> = ({
       </div>
 
       {/* Guide Sections */}
-      <div className="space-y-8">
-        {skillLevels.map((level) => (
+      <div className="space-y-12">
+        {skillLevels.map((level, levelIndex) => (
           <GuideSection
             key={level.id}
             level={level.id}
+            startIndex={skillLevels.slice(0, levelIndex).reduce((count, item) => count + item.guides.length, 0)}
             totalCount={level.guides.length}
             guides={level.guides}
             inProgressGuideIds={inProgressGuideIds}

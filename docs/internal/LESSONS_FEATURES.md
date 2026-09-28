@@ -65,7 +65,7 @@
 - **16 comprehensive guides** across beginner/intermediate/advanced levels
 - **4 full language translations** (rare in Nostr space)
 
-**Why it matters:** Most Nostr resources assume technical knowledge. These guides actually speak to creators/writers/artists.
+**Why it matters:** The guides explain Nostr to beginners with different interests and no assumed technical background.
 
 **Content angle:** "Nostr guides that don't assume you're a developer" / "Finally, Nostr explained in plain English"
 
@@ -131,7 +131,7 @@
 1. **Client Simulators** - "Try 10 clients in your browser" is unique and practical
 2. **Follow Pack Finder** - "300+ curated accounts" is concrete and impressive
 3. **Relay Playground** - "Interactive relay lab" is unique in the space
-4. **Guide accessibility** - "For creators, not developers" is strong positioning
+4. **Guide accessibility** - Beginner-friendly explanations are the core positioning
 
 **Mention as supporting points:**
 - 16 guides in 4 languages
@@ -157,7 +157,7 @@
 "Nostrich.love built an interactive relay laboratory. Test connections to 34 relays, see which Nostr features each supports, watch live event streams, test queries. It's like a protocol sandbox for learning without breaking things."
 
 ### Angle 4: The Accessibility Angle
-"16 Nostr guides. 4 languages. Written for creators who want to own their audience, not developers who want to run relays. Uses analogies, visual diagrams, time estimates. Finally, onboarding that doesn't require a CS degree."
+"16 Nostr guides. A practical introduction for anyone starting on Nostr, whether they want to read, join a conversation or post. Uses analogies, visual diagrams and time estimates. No technical background required."
 
 ---
 

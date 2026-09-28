@@ -34,7 +34,7 @@ export function LogoText({
   };
 
   return (
-    <div className={cn("relative", className)}>
+    <div dir="ltr" lang="en" className={cn("relative", className)}>
       <div className="relative flex items-center">
         <div className="flex items-baseline gap-0.5">
           <span

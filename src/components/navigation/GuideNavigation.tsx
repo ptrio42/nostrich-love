@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, ArrowRight, Milestone } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { SKILL_LEVELS, type SkillLevel, getGuideLevel } from '../../data/learning-paths';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -149,12 +149,10 @@ export function GuideNavigation({
     className,
   );
 
-  // Card recipe, VISUAL_SYSTEM.md §4: a border and a ground. No shadow, no
-  // scale, no accent-tinted hover border — the border and the ground move.
   const navCard =
-    'flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800';
+    'group flex items-center gap-3 border-t border-gray-200 py-4 transition-colors hover:border-gray-400 dark:border-gray-800 dark:hover:border-gray-600';
   const navLabel = 'block text-micro uppercase text-gray-500 dark:text-gray-400';
-  const navTitle = 'block text-body-sm font-medium text-gray-900 dark:text-white';
+  const navTitle = 'block text-body-sm font-medium text-gray-900 underline-offset-2 group-hover:underline dark:text-white';
   const navArrow = 'h-5 w-5 shrink-0 text-gray-400 dark:text-gray-500 rtl:rotate-180';
 
   // Secondary button: gray ground, both grounds. It carried no dark: variants
@@ -196,16 +194,11 @@ export function GuideNavigation({
   if (isLastInLevel) {
     return (
       <div className={rootClass}>
-        <div className="mb-8 rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-800 dark:bg-gray-900">
-          <Milestone
-            className="mx-auto mb-4 h-6 w-6 text-gray-400 dark:text-gray-500 rtl:-scale-x-100"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
+        <div className="mb-8 border-s-2 border-gray-300 ps-5 dark:border-gray-700">
           <h3 className="mb-2 text-h3 font-semibold text-gray-900 dark:text-white">
             {t('guideNavigation.lastInLevel').replace('{level}', t(`skillLevels.${currentLevel}.label`) || '')}
           </h3>
-          <p className="mx-auto mb-6 max-w-measure-narrow text-gray-600 dark:text-gray-400">
+          <p className="mb-6 max-w-measure-narrow text-gray-600 dark:text-gray-400">
             {t(
               nextLevel
                 ? 'guideNavigation.lastInLevelDescription'

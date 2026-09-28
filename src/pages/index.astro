@@ -5,6 +5,10 @@ import Footer from '../components/layout/Footer.astro';
 import { ResumeBanner } from '../components/navigation/ResumeBanner';
 import { siteConfig } from '../config/site';
 import { COMPARISON_PAGES } from '../config/comparison-pages';
+import { getCollection } from 'astro:content';
+import { SKILL_LEVELS } from '../data/learning-paths';
+import { DEFAULT_LOCALE, guidePath } from '../i18n/paths';
+import { getTranslations } from '../i18n';
 
 // The title template (src/config/site.ts) already appends "| Nostrich.love",
 // so the brand must NOT be repeated here — it was, producing
@@ -63,15 +67,9 @@ const jsonLd = [
   },
 ];
 
-// The `icon` field on both lists held a decorative emoji: three on the value
-// props, five on the comparison rows. Every one of them repeated the words
-// next to it, so they went with the rest of the ornament (VISUAL_SYSTEM.md
-// §5), and the field went with them.
+// The `icon` field on the value props held decorative emoji that repeated the
+// words next to them, so the field went with the rest of the ornament.
 const valueProps = [
-  {
-    title: 'Three levels, in order',
-    description: 'Beginner, intermediate, advanced. You can read them in any order you like; the levels only say where to start and what tends to come next.'
-  },
   {
     title: 'A quiz at the end',
     description: 'Most guides finish with one, so you leave knowing which parts you understood and which to read again.'
@@ -82,43 +80,15 @@ const valueProps = [
   },
 ];
 
-const comparisonPoints = [
-  {
-    nostr: {
-      title: 'Your feed, in order',
-      description: 'Posts from the people you follow, in the order they were written. You decide what matters.'
-    },
-    oldWay: 'Elsewhere, an algorithm decides what you see and when.'
-  },
-  {
-    nostr: {
-      title: 'Rooms you pick yourself',
-      description: 'Relays can be narrow. One for music, one for gardening. You read the sections you want and skip the rest.'
-    },
-    oldWay: 'Elsewhere, everybody gets the same mixed timeline.'
-  },
-  {
-    nostr: {
-      title: 'Anonymous if you want to be',
-      description: 'No phone number, no email, no ID check. Call yourself whatever you like.'
-    },
-    oldWay: 'Most platforms want a verified identity before you can start.'
-  },
-  {
-    nostr: {
-      title: 'Your posts stay yours',
-      description: 'They sit on several relays at once instead of in one company database. Nobody can quietly remove the lot.'
-    },
-    oldWay: 'One account deletion elsewhere and the archive goes with it.'
-  },
-  {
-    nostr: {
-      title: 'Tips land with you',
-      description: 'Readers can send you money straight from the app. No middleman takes a cut.'
-    },
-    oldWay: 'The usual arrangement sells your attention instead.'
-  }
-];
+const englishGuides = await getCollection('guides', (entry) => entry.slug.startsWith(`${DEFAULT_LOCALE}/`));
+const translations = getTranslations(DEFAULT_LOCALE) as typeof import('../i18n/locales/en.json');
+const coursePreview = Object.values(SKILL_LEVELS).map((level) => ({
+  level,
+  openingGuide: englishGuides.find((entry) => entry.slug === `${DEFAULT_LOCALE}/${level.sequence[0]}`),
+}));
+const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
+  .map((slug) => englishGuides.find((entry) => entry.slug === `${DEFAULT_LOCALE}/${slug}`))
+  .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
 
 ---
 
@@ -128,196 +98,124 @@ const comparisonPoints = [
   <ResumeBanner client:idle />
 
   <main id="main-content">
-    <!-- Hero Section - Storybrand Approach.
-         The page ground, no wash. What used to be here: a three-stop
-         purple/cream gradient, two blurred pulsing blobs, a blurred pill badge
-         and a gradient-text second line. The type carries it now. -->
-    <section class="min-h-[700px] flex items-center border-b border-gray-200 dark:border-gray-800">
-      <div class="w-full">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="max-w-5xl mx-auto">
-            <!-- Problem Statement -->
-            <div class="text-center mb-8">
-              <p class="text-lead text-gray-600 dark:text-gray-400 mb-2 max-w-measure mx-auto">
-                Everything you have posted, and everyone who follows you, sits on a server that belongs to somebody else.
-              </p>
-              <p class="text-lead text-gray-600 dark:text-gray-400 max-w-measure mx-auto">
-                The rules there can change on a Tuesday, and nobody has to warn you first.
-              </p>
-            </div>
+    <!-- Keep the problem, the change, and the course in one reading column. -->
+    <section class="border-b border-gray-200 dark:border-gray-800">
+      <div class="container mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(17rem,0.6fr)] lg:items-center lg:gap-16 lg:px-8 lg:py-20">
+        <div>
+          <div class="max-w-measure border-s-2 border-primary-600 py-1 ps-4 dark:border-primary-400 sm:ps-6">
+            <p class="text-h4 font-semibold text-gray-900 dark:text-white">Everything you have posted, and everyone who follows you, sits on a server that belongs to somebody else.</p>
+            <p class="mt-3 text-body text-gray-600 dark:text-gray-400">The rules there can change on a Tuesday, and nobody has to warn you first.</p>
+          </div>
+          <p class="mb-5 mt-9 text-micro uppercase text-gray-500 dark:text-gray-400">Nostr works differently</p>
+          <h1 class="max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white">
+            Learn Nostr, step by step
+          </h1>
+          <p class="mt-6 max-w-measure text-lead text-gray-600 dark:text-gray-400">
+            From your first key to the protocol itself. Sixteen guides, sorted into three levels. Most of them end in a quiz, so you find out what actually stuck. Nothing is locked. The levels are only a sensible order to read in.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href="/guides/what-is-nostr" class="inline-flex items-center justify-center rounded-md bg-primary-600 px-6 py-3 text-body font-semibold text-white transition-colors hover:bg-primary-700">
+              Start the course
+              <svg class="ms-2 h-5 w-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a href="/guides" class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">See the whole course first</a>
+          </div>
+          <p class="mt-4 text-body-sm text-gray-500 dark:text-gray-400">
+            Free and open source, in <span class="font-semibold text-gray-700 dark:text-gray-300">seven languages</span>. That includes Arabic and Hindi, which almost nothing else in Nostr covers.
+          </p>
+        </div>
+        <img src="/illustrations/hero-platform-cabinet.webp" alt="" width="640" height="729" loading="eager" decoding="async" class="ms-auto h-auto w-28 sm:w-36 lg:mx-auto lg:w-64" />
+      </div>
+    </section>
 
-            <!-- Was a pill badge: blurred translucent ground, purple border,
-                 shadow and a pulsing green dot. The words are the same; they
-                 are an eyebrow now. -->
-            <p class="text-center text-micro uppercase text-gray-500 dark:text-gray-400 mb-6">
-              Nostr works differently
+    <!-- Show the real three-level course spine before readers open the index. -->
+    <section class="py-14">
+      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+          <div class="max-w-measure">
+            <h2 class="mb-3 text-h2 font-semibold text-gray-900 dark:text-white">
+              How the course works
+            </h2>
+            <p class="text-lead text-gray-600 dark:text-gray-400">
+              Read it in order, or skip to the part you need. Both work.
             </p>
+          </div>
 
-            <!-- Main Headline -->
-            <div class="text-center mb-8">
-              <h1 class="text-display font-bold mb-6 text-gray-900 dark:text-white">
-                <span class="block">Learn Nostr, Step by Step</span>
-                <span class="block">from your first key to the protocol itself</span>
-              </h1>
+          <ol class="border-s-2 border-gray-200 dark:border-gray-700 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            {coursePreview.map(({ level, openingGuide }) => (
+              <li class="relative border-b border-gray-200 py-5 ps-6 last:border-b-0 dark:border-gray-800">
+                <span class="absolute -start-[5px] top-7 h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400" aria-hidden="true"></span>
+                <a href={guidePath(level.sequence[0], DEFAULT_LOCALE)} class="group block">
+                  <h3 class="text-h3 font-semibold text-gray-900 underline-offset-2 group-hover:underline dark:text-white">{level.label}</h3>
+                  <p class="mt-1 text-body-sm text-gray-600 dark:text-gray-400">{openingGuide?.data.title ?? level.description}</p>
+                </a>
+              </li>
+            ))}
+          </ol>
 
-              <p class="text-lead text-gray-600 dark:text-gray-400 mb-4 max-w-measure-wide mx-auto">
-                Sixteen guides, sorted into three levels. Most of them end in a quiz, so you find out what actually stuck. Nothing is locked. The levels are only a sensible order to read in.
-              </p>
-
-              <!-- This line used to read "Join thousands discovering…". There is no
-                   traffic measurement behind any such number, so it made a claim the
-                   site cannot support. What replaces it is checkable in one click. -->
-              <p class="text-body-sm text-gray-500 dark:text-gray-400 max-w-measure mx-auto">
-                Free and open source, in <span class="font-semibold text-gray-700 dark:text-gray-300">seven languages</span>. That includes Arabic and Hindi, which almost nothing else in Nostr covers.
-              </p>
-            </div>
-
-            <!-- CTA Button -->
-            <div class="mt-12 flex justify-center">
-              <a
-                href="/guides/what-is-nostr"
-                class="inline-flex items-center justify-center px-8 py-4 text-body font-semibold text-white bg-primary-600 rounded-md transition-colors hover:bg-primary-700"
-              >
-                Start the course
-                <svg class="ms-2 h-5 w-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </div>
-
-            <p class="mt-4 text-center text-body-sm text-gray-500 dark:text-gray-400">
-              Free • No account required • <a href="/guides" class="underline underline-offset-2 text-primary-text dark:text-primary-400">see the whole course first</a>
-            </p>
+          <div class="grid gap-6 border-t border-gray-200 pt-6 dark:border-gray-800 sm:grid-cols-2 lg:col-start-1 lg:row-start-2 lg:grid-cols-1">
+            {valueProps.map((prop) => (
+              <div>
+                <h3 class="text-h4 font-semibold text-gray-900 dark:text-white">{prop.title}</h3>
+                <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{prop.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How the course works.
-         `valueProps` was declared in the frontmatter of this page and rendered
-         nowhere, so the home page described the protocol at length and the course
-         not at all. This is the section that makes the shape of it visible before
-         a reader has to click anything. -->
-    <section class="py-16">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-4">
-            How the course works
-          </h2>
-          <p class="text-lead text-gray-600 dark:text-gray-400 max-w-measure mx-auto">
-            Read it in order, or skip to the part you need. Both work.
-          </p>
+    <section class="border-t border-gray-200 py-16 dark:border-gray-800">
+      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">Quick Start Guides</h2>
+          <p class="mt-3 text-lead text-gray-600 dark:text-gray-400">Four places people usually start</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {valueProps.map((prop) => (
-            <div class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-              <h3 class="text-h3 font-semibold text-gray-900 dark:text-white">{prop.title}</h3>
-              <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{prop.description}</p>
-            </div>
+        <ol class="border-t border-gray-200 dark:border-gray-800">
+          {firstSteps.map((guide, index) => (
+            <li>
+              <a
+                href={guidePath(guide.slug.replace(`${DEFAULT_LOCALE}/`, ''), DEFAULT_LOCALE)}
+                class="group grid grid-cols-[2.5rem_minmax(0,1fr)_auto] gap-x-3 border-b border-gray-200 py-5 transition-colors hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:gap-x-6"
+              >
+                <span class="font-display text-h2 tabular-nums text-gray-400 dark:text-gray-500" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div class="min-w-0 md:grid md:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] md:items-baseline md:gap-x-8">
+                  <h3 class="text-h3 font-semibold text-gray-900 underline-offset-2 group-hover:underline dark:text-white">{guide.data.title}</h3>
+                  <p class="mt-1 text-body-sm text-gray-600 dark:text-gray-400 md:mt-0">{guide.data.description}</p>
+                </div>
+                <span class="col-start-3 mt-1 inline-flex items-center text-primary-text dark:text-primary-400" aria-hidden="true">
+                  <svg class="h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
 
-    <!-- A Better Way to Connect Section -->
-    <section class="py-20 border-t border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-4">
-            What changes on Nostr
-          </h2>
-          <p class="text-lead text-gray-600 dark:text-gray-400 max-w-measure mx-auto">
-            A few things work differently once no company owns the feed
-          </p>
-        </div>
-
-        <div class="max-w-4xl mx-auto space-y-6">
-          {/* One card per point, not two side by side. The pair used to sit in a
-              two-column grid, and the right-hand box held a single short italic
-              line in a lot of empty space, so it read as an unrelated fragment
-              floating beside the card rather than as the counterpoint to it. The
-              contrast is one statement, so it lives in one card: the Nostr
-              behaviour, a hairline, then what happens elsewhere, set back but
-              plainly attached to what it answers. */}
-          {comparisonPoints.map((point) => (
-            <div class="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-              <div class="p-6">
-                <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">{point.nostr.title}</h3>
-                <p class="text-body-sm text-gray-600 dark:text-gray-400">{point.nostr.description}</p>
+    <section class="border-t border-gray-200 py-14 dark:border-gray-800">
+      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
+          <div class="flex items-center justify-between gap-4 lg:block">
+            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">
+              {translations.homePage.whatChanges.title}
+            </h2>
+            <img src="/illustrations/identity-across-apps.webp" alt="" width="560" height="515" loading="lazy" decoding="async" class="h-auto w-24 shrink-0 sm:w-32 lg:mt-6 lg:w-48" />
+          </div>
+          <dl class="border-t border-gray-200 dark:border-gray-800">
+            {translations.homePage.whatChanges.points.map((point) => (
+              <div class="grid gap-2 border-b border-gray-200 py-5 dark:border-gray-800 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-10 lg:grid-cols-1 lg:gap-1">
+                <dt class="text-h4 font-semibold text-gray-900 dark:text-white">{point.title}</dt>
+                <dd class="max-w-measure text-body-sm text-gray-600 dark:text-gray-400">{point.description}</dd>
               </div>
-              <p class="border-t border-gray-200 px-6 py-3 text-body-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
-                {point.oldWay}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Start Guide Cards Section -->
-    <!-- Four identical cards. They were four pastel gradients in four different
-         hues (purple, blue, green, amber), each with an emoji in a tinted tile
-         that grew on hover. The hues carried no meaning — green here did not
-         mean success — and on this site colour outside the accent is reserved
-         for state. So: one card recipe, and purple only on the "go" line. -->
-    <section class="py-16 border-t border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-h2 font-semibold text-center mb-4 text-gray-900 dark:text-white">
-          Quick Start Guides
-        </h2>
-        <p class="text-lead text-gray-600 dark:text-gray-400 text-center mb-12 max-w-measure mx-auto">
-          Four places people usually start
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-          <!-- Guide 1: What is Nostr? -->
-          <a href="/guides/what-is-nostr" class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
-            <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">What is Nostr?</h3>
-            <p class="text-body-sm text-gray-600 dark:text-gray-400">What the thing actually is, before any of the setup</p>
-            <div class="mt-4 flex items-center text-body-sm font-medium text-primary-text dark:text-primary-400">
-              Start here
-              <svg class="ms-2 h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </a>
-
-          <!-- Guide 2: First Steps -->
-          <a href="/guides/quickstart" class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
-            <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">First Steps</h3>
-            <p class="text-body-sm text-gray-600 dark:text-gray-400">Keys ready, an app picked, your first post sent</p>
-            <div class="mt-4 flex items-center text-body-sm font-medium text-primary-text dark:text-primary-400">
-              Get started
-              <svg class="ms-2 h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </a>
-
-          <!-- Guide 3: Choose Your App -->
-          <a href="/guides/multi-client" class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
-            <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">Choose Your App</h3>
-            <p class="text-body-sm text-gray-600 dark:text-gray-400">Compare the apps and see which one suits the way you post</p>
-            <div class="mt-4 flex items-center text-body-sm font-medium text-primary-text dark:text-primary-400">
-              Compare apps
-              <svg class="ms-2 h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </a>
-
-          <!-- Guide 4: Understanding Keys -->
-          <a href="/guides/keys-and-security" class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
-            <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">Understanding Keys</h3>
-            <p class="text-body-sm text-gray-600 dark:text-gray-400">What your two keys are, and which one nobody else may ever see</p>
-            <div class="mt-4 flex items-center text-body-sm font-medium text-primary-text dark:text-primary-400">
-              Read about keys
-              <svg class="ms-2 h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </a>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
@@ -330,23 +228,28 @@ const comparisonPoints = [
       most winnable pages (comparison intent, low competition), so they get a
       real entry point here with descriptive anchor text.
     -->
-    <section class="py-16 border-t border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-h2 font-semibold text-center mb-4 text-gray-900 dark:text-white">
-          Coming from another platform?
-        </h2>
-        <p class="text-lead text-gray-600 dark:text-gray-400 text-center mb-12 max-w-measure mx-auto">
-          How Nostr differs from the network you are leaving, and what carries over
-        </p>
+    <section class="border-t border-gray-200 py-16 dark:border-gray-800">
+      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">
+              Coming from another platform?
+            </h2>
+            <p class="mt-3 max-w-measure text-lead text-gray-600 dark:text-gray-400">
+              How Nostr differs from the network you are leaving, and what carries over
+            </p>
+          </div>
+          <img src="/illustrations/compare-paths.webp" alt="" width="480" height="545" loading="lazy" decoding="async" class="h-auto w-20 shrink-0 sm:w-28 lg:w-32" />
+        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {COMPARISON_PAGES.map((item) => (
             <a
               href={item.href}
-              class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800"
+              class="group border-t-2 border-gray-300 pt-4 transition-colors hover:border-primary-600 dark:border-gray-700 dark:hover:border-primary-400"
             >
-              <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">{item.label}</h3>
-              <p class="text-body-sm text-gray-600 dark:text-gray-400">{item.blurb}</p>
+              <h3 class="text-h3 font-semibold text-gray-900 underline-offset-2 group-hover:underline dark:text-white">{item.label}</h3>
+              <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{item.blurb}</p>
               <div class="mt-4 flex items-center text-body-sm font-medium text-primary-text dark:text-primary-400">
                 Compare
                 <svg class="ms-2 h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -365,7 +268,7 @@ const comparisonPoints = [
           are the slice of it a small site can realistically win — mainstream
           publishers do not go below the app layer.
         -->
-        <p class="mt-8 text-center text-body-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-8 text-body-sm text-gray-600 dark:text-gray-400">
           <a
             href="/guides/protocol-comparison"
             class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2"
@@ -380,17 +283,19 @@ const comparisonPoints = [
          This is the page's one flat band (VISUAL_SYSTEM.md §4: at most one).
          It was a purple gradient panel with white text on it; the band plus the
          primary button does the same job of marking the end of the page. -->
-    <section class="py-20 border-t border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section class="border-t border-gray-200 bg-gray-50 py-16 dark:border-gray-800 dark:bg-gray-900">
+      <div class="container mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:px-8">
+        <div>
         <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-4">
           Ready to take control?
         </h2>
-        <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 max-w-measure mx-auto">
+        <p class="max-w-measure text-lead text-gray-600 dark:text-gray-400">
           The course begins at beginner level and ends at the protocol itself. Or open the index and pick.
         </p>
+        </div>
         <a
           href="/guides"
-          class="inline-flex items-center justify-center px-8 py-4 text-body font-semibold text-white bg-primary-600 rounded-md transition-colors hover:bg-primary-700"
+          class="inline-flex items-center justify-center rounded-md bg-primary-600 px-8 py-4 text-body font-semibold text-white transition-colors hover:bg-primary-700 lg:justify-self-end"
         >
           Start Learning
           <svg class="ms-2 h-5 w-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -404,7 +309,7 @@ const comparisonPoints = [
           topical signal. Descriptive anchor text, from the page with the most
           authority to spend.
         -->
-        <p class="mt-6 text-body-sm text-gray-500 dark:text-gray-400">
+        <p class="text-body-sm text-gray-500 dark:text-gray-400 lg:col-span-2">
           Already know Nostr? <a href="/tools" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">Jump to Tools</a> •
           Browse <a href="/resources" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">Nostr resources</a> •
           Look up a term in the <a href="/glossary" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">Nostr glossary</a> •
@@ -416,4 +321,3 @@ const comparisonPoints = [
 
   <Footer />
 </Layout>
-

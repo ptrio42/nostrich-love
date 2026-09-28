@@ -161,7 +161,7 @@ export function TableOfContents({ headings, className }: TableOfContentsProps) {
     <nav
       aria-label={t('tableOfContents.ariaLabel')}
       className={cn(
-        'rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900',
+        'rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 xl:rounded-none xl:border-0 xl:bg-transparent xl:dark:bg-transparent',
         className,
       )}
       onKeyDown={(event) => {

@@ -287,7 +287,7 @@
     },
     "quickstart": {
       "title": "Szybki start",
-      "description": "Praktyczny przewodnik, dzięki któremu uruchomisz Nostr w kilka minut."
+      "description": "Zainstaluj aplikację Nostr, zabezpiecz tożsamość, opublikuj krótki post i sprawdź, czy inni mogą go zobaczyć."
     },
     "findingCommunity": {
       "title": "Znajdowanie społeczności",
@@ -3337,13 +3337,16 @@
       "mobileNav": "Nawigacja mobilna"
     }
   },
+  "aboutPage": {
+    "missionIntro": "Nostrich.love powstało, by przybliżyć Nostr każdej osobie, która dopiero zaczyna. Korzystanie ze zdecentralizowanych mediów społecznościowych nie powinno wymagać wiedzy technicznej.",
+    "accessibility": "Teksty są pisane dla osób nowych na Nostr. Niezbędne pojęcia wyjaśniamy przed ich użyciem."
+  },
   "footer": {
     "languages": {
       "thisPage": "Przeczytaj tę stronę po",
       "guides": "Przeczytaj przewodniki po"
     },
-    "tagline": "Przewodnik po protokole Nostr dla początkujących. Ucz się, odkrywaj i dołącz do zdecentralizowanej rewolucji społecznościowej.",
-    "privacyNote": "Klucze powstają w Twojej przeglądarce. Nic nie trafia na nasze serwery.",
+    "tagline": "Bezpłatny, praktyczny kurs Nostr dla początkujących.",
     "copyright": "© {year} {site}. Otwarte źródła, tworzone przez społeczność.",
     "homeAria": "{site}, strona główna",
     "externalLinkAria": "{label} (otwiera się w nowej karcie)",
@@ -3420,7 +3423,8 @@
   },
   "guideSection": {
     "startHere": "Zacznij tutaj",
-    "complete": "Ukończony"
+    "complete": "Ukończony",
+    "progressCount": "Ukończono {completed} z {total}"
   },
   "relayFeedBrowser": {
     "title": "Przeglądaj feedy relay",
@@ -3479,6 +3483,11 @@
   "tableOfContents": {
     "title": "Na tej stronie",
     "ariaLabel": "Sekcje poradnika"
+  },
+  "guideReadAction": {
+    "prompt": "To koniec poradnika.",
+    "markAsRead": "Oznacz jako przeczytany",
+    "markedAsRead": "Oznaczono jako przeczytany"
   },
   "guideFooter": {
     "improvePage": "Ulepsz tę stronę",
@@ -3589,6 +3598,25 @@
         "name": "Bardzo specyficzne",
         "description": "Wąskie zainteresowania i nietypowe perspektywy, których nie znajdziesz nigdzie indziej."
       }
+    }
+  },
+  "homePage": {
+    "whatChanges": {
+      "title": "Co zmienia się w Nostr",
+      "points": [
+        {
+          "title": "Ta sama tożsamość w różnych aplikacjach",
+          "description": "Konto Nostr opiera się na kluczach. Możesz używać tej samej tożsamości w innej aplikacji Nostr."
+        },
+        {
+          "title": "Aplikacja układa Twój strumień wpisów",
+          "description": "Każda aplikacja decyduje, jak wyświetlać wpisy. Możesz wybrać taką, która Ci odpowiada, i później ją zmienić."
+        },
+        {
+          "title": "Wpisy mogą być na kilku przekaźnikach",
+          "description": "Przekaźniki przechowują wpisy. Jeśli wpis trafi na kilka z nich, może pozostać dostępny, gdy jeden przestanie działać lub go usunie."
+        }
+      ]
     }
   },
   "glossary": {

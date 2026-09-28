@@ -1,14 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
   BookOpen,
-  AlertTriangle,
   RotateCcw,
   ChevronRight,
   ChevronLeft,
-  KeyRound,
-  Shield,
-  Server,
-  Database,
   CheckCircle2,
   XCircle,
 } from "lucide-react";
@@ -45,7 +40,7 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
   // Get questions from translations using getValue to retrieve arrays/objects
   const rawQuestions = getValue("guides.whatIsNostr.quiz.questions");
   const questions: Question[] = Array.isArray(rawQuestions) ? rawQuestions : [];
-  const quizTitle = t("guides.whatIsNostr.quiz.title") || "What is Nostr Quiz";
+  const quizTitle = t("guides.whatIsNostr.quiz.title");
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -54,22 +49,20 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
   // Records the result once the reader reaches the results screen. Must stay
   // above the early return below — see useQuizCompletion for why.
   useQuizCompletion("what-is-nostr", showResults, questions, answers);
+  const score = questions.reduce((acc, question) => (
+    answers[question.id] === question.correctId ? acc + 1 : acc
+  ), 0);
 
   // Handle case where translations haven't loaded yet
   if (!questions || questions.length === 0) {
     return (
       <div className={cn(
-        // `not-prose` on the root of all three views. The astro-island wrapper
-        // already keeps article prose out when this is hydrated, but the guard
-        // is what the plugin's own rules honour, it survives the island tag in
-        // between, and it costs nothing — so the component renders the same
-        // whether MDX embeds it with a client directive or without one
-        // (VISUAL_SYSTEM.md §6).
-        "not-prose rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900",
+        // Keep the quiz typography separate from the surrounding article.
+        "not-prose border-t border-gray-200 py-6 dark:border-gray-800",
         className
       )}>
         <div className="flex flex-col items-center text-center">
-          <BookOpen aria-hidden="true" strokeWidth={1.5} className="h-6 w-6 animate-pulse text-gray-400 motion-reduce:animate-none dark:text-gray-500" />
+          <BookOpen aria-hidden="true" strokeWidth={1.5} className="h-6 w-6 text-gray-400 dark:text-gray-500" />
           <p className="mt-4 text-body text-gray-600 dark:text-gray-300">{t("ui.quiz.loading")}</p>
         </div>
       </div>
@@ -79,15 +72,6 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
   const currentQuestion = questions[currentIndex];
   const total = questions.length;
   const answeredCount = Object.keys(answers).length;
-
-  const score = useMemo(() => {
-    return questions.reduce((acc: number, question: Question) => {
-      if (answers[question.id] === question.correctId) {
-        return acc + 1;
-      }
-      return acc;
-    }, 0);
-  }, [answers, questions]);
 
   const handleSelect = (optionId: string) => {
     setAnswers((prev) => ({
@@ -121,41 +105,24 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
       <div
         data-quiz
         className={cn(
-          "not-prose animate-scale-in motion-reduce:animate-none rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900",
+          "not-prose border-t border-gray-200 py-6 dark:border-gray-800",
           className,
         )}
       >
         <div className="flex flex-col items-center text-center">
-          <div
-            className="animate-spin-in motion-reduce:animate-none"
-            style={{ animationDelay: "100ms" }}
-          >
-            <BookOpen aria-hidden="true" strokeWidth={1.5} className="h-6 w-6 text-primary-text dark:text-primary-400" />
-          </div>
-
           <h3
-            className="animate-slide-up motion-reduce:animate-none mt-4 text-h2 font-bold text-gray-900 dark:text-white"
-            style={{ animationDelay: "200ms" }}
+            className="text-h2 font-bold text-gray-900 dark:text-white"
           >
             {t("ui.quiz.gradeTitle").replace("{{title}}", quizTitle).replace("{{rate}}", successRate.toString())}
           </h3>
 
           <p
-            className="animate-slide-up motion-reduce:animate-none mt-2 text-body text-gray-600 dark:text-gray-300"
-            style={{ animationDelay: "300ms" }}
+            className="mt-2 text-body text-gray-600 dark:text-gray-300"
           >
             {t("ui.quiz.scoreDisplay").replace("{{score}}", score.toString()).replace("{{total}}", total.toString())}
           </p>
 
-          <div
-            // gray-800, not gray-900. This panel sits inside a quiz card that is
-            // itself gray-900 in dark mode, inside an article card that is also
-            // gray-900 — so a gray-900 ground here is no ground at all and the
-            // summary the reader is meant to read simply vanished. gray-50 /
-            // gray-800 is the nested-panel pair the rest of the components use.
-            className="animate-slide-up motion-reduce:animate-none mt-6 grid w-full gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
-            style={{ animationDelay: "400ms" }}
-          >
+          <div className="mt-6 grid w-full gap-4 border-y border-gray-200 py-5 dark:border-gray-800">
             <ResultRow
               label={t("ui.quiz.conceptsMastered")}
               value={`${score} of ${total}`}
@@ -170,10 +137,7 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
             />
           </div>
 
-          <div
-            className="animate-slide-up motion-reduce:animate-none mt-6 grid w-full gap-3 sm:grid-cols-2"
-            style={{ animationDelay: "500ms" }}
-          >
+          <div className="mt-6 grid w-full gap-3 sm:grid-cols-2">
             <a
               className="inline-flex items-center justify-center rounded-md border border-gray-200 px-4 py-3 font-semibold text-primary-text transition-colors hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:text-primary-400 dark:hover:border-gray-700 dark:hover:bg-gray-800"
               href={guidePath("keys-and-security", locale)}
@@ -191,8 +155,7 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
           <button
             type="button"
             onClick={handleRestart}
-            className="animate-scale-in motion-reduce:animate-none mt-8 inline-flex items-center gap-2 rounded-md bg-primary-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-primary-700 motion-reduce:transition-none"
-            style={{ animationDelay: "600ms" }}
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-primary-700"
           >
             <RotateCcw aria-hidden="true" strokeWidth={1.5} className="h-4 w-4" />
             {t("ui.quiz.retakeQuiz")}
@@ -209,29 +172,24 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
     <div
       data-quiz
       className={cn(
-        "not-prose overflow-hidden rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900",
+        "not-prose border-t border-gray-200 py-6 dark:border-gray-800",
         className,
       )}
     >
       <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p
-            key={`title-${currentIndex}`}
-            className="animate-slide-in-left motion-reduce:animate-none text-micro font-semibold uppercase text-primary-text dark:text-primary-400"
+            className="text-micro font-semibold uppercase text-primary-text dark:text-primary-400"
           >
             {quizTitle}
           </p>
           <h3
-            key={`heading-${currentIndex}`}
-            className="animate-slide-in-left motion-reduce:animate-none text-h3 font-bold text-gray-900 dark:text-white"
-            style={{ animationDelay: "50ms" }}
+            className="text-h3 font-bold text-gray-900 dark:text-white"
           >
             {currentQuestion.title}
           </h3>
           <p
-            key={`counter-${currentIndex}`}
-            className="animate-slide-in-left motion-reduce:animate-none text-body-sm text-gray-500 dark:text-gray-400"
-            style={{ animationDelay: "100ms" }}
+            className="text-body-sm text-gray-500 dark:text-gray-400"
           >
             {t("ui.quiz.questionCounter").replace("{{current}}", (currentIndex + 1).toString()).replace("{{total}}", total.toString())}
           </p>
@@ -261,22 +219,13 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
         </div>
       </header>
 
-      <div
-        key={currentIndex}
-        className="animate-slide-in-right motion-reduce:animate-none"
-      >
-          <div
-            // Same nested-panel pair as the results summary: the question box
-            // has to read as a box on the quiz card, and gray-900 on gray-900
-            // does not.
-            className="animate-slide-up motion-reduce:animate-none rounded-lg border border-gray-200 bg-gray-50 p-4 text-body-sm text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
-            style={{ animationDelay: "100ms" }}
-          >
+      <div key={currentIndex}>
+          <p className="text-body text-gray-700 dark:text-gray-200">
             {currentQuestion.prompt}
-          </div>
+          </p>
 
-          <div className="mt-6 space-y-3">
-            {currentQuestion.options.map((option, i) => {
+          <div className="mt-6 border-t border-gray-200 dark:border-gray-800">
+            {currentQuestion.options.map((option) => {
               const isSelected = option.id === selectedOption;
               const isAnswer = option.id === currentQuestion.correctId;
               const showState = Boolean(selectedOption);
@@ -288,41 +237,33 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
                   onClick={() => !showState && handleSelect(option.id)}
                   aria-pressed={isSelected}
                   disabled={showState}
-                  style={{ animationDelay: `${i * 80}ms` }}
                   className={cn(
-                    "animate-slide-up motion-reduce:animate-none w-full rounded-lg border px-4 py-3 text-start transition-colors motion-reduce:transition-none",
+                    "w-full border-b border-gray-200 px-2 py-4 text-start transition-colors dark:border-gray-800",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                    isSelected && "border-primary bg-primary/10",
-                    showState && isAnswer && "border-success-500 bg-success-500/10",
+                    isSelected && "border-s-2 border-s-primary ps-4",
+                    showState && isAnswer && "border-s-2 border-s-success-500 ps-4",
                     showState &&
                       isSelected &&
                       !isAnswer &&
-                      "border-error-500 bg-error-500/15 animate-shake motion-reduce:animate-none",
+                      "border-s-2 border-s-error-500 ps-4",
                     !isSelected &&
                       !showState &&
-                      "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800",
+                      "hover:bg-gray-50 dark:hover:bg-gray-800",
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    {renderOptionIcon(option.id)}
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
                         <p className="font-semibold text-gray-900 dark:text-white">
                           {option.label}
                         </p>
                         {showState && isAnswer && (
-                          <div
-                            className="animate-scale-pop motion-reduce:animate-none"
-                            style={{ animationDelay: "200ms" }}
-                          >
+                          <div>
                             <CheckCircle2 aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 text-success-600 dark:text-success-400" />
                           </div>
                         )}
                         {showState && isSelected && !isAnswer && (
-                          <div
-                            className="animate-scale-pop motion-reduce:animate-none"
-                            style={{ animationDelay: "200ms" }}
-                          >
+                          <div>
                             <XCircle aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 text-error-600 dark:text-error-400" />
                           </div>
                         )}
@@ -344,32 +285,23 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
             {selectedOption && (
               <div
                 className={cn(
-                  "animate-slide-down motion-reduce:animate-none mt-4 overflow-hidden rounded-lg border px-4 py-3 text-body-sm",
+                  "mt-4 border-s-2 ps-4 text-body-sm",
                   isCorrect
-                    ? "border-success-500 bg-success-500/10 text-success-900 dark:text-success-100"
-                    : "border-error-500 bg-error-500/10 text-error-900 dark:text-error-100",
+                    ? "border-success-500 text-success-900 dark:text-success-100"
+                    : "border-error-500 text-error-900 dark:text-error-100",
                 )}
               >
-                <div
-                  className="animate-fade-in motion-reduce:animate-none"
-                  style={{ animationDelay: "150ms" }}
-                >
+                <div>
                   {isCorrect ? (
                     <span className="flex items-center gap-2">
-                      <span
-                        className="inline-flex animate-scale-pop motion-reduce:animate-none"
-                        style={{ animationDelay: "200ms" }}
-                      >
+                      <span className="inline-flex">
                         <CheckCircle2 aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 text-success-600 dark:text-success-400" />
                       </span>
                       <span className="font-semibold">{t("ui.quiz.feedback.correct")}</span>
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      <span
-                        className="inline-flex animate-scale-pop motion-reduce:animate-none"
-                        style={{ animationDelay: "200ms" }}
-                      >
+                      <span className="inline-flex">
                         <XCircle aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 text-error-600 dark:text-error-400" />
                       </span>
                       <span className="font-semibold">{t("ui.quiz.feedback.incorrect")}</span>
@@ -383,16 +315,7 @@ export function WhatIsNostrQuiz({ className }: WhatIsNostrQuizProps) {
       </div>
 
       <footer className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div
-          className="animate-fade-in motion-reduce:animate-none text-micro uppercase text-gray-500 dark:text-gray-400"
-          style={{ animationDelay: "300ms" }}
-        >
-          {currentQuestion.severity === "critical" && t("ui.quiz.severity.critical")}
-          {currentQuestion.severity === "warning" && t("ui.quiz.severity.warning")}
-          {currentQuestion.severity === "info" && t("ui.quiz.severity.info")}
-        </div>
-
-        <div className="flex gap-3">
+        <div className="flex w-full justify-end gap-3">
           <button
             type="button"
             onClick={handlePrev}
@@ -431,26 +354,6 @@ function ResultRow({ label, value }: ResultRowProps) {
       </span>
     </div>
   );
-}
-
-function renderOptionIcon(optionId: string) {
-  const iconClass = "h-5 w-5 shrink-0 text-gray-400 dark:text-gray-500";
-  switch (optionId) {
-    case "protocol":
-      return <BookOpen aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-    case "npub":
-      return <KeyRound aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-    case "no":
-      return <Shield aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-    case "store":
-      return <Server aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-    case "automatic":
-      return <Database aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-    case "gone":
-      return <AlertTriangle aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-    default:
-      return <BookOpen aria-hidden="true" strokeWidth={1.5} className={iconClass} />;
-  }
 }
 
 export default WhatIsNostrQuiz;

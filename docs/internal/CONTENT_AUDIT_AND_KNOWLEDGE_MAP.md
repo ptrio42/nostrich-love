@@ -1,11 +1,11 @@
 # Nostrich.love Content Audit & Knowledge Mapping
-## Comprehensive Reference for Content Creators
+## Comprehensive Reference for Guide Coverage
 
 **Last Updated:** March 2026  
 **Total Guides:** 16  
 **Interactive Quizzes:** 13  
 **Estimated Total Learning Time:** ~3 hours  
-**Target Audience:** Creators (writers, artists, musicians) new to Nostr
+**Target Audience:** People new to Nostr, regardless of why they want to use it
 
 ---
 
@@ -98,28 +98,26 @@ Nostrich.love is a beginner-friendly educational platform for Nostr with **16 co
 ---
 
 #### 4. Quickstart (`quickstart.mdx`)
-**Priority:** 4 | **Time:** 5 min | **Category:** Getting Started
+**Priority:** 4 | **Time:** 15-20 min | **Category:** Getting Started
 
 **Main Topics:**
-- Prerequisites check (keys ready?)
-- Client selection by platform (iOS/Android/Web)
-- Interactive Client Simulator recommendation
-- Launch checklist with safety verification
-- First-day pro tips (fill feed, keep learning)
+- Install Primal on iPhone or Android from its official download page
+- Create or reuse a Nostr identity and back up the private key
+- Add a name or nickname and a short profile description
+- Write and publish a plain-text introduction post
+- Verify the post on the profile and through its share link when available
+- Troubleshoot missing posts and continue to Finding Community
 
 **Key Concepts:**
-- Client = app interface
-- Platform-specific recommendations
-- Safety verification before launch
-- Follow packs for immediate feed population
+- An existing identity works across Nostr apps
+- `npub` is public; `nsec` stays private and needs a backup
+- A post appearing locally is a first check; a shared link gives stronger confirmation
+- Relays can delay or reject a post
 
-**Interactive Components:**
-- Client comparison table
-- Safety check checklist
-- Direct links to client simulators
+**Interactive Components:** None; the task takes place in the Nostr app.
 
-**Prerequisites:** What is Nostr?, Keys and Security
-**Target Audience:** Ready-to-launch beginners
+**Recommended reading:** What is Nostr?, Keys and Security. The guide can be started directly; it includes the key backup checkpoint and links to the detailed security guide.
+**Target Audience:** Beginners ready to publish their first post
 **Builds Upon:** Keys and Security
 **Leads To:** Finding Community, Relays Demystified
 
@@ -620,25 +618,24 @@ For a user to have a good experience:
 
 ### Identified Gaps
 
-#### 1. Content Creation Guide (HIGH PRIORITY)
-**Gap:** No guide for creators on how to create engaging content on Nostr
-**Impact:** Creators (target audience) lack platform-specific guidance
+#### 1. Publishing Beyond a First Text Post (HIGH PRIORITY)
+**Gap:** No practical guide for publishing and checking longer posts or media
+**Impact:** Beginners who want to share more than a short text post lack a complete workflow
 **Suggested Content:**
 - Writing for Nostr (thread structure, formatting)
 - Visual content (images, video)
 - Long-form publishing (Habla, Nostrudel)
-- Building an audience from zero
-- Cross-posting strategies
-- Content calendar for Nostr
+- Checking how a post appears to other readers
+- Media hosting and availability
 
-#### 2. Nostr for Specific Creator Types (MEDIUM PRIORITY)
-**Gap:** Generic content, no role-specific guidance
-**Impact:** Artists, writers, musicians don't see themselves in the content
+#### 2. Examples for Different Reasons to Join (MEDIUM PRIORITY)
+**Gap:** Practical examples concentrate on publishing and earning
+**Impact:** Beginners who mainly want to read, talk or join communities may not see their own goals in the material
 **Suggested Content:**
-- Nostr for Writers (long-form, newsletters)
-- Nostr for Artists (visual media, galleries)
-- Nostr for Musicians (music sharing, Current app)
-- Nostr for Podcasters (zap splits, communities)
+- Reading and following topics without posting
+- Joining a conversation and replying to others
+- Finding people with shared interests
+- Publishing writing, visual work or audio when relevant
 
 #### 3. Mobile-First Guide (MEDIUM PRIORITY)
 **Gap:** Most guides assume desktop access for setup
@@ -727,11 +724,11 @@ For a user to have a good experience:
 
 ### Medium-Term Extensions (High Value, Medium Effort)
 
-#### 4. Creator-Specific Guides
-- Writer's Guide to Nostr
-- Artist's Guide to Nostr
-- Musician's Guide to Nostr
-- Each with platform-specific tips
+#### 4. Use-Case Companions
+- Reading and finding trustworthy sources
+- Joining conversations and communities
+- Publishing writing, images or audio
+- Each guide should explain the task without assuming a profession
 
 #### 5. Interactive Relay Selector
 - Tool to recommend relays based on interests
@@ -803,7 +800,7 @@ For a user to have a good experience:
 
 ---
 
-## Guidelines for Future Content Creators
+## Guidelines for Future Guide Authors
 
 ### Content Creation Principles
 
@@ -998,21 +995,21 @@ These can be read in any order:
 
 | Category | Score | Notes |
 |----------|-------|-------|
-| **Completeness** | 9/10 | Comprehensive coverage, some creator-specific gaps |
+| **Completeness** | 9/10 | Broad protocol coverage, some practical workflow gaps |
 | **Pedagogical Flow** | 9/10 | Clear progression, good analogies |
 | **Interactivity** | 9/10 | 13 quizzes, multiple simulators |
 | **I18n Coverage** | 8/10 | 4 locales, some quiz gaps historically |
 | **Technical Accuracy** | 9/10 | Current with NIPs, reviewed |
 | **Accessibility** | 8/10 | Good structure, could improve mobile |
-| **Creator Focus** | 7/10 | Generic content, needs role-specific guides |
+| **Beginner Use-Case Breadth** | 7/10 | Examples should cover reading, conversation and publishing |
 
 **Overall Score: 8.4/10**
 
 ### Priority Actions for Content Team
 
-1. **HIGH:** Create Content Creation Guide (bridge keys to engagement)
+1. **HIGH:** Add practical guidance for publishing beyond a first text post
 2. **HIGH:** Create Nostr Etiquette & Culture guide (reduce social friction)
-3. **MEDIUM:** Create Creator-specific guides (Writer, Artist, Musician)
+3. **MEDIUM:** Add examples for different reasons beginners join Nostr
 4. **MEDIUM:** Create Mobile-First Setup guide
 5. **LOW:** Create Case Studies (success stories)
 6. **LOW:** Create Historical Context guide

@@ -1,18 +1,59 @@
 # Visual system
 
-Two readers told us the site looks machine-generated. They were right, and it
-was countable: 130 gradients, 19 headings with a gradient poured through
-`bg-clip-text`, 220 `rounded-2xl`/`3xl`, 155 large shadows, 43 `hover:scale`,
-19 `backdrop-blur`, 29 pastel tinted cards, 203 emoji in guide headings. Each
-one is harmless. Together they are the house style of every landing-page
-generator on the internet, and people recognise it.
+The site's identity comes from how it teaches beginners. Typography supports
+that structure. Decoration cannot make a generic arrangement distinctive.
 
-So: strip the ornament, and give the type something to say instead. This is
-not a redesign. Layout, structure, component boundaries and information
-architecture do not change. Only the surface does.
+## 0. Layout follows the reader's task
 
-The guide pages are already right — one column, white card, no gradient,
-readable. They are the target, not a thing to fix.
+- The course index is a numbered syllabus. Keep its order visible, including
+  when a topic filter is active. A lesson row shows its title, full useful
+  description, reading time, and completion state. Do not render the syllabus
+  as a grid of equal marketing cards.
+- Keep the syllabus text-led. Do not add a thumbnail to every lesson. Use an
+  image only when it identifies a real app, shows a real interface, or explains
+  a step that text alone makes difficult to picture.
+- The progress page follows the same lesson order and row structure, so the
+  course does not change shape when a reader checks what is complete.
+- An introduction, a comparison, a course outline, and a tool have different
+  jobs. Give them different layouts. A centered heading followed by equal
+  cards is not the default page template.
+- Do not put a card inside another card. Use sections and rules to group
+  resources and tools. Reserve a bordered panel for a control that needs one.
+- Put search near the top of reference pages. Present glossary terms as a
+  scannable list instead of equally weighted cards.
+- On narrow screens, make the first useful action visible before search and
+  filtering controls. Do not spend the first viewport on empty hero space.
+- Keep guide prose in a readable column and retain the table of contents for
+  long lessons. On phones, place the contents after the title and standfirst;
+  on wide screens, keep it beside the article. The article does not need a
+  surrounding card to be legible.
+- Use concrete examples, annotated client screenshots, and diagrams close to
+  the concept they explain. Visuals should help the reader decide or learn.
+- On the home page, use three compact scenes with the same purple ostrich and
+  its angular lightning-bolt beak: the cabinet beside the introductory problem
+  statement, the two app views beside the Nostr concept heading, and the map
+  beside the platform-comparison heading. Their files are in
+  `public/illustrations/`. Keep text selectable and the first guide links ahead
+  of the Nostr concept summary. Place art beside section headings or the whole
+  statement, never in only one row of a parallel list. Keep it small enough on
+  narrow screens that links remain easy to reach.
+- Keep the home hero's problem statement, "Nostr works differently" cue, and
+  course introduction in one reading column. The cabinet scene sits beside
+  that sequence on wide screens and follows it on narrow screens.
+- On the home page, place the course's supporting facts beside its three-level
+  outline. Let the four Quick Start guides use the full content width as
+  numbered rows. Neither section needs an illustration to fill a blank column.
+- In a lesson, separate comparisons and quiz answers with rules and spacing.
+  Avoid nesting bordered panels. A quiz result needs clear feedback, not an
+  animated reveal.
+- Mark a lesson as read only after the reader chooses that action or finishes
+  its quiz. Scroll depth and time on page can show position or engagement but
+  cannot award completion.
+- The footer may repeat the logo as a site signature. Keep the description
+  concrete and short; explain browser key generation next to the key tool,
+  where a reader needs that assurance.
+
+The rules below still govern color, type, spacing, and ornament.
 
 ---
 
@@ -25,7 +66,7 @@ and Google Fonts is therefore blocked by policy, not by preference.
 **Why this one.** It is a display serif built out of mid-century advertising
 type, and it was drawn with an argument: that a screen face is allowed to have
 warmth and a little wobble instead of the ironed-out neutrality everything else
-has settled on. That fits a patient teaching site for writers and artists
+has settled on. That fits a patient teaching site for people new to Nostr
 better than another grotesque would. It also does the practical job — at 700
 weight it has real presence at heading sizes, and next to a plain system sans
 it makes the page look composed rather than decorated. Inter and Space Grotesk

@@ -29,6 +29,10 @@ export interface GuideTranslation {
 }
 
 export interface Translations {
+  aboutPage: {
+    missionIntro: string;
+    accessibility: string;
+  };
   guides: {
     [guideId: string]: GuideTranslation;
   };
@@ -114,6 +118,7 @@ export interface Translations {
   guideSection?: {
     startHere: string;
     complete: string;
+    progressCount: string;
   };
   glossary?: {
     title: string;

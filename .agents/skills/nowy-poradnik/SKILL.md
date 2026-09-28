@@ -8,7 +8,7 @@ description: Gdy piszemy nowy poradnik (MDX) albo przepisujemy istniejący. Uruc
 ## Zanim napiszesz zdanie
 
 1. **Sprawdź, czy to naprawdę dziura.** `docs/internal/CONTENT_AUDIT_AND_KNOWLEDGE_MAP.md` — mapa tego, co już pokryte. Powtórka jest gorsza niż brak: rozmywa i konkuruje sama ze sobą w wyszukiwarce.
-2. **Test odbiorcy.** Piszemy dla twórców — piszących, artystów, muzyków. Jeśli poradnik zakłada, że czytelnik ogarnie klucz kryptograficzny albo klienta CLI, jest chybiony. „Dev to zrozumie" to nie jest zaliczenie testu.
+2. **Test odbiorcy.** Piszemy dla osób początkujących na Nostr, niezależnie od tego, czy chcą czytać, rozmawiać, publikować, wspierać innych czy poznawać technologię. Wyjaśnij nowe pojęcia przed użyciem. Poradnik wprowadzający ma działać bez znajomości kryptografii i terminala.
 3. **Wczytaj w tej kolejności:** `docs/internal/TEACHING_METHODS.md` → `I18N_PATTERNS.md` → `CONTENT_TRANSLATION.md`.
 
 ## Pisanie
@@ -21,7 +21,7 @@ description: Gdy piszemy nowy poradnik (MDX) albo przepisujemy istniejący. Uruc
 
 ## Czego nie robić
 
-- **Nie rób formatu „zadanie na dzień N"** ani ścieżek dla deweloperów. Było proponowane, było odrzucone — to konkurencja robi dla innej grupy.
+- **Nie rób formatu „zadanie na dzień N".** Był proponowany i został odrzucony. Tematy dla deweloperów nie są domyślną ścieżką wprowadzającą; można je opisać jako opcjonalne rozwinięcie dla zainteresowanych początkujących.
 - **Nie pisz o kampaniach zewnętrznych** (posty na nostr, nagrody w satach). To terytorium Piotra, obsługiwane poza repo.
 - Nie tłumacz terminów protokołu: `npub`, `nsec`, `relay`, `NIP` zostają.
 

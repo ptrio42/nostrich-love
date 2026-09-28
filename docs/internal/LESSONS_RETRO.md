@@ -50,9 +50,9 @@
 - 4-language i18n = Genuine accessibility commitment
 - No analytics = Principles over metrics
 
-**Lesson:** The tech stack reflects values. This isn't just "a Nostr guide site" - it's a privacy-focused, accessible, creator-centered platform.
+**Lesson:** The tech stack reflects values. The site aims to make Nostr accessible to beginners with different interests.
 
-**Content implication:** Lead with principles (privacy, accessibility, creator-focus) not just features.
+**Content implication:** Explain privacy and accessibility through tasks a beginner can complete.
 
 ---
 
@@ -72,16 +72,16 @@
 
 ---
 
-### 6. Audience Definition is Binary
+### 6. Audience Definition Must Match the Project Brief
 
-**Critical rule from AGENTS.md:** Creator-focused, NOT developer-focused
+**Current rule in CLAUDE.md:** The site serves anyone new to Nostr, including people who read, converse, publish or explore the technology. The former creator-only rule was incorrect.
 
 **Why this kept coming up:**
-- Every feature could be positioned two ways
-- Relay Playground = "protocol sandbox" (dev) vs "hands-on learning" (creator)
-- Follow Packs = "curation algorithm" (dev) vs "find your community" (creator)
+- A feature can support several beginner tasks
+- Relay Playground can help curious readers see how relays work
+- Follow Packs can help people find conversations on topics they care about
 
-**Lesson:** Always filter through audience lens. Same feature, different framing = different appeal.
+**Lesson:** Explain a feature through the task it helps a beginner complete. Do not make one occupation the default audience.
 
 ---
 
@@ -153,7 +153,7 @@
 - "Found this..." vs "We built..."
 - "Worth bookmarking" vs "Check out our site"
 
-**Focus on creator pain points:**
+**Focus on beginner pain points:**
 - Empty feeds → Follow Pack Finder
 - Technical intimidation → Layman guides
 - Finding community → Curated categories

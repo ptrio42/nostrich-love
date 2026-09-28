@@ -67,54 +67,55 @@ const tools: ToolCard[] = [
   <Header />
   
   <main id="main-content">
-    <!-- Hero Section -->
     <section class="border-b border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div class="text-center max-w-3xl mx-auto">
-          <h1 class="text-display font-bold text-gray-900 dark:text-white mb-6">
+      <div class="container mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.6fr)] lg:items-end lg:px-8 lg:py-14">
+        <div>
+          <h1 class="text-display font-bold text-gray-900 dark:text-white">
             Nostr Tools
           </h1>
-          <p class="text-lead text-gray-600 dark:text-gray-300 mb-8">
+          <p class="mt-5 max-w-measure text-lead text-gray-600 dark:text-gray-300">
             Free browser-based tools to help you get started with Nostr.
             All tools run locally in your browser - no data is sent to any server.
           </p>
         </div>
+        <nav aria-label={title} class="border-t border-gray-200 pt-4 dark:border-gray-800">
+          <ul class="grid grid-cols-2 gap-x-4 gap-y-2 lg:grid-cols-1">
+            {tools.map((tool) => (
+              <li><a href={`#${tool.id}`} class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{tool.title}</a></li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </section>
 
-    <!-- Tools Grid -->
-    <section class="py-16">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {tools.map((tool, index) => (
-            <div id={tool.id} class={`p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 ${index === 0 || tool.id === 'relay-playground' || tool.id === 'follow-pack-finder' ? 'lg:col-span-2' : ''}`}>
-              <div class="mb-6">
-                <h2 class="text-h2 font-bold text-gray-900 dark:text-white">{tool.title}</h2>
-                <p class="text-body-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {tools.map((tool) => (
+        <section id={tool.id} class="scroll-mt-24 border-b border-gray-200 py-10 dark:border-gray-800 lg:py-14">
+          <div class="mb-7 max-w-measure">
+            <h2 class="text-h2 font-bold text-gray-900 dark:text-white">{tool.title}</h2>
+            <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
                 {tool.page && (
                   <a
                     href={tool.page}
-                    class="inline-block mt-1 text-caption font-medium text-primary-text dark:text-primary-400 underline underline-offset-2"
+                    class="mt-2 inline-block text-caption font-medium text-primary-text underline underline-offset-2 dark:text-primary-400"
                     aria-label={`Open the dedicated ${tool.title} page`}
                   >
                     Dedicated page →
                   </a>
                 )}
-              </div>
-              {tool.id === 'key-generator' && <div class="max-w-3xl mx-auto"><KeyGenerator client:idle /></div>}
-              {tool.id === 'follow-pack-finder' && <FollowPackFinder client:idle />}
-              {tool.id === 'nip05-checker' && <div class="max-w-3xl mx-auto"><NIP05Checker client:idle /></div>}
-              {tool.id === 'relay-playground' && <RelayPlayground client:idle />}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+          </div>
+          {tool.id === 'key-generator' && <div class="max-w-3xl"><KeyGenerator client:idle /></div>}
+          {tool.id === 'follow-pack-finder' && <FollowPackFinder client:idle />}
+          {tool.id === 'nip05-checker' && <div class="max-w-3xl"><NIP05Checker client:idle /></div>}
+          {tool.id === 'relay-playground' && <RelayPlayground client:idle />}
+        </section>
+      ))}
+    </div>
 
     <!-- Sandstr cross-link: the client simulators live there now -->
     <section class="py-12 bg-gray-50 dark:bg-gray-900">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center p-8 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div class="max-w-3xl">
           <h2 class="text-h2 font-bold text-gray-900 dark:text-white mb-3">Want to try whole clients, not just tools?</h2>
           <p class="text-body text-gray-600 dark:text-gray-300 mb-6">
             Sandstr lets you click through Damus, Amethyst, Primal and more in your browser,

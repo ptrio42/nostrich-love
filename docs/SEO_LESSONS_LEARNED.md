@@ -49,7 +49,7 @@ export const localeConfig: Record<Locale, {
 - Less SEO-friendly for local keywords
 - URLs look "mixed" (German prefix + English slug)
 
-**Verdict:** ✅ Correct choice for this project - simplicity wins for creator-focused content.
+**Verdict:** ✅ Correct choice for this project - simple URLs help beginners navigate across languages.
 
 #### 3. **Dynamic HTML Lang Attribute**
 **Implementation:** Layout.astro accepts `locale` prop and sets `<html lang={htmlLang}>`

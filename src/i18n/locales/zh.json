@@ -7,25 +7,25 @@
         "title": "Nostr 基础知识测验",
         "questions": [
           {
-            "id": "nostr-acronym",
-            "title": "协议名称",
-            "prompt": "NOSTR 代表什么？",
+            "id": "switching-apps",
+            "title": "切换应用",
+            "prompt": "你想试试另一款 Nostr 应用。你的身份会怎样？",
             "options": [
               {
                 "id": "a",
-                "label": "通过中继传输的笔记和其他内容"
+                "label": "同一个身份可以在新应用中使用"
               },
               {
                 "id": "b",
-                "label": "安全传输资源网络"
+                "label": "必须请旧应用转移账号"
               },
               {
                 "id": "c",
-                "label": "新型在线社交技术资源"
+                "label": "必须创建一个新身份"
               }
             ],
             "correctId": "a",
-            "explanation": "NOSTR 代表'通过中继传输的笔记和其他内容'（Notes and Other Stuff Transmitted by Relays）。这是一个简单、开放的去中心化社交媒体协议。",
+            "explanation": "你的身份由密钥决定，不依附于某款应用。你可以在另一款应用中使用同一个身份。旧帖子能否显示，取决于中继是否仍保存着它们。",
             "severity": "info"
           },
           {
@@ -286,8 +286,8 @@
       }
     },
     "quickstart": {
-      "title": "快速入门",
-      "description": "通过实践指南，几分钟内即可开始使用 Nostr。"
+      "title": "快速开始",
+      "description": "安装 Nostr 应用、备份身份、发布一条简短动态，并确认别人能否看到。"
     },
     "findingCommunity": {
       "title": "寻找社区",
@@ -1944,13 +1944,16 @@
       "mobileNav": "移动端导航"
     }
   },
+  "aboutPage": {
+    "missionIntro": "Nostrich.love 致力于让每位刚接触 Nostr 的人都能理解这个协议。使用去中心化社交网络不应要求技术背景。",
+    "accessibility": "内容写给 Nostr 新手。必须使用的术语会先解释，再使用。"
+  },
   "footer": {
     "languages": {
       "thisPage": "阅读本页的其他语言版本",
       "guides": "阅读其他语言的指南"
     },
-    "tagline": "面向新手的 Nostr 协议指南。学习、探索，加入去中心化的社交变革。",
-    "privacyNote": "密钥在你的浏览器里生成。我们的服务器上什么都不存。",
+    "tagline": "面向初学者的免费 Nostr 实用课程。",
     "copyright": "© {year} {site}。开源，由社区驱动。",
     "homeAria": "{site} 首页",
     "externalLinkAria": "{label}（在新标签页打开）",
@@ -3420,7 +3423,8 @@
   },
   "guideSection": {
     "startHere": "从这里开始",
-    "complete": "完成"
+    "complete": "完成",
+    "progressCount": "已完成 {completed}/{total} 篇"
   },
   "relayFeedBrowser": {
     "title": "浏览中继动态",
@@ -3479,6 +3483,11 @@
   "tableOfContents": {
     "title": "本页内容",
     "ariaLabel": "指南章节"
+  },
+  "guideReadAction": {
+    "prompt": "读完了吗？",
+    "markAsRead": "标记为已读",
+    "markedAsRead": "已标记为已读"
   },
   "guideFooter": {
     "improvePage": "改进此页面",
@@ -3589,6 +3598,25 @@
         "name": "非常小众",
         "description": "很窄的兴趣和不寻常的视角，别处找不到。"
       }
+    }
+  },
+  "homePage": {
+    "whatChanges": {
+      "title": "Nostr 有什么不同",
+      "points": [
+        {
+          "title": "切换应用时，身份也能跟着你",
+          "description": "Nostr 账号基于密钥。换用另一款 Nostr 应用时，你可以继续使用同一个身份。"
+        },
+        {
+          "title": "应用决定动态如何呈现",
+          "description": "每款应用决定如何展示帖子。你可以选择适合自己的应用，以后也能更换。"
+        },
+        {
+          "title": "帖子可以保存在多个中继服务器上",
+          "description": "中继服务器保存帖子。如果一条帖子被多个中继服务器接收，即使其中一个离线或删除它，帖子仍可能在其他地方可见。"
+        }
+      ]
     }
   },
   "glossary": {

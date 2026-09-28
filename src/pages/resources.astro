@@ -22,6 +22,7 @@ const jsonLd = [
 
 const resourceCategories = [
   {
+    priority: 2,
     title: 'Official Documentation',
     description: 'Core protocol documentation and specifications',
     resources: [
@@ -46,6 +47,7 @@ const resourceCategories = [
     ],
   },
   {
+    priority: 0,
     title: 'Client Apps',
     description: 'Popular Nostr clients for different platforms',
     resources: [
@@ -82,6 +84,7 @@ const resourceCategories = [
     ],
   },
   {
+    priority: 3,
     title: 'Developer Resources',
     description: 'Tools and libraries for building on Nostr',
     resources: [
@@ -106,6 +109,7 @@ const resourceCategories = [
     ],
   },
   {
+    priority: 1,
     title: 'Communities',
     description: 'Places to connect with other Nostr users',
     resources: [
@@ -130,14 +134,13 @@ const resourceCategories = [
   <Header />
   
   <main id="main-content">
-    <!-- Hero Section -->
     <section>
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div class="text-center max-w-3xl mx-auto">
-          <h1 class="text-display font-bold mb-6 text-gray-900 dark:text-white">
+      <div class="container mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+        <div class="max-w-measure">
+          <h1 class="text-display font-bold text-gray-900 dark:text-white">
             Nostr Resources
           </h1>
-          <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 max-w-measure mx-auto">
+          <p class="mt-5 text-lead text-gray-600 dark:text-gray-400">
             A curated collection of resources for learning about and using Nostr, from the
             official protocol docs to community-built tools.
           </p>
@@ -145,22 +148,22 @@ const resourceCategories = [
       </div>
     </section>
 
-    <!-- Resources Grid -->
-    <section class="py-16 bg-gray-50 dark:bg-gray-900 border-y border-gray-200 dark:border-gray-800">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {resourceCategories.map((category) => (
-            <div class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-              <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-2">{category.title}</h2>
-              <p class="text-body-sm text-gray-600 dark:text-gray-400 mb-6">{category.description}</p>
-
-              <div class="space-y-4">
+    <section class="border-y border-gray-200 bg-gray-50 py-10 dark:border-gray-800 dark:bg-gray-900">
+      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="space-y-10">
+          {[...resourceCategories].sort((a, b) => a.priority - b.priority).map((category) => (
+            <section class="grid gap-5 border-t border-gray-200 pt-7 dark:border-gray-800 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12">
+              <div>
+                <h2 class="text-h2 font-semibold text-gray-900 dark:text-white">{category.title}</h2>
+                <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{category.description}</p>
+              </div>
+              <ul class="border-t border-gray-200 dark:border-gray-800">
                 {category.resources.map((resource) => (
-                  <a
+                  <li class="border-b border-gray-200 dark:border-gray-800"><a
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="group block p-4 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800"
+                    class="group block py-4 transition-colors hover:bg-white dark:hover:bg-gray-800"
                   >
                     <div class="flex items-start justify-between">
                       <div>
@@ -175,10 +178,10 @@ const resourceCategories = [
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </div>
-                  </a>
+                  </a></li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </section>
           ))}
         </div>
       </div>
@@ -186,11 +189,11 @@ const resourceCategories = [
 
     <!-- CTA Section -->
     <section class="py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-4">
           Want to contribute?
         </h2>
-        <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 max-w-measure mx-auto">
+        <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 max-w-measure">
           This guide is open source. If something belongs on this list and is not here yet, open an issue.
         </p>
         <a

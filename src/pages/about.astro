@@ -4,6 +4,9 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import { OfficialAccountWidget } from '../components/interactive/OfficialAccountWidget';
 import { siteConfig } from '../config/site';
+import { getTranslations } from '../i18n';
+
+const translations = getTranslations('en');
 
 const title = 'About';
 const description = 'Who builds nostrich.love and why. An open-source project that helps newcomers understand and use Nostr, the decentralized social protocol.';
@@ -42,14 +45,13 @@ const jsonLd = [
   <Header />
   
   <main id="main-content">
-    <!-- Hero Section -->
-    <section>
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div class="text-center max-w-3xl mx-auto">
-          <h1 class="text-display font-bold mb-6 text-gray-900 dark:text-white">
+    <section class="border-b border-gray-200 dark:border-gray-800">
+      <div class="container mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+        <div class="max-w-measure">
+          <h1 class="text-display font-bold text-gray-900 dark:text-white">
             About This Guide
           </h1>
-          <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 max-w-measure mx-auto">
+          <p class="mt-5 text-lead text-gray-600 dark:text-gray-400">
             A free, open-source guide to Nostr, written for people who have never heard of it.
           </p>
         </div>
@@ -63,9 +65,7 @@ const jsonLd = [
           <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-6">Why this exists</h2>
           <div class="prose dark:prose-invert max-w-none">
             <p class="text-body text-gray-600 dark:text-gray-400 mb-4">
-              Nostrich.love was made to put the Nostr protocol within reach of people who are not
-              developers. Decentralized social media should not ask for a technical background at
-              the door.
+              {translations.aboutPage.missionIntro}
             </p>
             <p class="text-body text-gray-600 dark:text-gray-400 mb-4">
               Nostr stands for Notes and Other Stuff Transmitted by Relays. It is a small, open
@@ -86,17 +86,17 @@ const jsonLd = [
     <section class="py-16 bg-gray-50 dark:bg-gray-900 border-y border-gray-200 dark:border-gray-800">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
-          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-8 text-center">Our Principles</h2>
+          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-8">Our Principles</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+          <div class="grid grid-cols-1 gap-7 md:grid-cols-2">
+            <div class="border-t-2 border-gray-300 pt-4 dark:border-gray-700">
               <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">Open Source</h3>
               <p class="text-body-sm text-gray-600 dark:text-gray-400">
                 All the code sits in public on GitHub. Read it, fork it, or send a fix.
               </p>
             </div>
 
-            <div class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="border-t-2 border-gray-300 pt-4 dark:border-gray-700">
               <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">Privacy First</h3>
               <p class="text-body-sm text-gray-600 dark:text-gray-400">
                 No tracking, no cookies, no data collection. The analytics we do run are the
@@ -104,15 +104,14 @@ const jsonLd = [
               </p>
             </div>
 
-            <div class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="border-t-2 border-gray-300 pt-4 dark:border-gray-700">
               <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">Accessible</h3>
               <p class="text-body-sm text-gray-600 dark:text-gray-400">
-                Written for people who are not developers. Where a term is unavoidable, we
-                explain it before we use it.
+                {translations.aboutPage.accessibility}
               </p>
             </div>
 
-            <div class="p-6 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="border-t-2 border-gray-300 pt-4 dark:border-gray-700">
               <h3 class="text-h3 font-semibold text-gray-900 dark:text-white mb-2">Community Driven</h3>
               <p class="text-body-sm text-gray-600 dark:text-gray-400">
                 Built from inside the Nostr community. Corrections and additions are welcome.
@@ -179,8 +178,8 @@ const jsonLd = [
     <section class="py-16 border-t border-gray-200 dark:border-gray-800">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
-          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-6 text-center">Follow Us on Nostr</h2>
-          <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 text-center max-w-measure mx-auto">
+          <h2 class="text-h2 font-semibold text-gray-900 dark:text-white mb-6">Follow Us on Nostr</h2>
+          <p class="text-lead text-gray-600 dark:text-gray-400 mb-8 max-w-measure">
             New guides and site news get posted to the official Nostr account.
           </p>
           <OfficialAccountWidget client:idle expanded={true} />

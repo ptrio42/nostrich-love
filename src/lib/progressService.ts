@@ -311,25 +311,15 @@ export function updateGuideProgress(
 // Calculate completion status based on multiple factors
 export function calculateCompletionStatus(
   guideId: string,
-  estimatedTimeMinutes: number,
-  hasChecklist: boolean
+  _estimatedTimeMinutes: number,
+  _hasChecklist: boolean
 ): 'not-started' | 'viewed' | 'engaged' | 'completed' {
   const progress = getGuideProgress(guideId);
   if (!progress) return 'not-started';
-  
-  const timeThreshold = estimatedTimeMinutes * 60 * 0.6; // 60% of estimated time
-  const scrollThreshold = 0.8; // 80% scroll depth
-  const checklistThreshold = hasChecklist ? 0.5 : 0; // 50% of checklist items
-  
-  const timeMet = progress.timeSpentSeconds >= timeThreshold;
-  const scrollMet = progress.maxScrollDepth >= scrollThreshold;
-  const checklistMet = !hasChecklist || 
-    (progress.checklistCompleted.length / (hasChecklist ? 3 : 1)) >= checklistThreshold;
-  
-  // Require 2 of 3 criteria for completion
-  const criteriaMet = [timeMet, scrollMet, checklistMet].filter(Boolean).length;
-  
-  if (criteriaMet >= 2) return 'completed';
+
+  // Completion comes only from an explicit read action or a finished quiz.
+  // Scrolling and elapsed time indicate engagement, not that the lesson was read.
+  if (progress.status === 'completed') return 'completed';
   if (progress.timeSpentSeconds > 30 || progress.maxScrollDepth > 0.3) return 'engaged';
   if (progress.timeSpentSeconds > 0) return 'viewed';
   return 'not-started';

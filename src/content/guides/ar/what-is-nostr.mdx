@@ -10,9 +10,9 @@ import { HoverCard } from "@components/HoverCard";
 import { ProtocolComparison } from "@components/ProtocolComparison";
 import { WhatIsNostrQuiz } from "@components/interactive/WhatIsNostrQuiz";
 
-**Nostr (اختصار لـ Notes and Other Stuff Transmitted by Relays) بروتوكول مفتوح للتواصل الاجتماعي، وليس تطبيقاً.** حسابك زوج مفاتيح تشفيرية، ومنشوراتك أحداث موقّعة، والـ Relays هي الخوادم التي تخزّنها وتمرّرها. أي عميل يستطيع قراءتها، فلا توجد شركة تستطيع حظرك أو حبس متابعيك عندها.
+تخيّل أنك نشرت رسماً أو أغنية أو نصاً، ثم أردت تجربة تطبيق اجتماعي آخر. في معظم المنصات يرتبط حسابك وطريقة وصولك إلى جمهورك بذلك التطبيق. في Nostr تتحكم بهويتك، ولذلك يمكنك تغيير التطبيق من دون إنشاء حساب جديد.
 
-نشره عام 2020 مطوّر مجهول يُعرف باسم fiatjaf، وتحدّده مواصفات مرقّمة تُسمّى NIPs بدلاً من أن تحدده شركة.
+Nostr مجموعة قواعد مشتركة للتطبيقات الاجتماعية. مفاتيحك تثبت هويتك، والعميل هو التطبيق الذي تستخدمه، والمرحّلات تنقل منشوراتك. سنشرح كل جزء فيما يلي.
 
 ## المشكلة
 
@@ -58,7 +58,7 @@ import { WhatIsNostrQuiz } from "@components/interactive/WhatIsNostrQuiz";
 
 ### الفرق موضح
 
-<ProtocolComparison client:idle />
+<ProtocolComparison />
 
 **المركزي (تويتر، فيسبوك):** شركة واحدة تملك كل شيء. يمكنهم حظرك، تغيير القواعد، أو الإغلاق تماماً.
 
