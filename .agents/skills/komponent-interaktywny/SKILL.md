@@ -33,6 +33,11 @@ Udokumentowany wtop: agent wymyślił strukturę `nip05Checker.messages.*` i `ni
 
 `client:idle`. Nie `client:load` — kiedyś było ich 429 i cały React, framer-motion i każdy quiz montowały się, zanim strona skończyła się ładować.
 
+Przy sprawdzaniu interakcji w przeglądarce poczekaj na hydratację wyspy przed
+oceną wyniku. Stan widoczny tuż po załadowaniu strony może być poprawnym HTML
+z serwera, podczas gdy pole wyszukiwania lub quiz jeszcze nie reaguje. Sprawdź
+działanie po hydratacji, a wygląd i kolejność treści również przed nią.
+
 `client:visible` byłoby lepsze, ale **nie da się go zweryfikować w tutejszym panelu przeglądarki**: `document.hidden` zostaje `true`, Chrome usypia IntersectionObserver w ukrytym dokumencie i komponent nigdy się nie hydratuje. Wygląda to na zepsute, choć nie jest. Przełączaj tylko po potwierdzeniu w prawdziwym Chrome.
 
 Komponent bez potrzeby JS nie dostaje dyrektywy w ogóle. `FAQAccordion` był 29 rootami Reacta na stronę, dopóki nie stał się komponentem `.astro` opakowującym `<details>/<summary>` — zero JS, działa przed hydracją i z wyłączonym JS.

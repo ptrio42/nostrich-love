@@ -34,6 +34,10 @@ Nine skills pulled from public marketplaces, pinned in `skills-lock.json` at the
 root. Do not edit them in place — an update overwrites the directory. If one is wrong for
 this project, say so in the relevant skill above.
 
+For visual work, use `frontend-design` for composition ideas. Its suggestions
+about gradients, motion, decorative effects, and changing the type palette do
+not override `AGENTS.md` or `docs/internal/VISUAL_SYSTEM.md`.
+
 | Skill | Source |
 |---|---|
 | `vercel-react-best-practices` | vercel-labs/agent-skills |

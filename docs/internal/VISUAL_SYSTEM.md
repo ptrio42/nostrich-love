@@ -23,6 +23,14 @@ that structure. Decoration cannot make a generic arrangement distinctive.
 - An introduction, a comparison, a course outline, and a tool have different
   jobs. Give them different layouts. A centered heading followed by equal
   cards is not the default page template.
+- Review connected pages in reading order. The home page explains the problem
+  and offers a first step, the course index shows the complete route, and each
+  guide teaches one part of it. Check the destination of each call to action:
+  repeating the same promise or featuring the first guide again breaks the
+  transition even when both pages look good separately.
+- Give each section boundary one visible rule. Check the rendered result when a
+  section border meets the first list item's border; stacked rules look like an
+  accidental double divider.
 - Do not put a card inside another card. Use sections and rules to group
   resources and tools. Reserve a bordered panel for a control that needs one.
 - Put search near the top of reference pages. Present glossary terms as a
