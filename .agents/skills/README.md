@@ -25,6 +25,7 @@ Written for this project, in Polish. Named after the task, not the technology.
 | `uzupelnij-tlumaczenia` | Filling translation gaps; measure first, translate second |
 | `sprawdz-seo` | Sitemap, hreflang, `og:locale`, canonical |
 | `nostr-relay` | Protocol work — outbox model, WebSockets, profiles |
+| `post-aktualizacyjny` | Writing Nostr updates for the project account from verified, reader-facing changes |
 | `przed-wypchnieciem` | The gates before a commit, push or deploy — and what to do when one fails |
 | `domkniecie-sesji` | Closing a session: what to write down, where, what stays open |
 
