@@ -1939,7 +1939,10 @@
       "userMenu": "用户菜单",
       "toggleMenu": "打开或关闭导航菜单",
       "mainNav": "主导航",
-      "mobileNav": "移动端导航"
+      "mobileNav": "移动端导航",
+      "changeLanguage": "切换语言",
+      "currentLanguage": "切换语言，当前：{language}",
+      "selectLanguage": "选择语言"
     }
   },
   "aboutPage": {
@@ -3598,6 +3601,16 @@
     }
   },
   "homePage": {
+    "resume": {
+      "welcome": "欢迎回来！",
+      "continue": "继续学习{level}内容",
+      "reading": "你上次读到：",
+      "recently": "不久前",
+      "guidesCompleted": "{level}指南已完成 {done}/{total} 篇",
+      "resume": "继续阅读",
+      "viewProgress": "查看进度"
+    },
+    "organizationDescription": "一门面向初学者的免费开源课程，介绍去中心化社交协议 Nostr。",
     "meta": {
       "title": "学习 Nostr：免费新手课程",
       "description": "通过免费新手课程循序渐进地学习 Nostr。了解它带来的变化，发布第一条动态，找到值得关注的人。16 篇指南，提供七种语言。"
@@ -3618,12 +3631,36 @@
     },
     "comparisons": {
       "title": "Nostr 与其他平台有何不同？",
-      "description": "看看它与 Twitter/X、Mastodon 和 Bluesky 的区别。"
+      "description": "看看它与 Twitter/X、Mastodon 和 Bluesky 的区别。",
+      "compare": "查看对比",
+      "englishNote": "上方三篇对比文章目前仅提供英文版。",
+      "deepDive": "Nostr、ActivityPub 与 Bluesky：三个协议的完整对比",
+      "cards": {
+        "twitter": {
+          "title": "Nostr 与 Twitter/X",
+          "description": "对比账号控制权、传播范围和内容管理"
+        },
+        "mastodon": {
+          "title": "Nostr 与 Mastodon",
+          "description": "Nostr 中继与 Mastodon 实例的作用不同"
+        },
+        "bluesky": {
+          "title": "Nostr 与 Bluesky",
+          "description": "两种去中心化身份的实现方式"
+        }
+      }
     },
     "closing": {
       "title": "找到下一篇指南",
       "description": "完整课程涵盖隐私、不同的应用，以及 Nostr 背后的工作原理。",
-      "cta": "浏览所有指南"
+      "cta": "浏览所有指南",
+      "moreTitle": "已经了解 Nostr？继续探索：",
+      "links": {
+        "tools": "探索工具",
+        "resources": "浏览 Nostr 资源",
+        "glossary": "在 Nostr 术语表中查找概念",
+        "github": "在 GitHub 查看源代码"
+      }
     },
     "whatChanges": {
       "title": "Nostr 有什么不同",

@@ -88,6 +88,7 @@ const NO_LOCALES: readonly Locale[] = [];
  * The list form exists because routes may ship in a subset of locales
  * (the glossary ships en/pl/es/de; zh/ar/hi wait on native review).
  *
+ * - `/`         → all seven locales (src/pages/[...lang]/index.astro)
  * - `/guides…`  → all seven locales (src/pages/[...lang]/guides/**)
  * - `/glossary` → GLOSSARY_LOCALES (src/pages/[...lang]/glossary.astro)
  * - everything else (/about, /tools, /follow-pack, /badges, ...) → none
@@ -96,6 +97,7 @@ const NO_LOCALES: readonly Locale[] = [];
  */
 export function localizedLocales(path: string): readonly Locale[] {
   const bare = stripLocale(path);
+  if (bare === '/') return locales;
   if (bare === '/guides' || bare === '/guides/' || bare.startsWith('/guides/')) {
     return locales;
   }
@@ -109,12 +111,10 @@ export function localizedLocales(path: string): readonly Locale[] {
  * Where the language switcher should send a reader who picks `locale` while on
  * `path` — never a 404, never a no-op.
  *
- * 1. Route ships that locale (guides, glossary) → the matching alternate.
+ * 1. Route ships that locale (home, guides, glossary) → the matching alternate.
  * 2. Already reading in that locale → stay put.
- * 3. Otherwise (the homepage, /about, /tools, /nostr-vs-*, which are English
- *    only) → that locale's guides hub. Previously these collapsed to
- *    `stripLocale(path)`, i.e. the page the reader was already on, so asking
- *    for Polish on the homepage did nothing at all.
+ * 3. Otherwise (/about, /tools, /nostr-vs-*, which are English only) → that
+ *    locale's guides hub.
  */
 export function localeEntryPath(path: string, locale: Locale): string {
   if (localizedLocales(path).includes(locale)) return localePath(path, locale);

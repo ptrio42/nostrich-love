@@ -5,12 +5,15 @@ import { SKILL_LEVELS, getGuideLevel, type SkillLevel } from '../../data/learnin
 import { getActiveLevel, getLevelProgress } from '../../utils/gamification';
 import { getLastViewedGuide, hasRecentProgress } from '../../lib/progress';
 import { guidePathFromLocation } from "../../i18n/paths";
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ResumeBannerProps {
   className?: string;
+  guideTitles?: Record<string, string>;
 }
 
-export function ResumeBanner({ className }: ResumeBannerProps) {
+export function ResumeBanner({ className, guideTitles }: ResumeBannerProps) {
+  const { t, locale } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [lastViewed, setLastViewed] = useState<ReturnType<typeof getLastViewedGuide>>(null);
@@ -70,20 +73,21 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
   }
 
   const levelConfig = SKILL_LEVELS[currentLevel];
-  const levelLabel = levelConfig?.label || 'Your Level';
+  const levelLabel = t(`skillLevels.${currentLevel}.label`);
 
   // Calculate time since last viewed
   const timeSince = Date.now() - lastViewed.timestamp;
   const daysSince = Math.floor(timeSince / (1000 * 60 * 60 * 24));
   const hoursSince = Math.floor(timeSince / (1000 * 60 * 60));
 
+  const relativeTime = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
   let timeText: string;
   if (daysSince > 0) {
-    timeText = daysSince === 1 ? 'Yesterday' : `${daysSince} days ago`;
+    timeText = relativeTime.format(-daysSince, 'day');
   } else if (hoursSince > 0) {
-    timeText = hoursSince === 1 ? '1 hour ago' : `${hoursSince} hours ago`;
+    timeText = relativeTime.format(-hoursSince, 'hour');
   } else {
-    timeText = 'Recently';
+    timeText = t('homePage.resume.recently');
   }
 
   // Calculate progress
@@ -108,10 +112,10 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
             {/* Greeting — desktop only */}
             <div className="hidden sm:flex items-center gap-2 flex-wrap">
               <h2 className="text-h3 text-gray-900 dark:text-white">
-                Welcome back!
+                {t('homePage.resume.welcome')}
               </h2>
               <span className="text-sm text-gray-500 dark:text-gray-400">
-                Continue your {levelLabel} journey
+                {t('homePage.resume.continue').replace('{level}', levelLabel)}
               </span>
             </div>
 
@@ -119,8 +123,8 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
             <div className="flex items-center gap-2 text-sm min-w-0 sm:mt-2">
               <BookOpen className="w-4 h-4 flex-shrink-0 text-gray-400 dark:text-gray-500" strokeWidth={1.5} aria-hidden="true" />
               <span className="text-gray-700 dark:text-gray-300 truncate">
-                You were reading:{' '}
-                <strong className="text-gray-900 dark:text-white">{lastViewed.title}</strong>
+                {t('homePage.resume.reading')}{' '}
+                <strong className="text-gray-900 dark:text-white">{guideTitles?.[lastViewed.slug] ?? lastViewed.title}</strong>
               </span>
               <span className="hidden sm:inline text-gray-400 dark:text-gray-500">•</span>
               <span className="hidden sm:flex text-gray-400 dark:text-gray-500 items-center gap-1 whitespace-nowrap">
@@ -139,14 +143,17 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
                   />
                 </div>
                 <span className="text-sm font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                  {progressPercentage}%
+                  {new Intl.NumberFormat(locale, { style: 'percent' }).format(progressPercentage / 100)}
                 </span>
               </div>
             )}
 
             {/* Progress text — desktop only */}
             <p className="hidden sm:block mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {completedCount}/{totalCount} {levelLabel} guides completed
+              {t('homePage.resume.guidesCompleted')
+                .replace('{done}', new Intl.NumberFormat(locale).format(completedCount))
+                .replace('{total}', new Intl.NumberFormat(locale).format(totalCount))
+                .replace('{level}', levelLabel)}
             </p>
           </div>
 
@@ -155,7 +162,7 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
             onClick={handleResume}
             className="flex-shrink-0 inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-base bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md transition-colors"
           >
-            Resume
+            {t('homePage.resume.resume')}
             <ArrowRight className="w-4 h-4 rtl:rotate-180" strokeWidth={1.5} aria-hidden="true" />
           </button>
 
@@ -163,7 +170,7 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
             onClick={handleViewProgress}
             className="hidden sm:inline-flex flex-shrink-0 items-center justify-center gap-2 px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
-            View Progress
+            {t('homePage.resume.viewProgress')}
             <ChevronRight className="w-4 h-4 rtl:rotate-180" strokeWidth={1.5} aria-hidden="true" />
           </button>
 
@@ -173,7 +180,7 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
           <button
             onClick={handleDismiss}
             className="flex-shrink-0 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Dismiss"
+            aria-label={t('continueLearning.dismiss')}
           >
             <X className="w-5 h-5" strokeWidth={1.5} aria-hidden="true" />
           </button>
@@ -181,12 +188,4 @@ export function ResumeBanner({ className }: ResumeBannerProps) {
       </div>
     </div>
   );
-}
-
-// Helper function to format guide slug to title
-function formatGuideTitle(slug: string): string {
-  return slug
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
 }

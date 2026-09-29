@@ -221,7 +221,7 @@ const jsonLd = {
   timeRequired: `PT${estimatedTimeMinutes}M`,
   author: {
     '@type': 'Person',
-    name: 'Piotr Czarnoleski',
+    name: 'ptrio42',
     url: 'https://github.com/ptrio42',
   },
   publisher: {
@@ -362,7 +362,7 @@ const components = {
 };
 ---
 
-<Layout title={title} description={description} locale={locale as Locale} type="article" author="Piotr Czarnoleski" publishedTime={publishedDate} modifiedTime={modifiedDate} jsonLd={pageSchema}>
+<Layout title={title} description={description} locale={locale as Locale} type="article" author="ptrio42" publishedTime={publishedDate} modifiedTime={modifiedDate} jsonLd={pageSchema}>
   <Header />
 
   <MinimalProgressBar client:idle guideId={guideSlug} estimatedTimeMinutes={estimatedTimeMinutes} />

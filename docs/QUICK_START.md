@@ -189,7 +189,7 @@ If you want a category that doesn't exist yet (e.g., "books", "sports", "develop
 
 **Script not found?**
 ```bash
-cd /Users/piotrczarnoleski/nostr-beginner-guide
+cd nostr-beginner-guide
 node scripts/<script-name>.cjs <args>
 ```
 

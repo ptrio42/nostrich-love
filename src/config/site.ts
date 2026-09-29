@@ -55,18 +55,17 @@ export const siteConfig = {
     ],
   },
 
-  // Author info for humans.txt
+  // Public project identity
   author: {
-    name: "Piotr Czarnoleski (ptrio42)",
+    name: "ptrio42",
     email: "hello@nostrich.love",
     website: "https://nostrich.love",
-    location: "Poland",
   },
 
   // Credits
   credits: {
-    design: "Piotr Czarnoleski (ptrio42)",
-    development: "Piotr Czarnoleski (ptrio42) and contributors",
+    design: "ptrio42",
+    development: "ptrio42 and contributors",
     lastUpdate: new Date().toISOString().split("T")[0],
   },
 } as const;

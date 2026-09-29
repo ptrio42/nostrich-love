@@ -1,5 +1,6 @@
 import type { Locale, Translations } from './types';
 import { locales } from '../config/locales';
+import { splitLocale } from './paths';
 
 export type { Locale } from './types';
 
@@ -72,7 +73,7 @@ export function setServerLocale(locale: Locale): void {
 
 /**
  * Get current locale from URL path.
- * Returns 'en', 'pl', 'es', 'de', 'zh', 'ar', or 'hi' based on URL prefix.
+ * Reads the prefix through the shared route helper.
  *
  * With no argument: the browser reads the URL, the server reports the page
  * being rendered. An explicit path always wins, in both environments.
@@ -82,13 +83,7 @@ export function getCurrentLocale(path?: string): Locale {
     if (typeof window === 'undefined') return serverLocale;
     path = window.location.pathname;
   }
-  if (path.startsWith('/pl/')) return 'pl';
-  if (path.startsWith('/es/')) return 'es';
-  if (path.startsWith('/de/')) return 'de';
-  if (path.startsWith('/zh/')) return 'zh';
-  if (path.startsWith('/ar/')) return 'ar';
-  if (path.startsWith('/hi/')) return 'hi';
-  return 'en';
+  return splitLocale(path).locale;
 }
 
 /**

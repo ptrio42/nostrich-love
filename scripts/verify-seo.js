@@ -5,7 +5,7 @@
  * removed and always exited 0 (audit findings #75/#90). Every check here
  * encodes a decision documented in docs/audit-2026-07/session-handoff.md:
  * English is served un-prefixed, hreflang is emitted only for routes that
- * exist in all seven locales, and the sitemap must agree with the pages.
+ * exist in their advertised locales, and the sitemap must agree with the pages.
  */
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -101,6 +101,41 @@ for (const l of LOCALES) {
   else fail(`${l} canonical is ${canonical}`);
 }
 
+// --- 3b. Every homepage locale is built, translated and reciprocal ---------
+{
+  const expectedHreflangs = ["en", ...LOCALES, "x-default"].sort();
+  for (const locale of ["en", ...LOCALES]) {
+    const path = locale === "en" ? "index.html" : `${locale}/index.html`;
+    if (!existsSync(join(DIST, path))) {
+      fail(`${path} missing`);
+      continue;
+    }
+    const html = read(path);
+    const expectedUrl = locale === "en" ? `${SITE}/` : `${SITE}/${locale}/`;
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    const expectedCopy = JSON.parse(readFileSync(`src/i18n/locales/${locale}.json`, "utf8")).homePage;
+    const expectedTitle = `${expectedCopy.meta.title} | Nostrich.love`;
+    const expectedGuide = locale === "en" ? "/guides/what-is-nostr" : `/${locale}/guides/what-is-nostr`;
+    const lang = html.match(/<html[^>]*\blang="([^"]+)"/)?.[1];
+    const dir = html.match(/<html[^>]*\bdir="([^"]+)"/)?.[1];
+    const expectedDir = locale === "ar" ? "rtl" : "ltr";
+    const hreflangs = hreflangsOf(html).sort();
+    if (canonical !== expectedUrl) fail(`${path} canonical is ${canonical}, expected ${expectedUrl}`);
+    if (lang !== locale || dir !== expectedDir) fail(`${path} language/direction is ${lang}/${dir}`);
+    if (!html.includes(`<title>${expectedTitle}</title>`)) fail(`${path} lacks its translated page title`);
+    if (!html.includes(`content="${expectedCopy.meta.description}"`)) fail(`${path} lacks its translated meta description`);
+    if (!html.includes(expectedCopy.hero.title)) fail(`${path} lacks its translated hero title`);
+    if (!html.includes(`href="${expectedGuide}"`)) fail(`${path} lacks its local first-guide link`);
+    if (hreflangs.join(",") !== expectedHreflangs.join(","))
+      fail(`${path} homepage hreflang wrong: [${hreflangs}]`);
+    else if (canonical === expectedUrl && lang === locale && dir === expectedDir &&
+      html.includes(`<title>${expectedTitle}</title>`) &&
+      html.includes(`content="${expectedCopy.meta.description}"`) &&
+      html.includes(expectedCopy.hero.title) && html.includes(`href="${expectedGuide}"`))
+      ok(`${path} localized homepage, canonical and hreflang correct`);
+  }
+}
+
 // --- 4. English-only pages must NOT advertise alternates -------------------
 for (const p of ["tools/index.html"]) {
   if (!existsSync(join(DIST, p))) {
@@ -154,11 +189,9 @@ const GLOSSARY_LOCALES = ["pl", "es", "de"]; // + un-prefixed en
 // Guard the anchors, not the switcher — hreflang alternates are checked above.
 {
   const home = existsSync(join(DIST, "index.html")) ? read("index.html") : "";
-  const unreachable = LOCALES.filter(
-    (l) => !new RegExp(`href="/${l}/guides/"`).test(home)
-  );
+  const unreachable = LOCALES.filter((l) => !new RegExp(`href="/${l}/"`).test(home));
   if (home && unreachable.length === 0)
-    ok(`homepage links to all ${LOCALES.length} locale hubs with real anchors`);
+    ok(`homepage links to all ${LOCALES.length} localized homepages with real anchors`);
   else fail(`homepage has no crawlable <a> into: ${unreachable.join(", ") || "(index.html missing)"}`);
 
   // On a route that ships locale variants the row must mirror that exact set —

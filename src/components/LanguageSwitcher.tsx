@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useId } from "react";
 import { Globe, ChevronDown } from "lucide-react";
 import { cn } from "../lib/utils";
+import { locales, getLocaleConfig, type Locale } from '../config/locales';
+import { useTranslation } from '../hooks/useTranslation';
 import {
   splitLocale,
   localePath,
@@ -22,18 +24,11 @@ interface LanguageSwitcherProps {
   currentPath?: string;
 }
 
-const languages = [
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "pl", label: "Polski", flag: "🇵🇱" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "de", label: "Deutsch", flag: "🇩🇪" },
-  { code: "zh", label: "中文", flag: "🇨🇳" },
-  { code: "ar", label: "العربية", flag: "🇸🇦" },
-  { code: "hi", label: "हिन्दी", flag: "🇮🇳" },
-];
+const languages = locales.map((code) => ({ code, label: getLocaleConfig(code).name }));
 
 export function LanguageSwitcher({ className, currentPath }: LanguageSwitcherProps) {
-  const [currentLang, setCurrentLang] = useState("en");
+  const { t } = useTranslation();
+  const [currentLang, setCurrentLang] = useState<Locale>(DEFAULT_LOCALE);
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -158,7 +153,7 @@ export function LanguageSwitcher({ className, currentPath }: LanguageSwitcherPro
           "p-2 rounded-lg text-gray-600 dark:text-gray-400",
           className,
         )}
-        aria-label="Change language"
+        aria-label={t('header.aria.changeLanguage')}
       >
         <Globe className="w-5 h-5" aria-hidden="true" />
       </button>
@@ -187,7 +182,7 @@ export function LanguageSwitcher({ className, currentPath }: LanguageSwitcherPro
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-controls={isOpen ? listboxId : undefined}
-        aria-label={`Change language, current: ${currentLanguage.label}`}
+        aria-label={t('header.aria.currentLanguage').replace('{language}', currentLanguage.label)}
       >
         <Globe className="w-4 h-4" aria-hidden="true" />
         <span className="hidden sm:inline" aria-hidden="true">
@@ -209,12 +204,12 @@ export function LanguageSwitcher({ className, currentPath }: LanguageSwitcherPro
           <div
             id={listboxId}
             role="listbox"
-            aria-label="Select language"
+            aria-label={t('header.aria.selectLanguage')}
             // Prevent the mousedown default so clicking an option never blurs
             // the focused option first — in Safari that blur (relatedTarget:
             // null) would unmount the list before the click could register.
             onMouseDown={(event) => event.preventDefault()}
-            className="absolute end-0 mt-2 w-40 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg z-50 overflow-hidden"
+            className="absolute end-0 mt-2 w-40 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm z-50 overflow-hidden"
           >
             {languages.map((lang, index) => (
               <a
@@ -238,7 +233,6 @@ export function LanguageSwitcher({ className, currentPath }: LanguageSwitcherPro
                     : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800",
                 )}
               >
-                <span className="text-lg" aria-hidden="true">{lang.flag}</span>
                 <span lang={lang.code}>{lang.label}</span>
                 {currentLang === lang.code && (
                   <span className="ms-auto text-primary" aria-hidden="true">✓</span>

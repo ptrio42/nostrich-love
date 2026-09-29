@@ -1,13 +1,12 @@
 /* TEAM */
-  Project Lead: Piotr Czarnoleski (ptrio42)
+  Project Lead: ptrio42
   Contact: hello [at] nostrich.love
   Site: https://nostrich.love
-  Location: Poland
 
-  Development: Piotr Czarnoleski (ptrio42) and contributors
+  Development: ptrio42 and contributors
   GitHub: https://github.com/ptrio42
 
-  Design: Piotr Czarnoleski (ptrio42)
+  Design: ptrio42
 
 /* THANKS */
   Nostr Protocol Creators: fiatjaf and contributors

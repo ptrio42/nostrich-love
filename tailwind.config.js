@@ -150,6 +150,12 @@ export default {
           "clamp(2.5rem, 6vw, 3.75rem)",
           { lineHeight: "1.05", letterSpacing: "-0.022em" },
         ],
+        // Home hero shares its row with an illustration; longer translations
+        // need a smaller fluid cap to stay on one line in the desktop grid.
+        "display-home": [
+          "clamp(2.5rem, 4vw, 2.9375rem)",
+          { lineHeight: "1.05", letterSpacing: "-0.022em" },
+        ],
         h1: ["2.25rem", { lineHeight: "1.12", letterSpacing: "-0.02em" }],
         h2: ["1.75rem", { lineHeight: "1.22", letterSpacing: "-0.015em" }],
         h3: ["1.3125rem", { lineHeight: "1.32", letterSpacing: "-0.01em" }],

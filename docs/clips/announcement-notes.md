@@ -91,7 +91,7 @@ Good as a follow-up or a reply to "what changed?", weaker as the opening post.
 
 ---
 
-## D — learning as play (goes with the play cut) — CHOSEN, Piotr's words
+## D: learning as play (goes with the play cut), chosen from ptrio42's words
 
 For the second video — see `walkthrough-cut.md`. **The note and the clip are one
 post**: the note makes the "boring" claim, the clip is the evidence, so nothing

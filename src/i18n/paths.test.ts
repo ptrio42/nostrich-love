@@ -119,6 +119,12 @@ describe('localizedLocales', () => {
     }
   });
 
+  it('returns all seven locales for the homepage', () => {
+    for (const p of ['/', '/pl/', '/ar']) {
+      expect(localizedLocales(p)).toEqual(['en', 'pl', 'es', 'de', 'zh', 'ar', 'hi']);
+    }
+  });
+
   it('returns exactly the shipped glossary locales for /glossary', () => {
     expect(localizedLocales('/glossary')).toEqual(['en', 'pl', 'es', 'de']);
     expect(localizedLocales('/glossary/')).toEqual(GLOSSARY_LOCALES);
@@ -137,14 +143,15 @@ describe('localizedLocales', () => {
   });
 
   it('is empty for English-only pages', () => {
-    for (const p of ['/about', '/tools', '/follow-pack', '/badges', '/']) {
+    for (const p of ['/about', '/tools', '/follow-pack', '/badges']) {
       expect(localizedLocales(p)).toEqual([]);
     }
   });
 });
 
 describe('hasLocalizedVersions', () => {
-  it('is true for guide and glossary routes', () => {
+  it('is true for home, guide and glossary routes', () => {
+    expect(hasLocalizedVersions('/')).toBe(true);
     expect(hasLocalizedVersions('/guides/')).toBe(true);
     expect(hasLocalizedVersions('/guides/faq')).toBe(true);
     expect(hasLocalizedVersions('/pl/guides/faq')).toBe(true);
@@ -152,7 +159,7 @@ describe('hasLocalizedVersions', () => {
   });
 
   it('is false for English-only pages', () => {
-    for (const p of ['/about', '/tools', '/follow-pack', '/badges', '/']) {
+    for (const p of ['/about', '/tools', '/follow-pack', '/badges']) {
       expect(hasLocalizedVersions(p)).toBe(false);
     }
   });
@@ -181,11 +188,14 @@ describe('localeEntryPath', () => {
     }
   });
 
-  it('sends English-only pages to that locale’s guides hub, not nowhere', () => {
-    // The regression this exists for: the old switcher collapsed these to
-    // stripLocale(path) — the page the reader was already on — so picking a
-    // language on the homepage silently did nothing.
-    for (const p of ['/', '/about', '/tools', '/nostr-vs-twitter']) {
+  it('switches between localized homepages', () => {
+    expect(localeEntryPath('/', 'pl')).toBe('/pl/');
+    expect(localeEntryPath('/pl/', 'hi')).toBe('/hi/');
+    expect(localeEntryPath('/pl/', 'en')).toBe('/');
+  });
+
+  it('sends English-only pages to that locale’s guides hub', () => {
+    for (const p of ['/about', '/tools', '/nostr-vs-twitter']) {
       expect(localeEntryPath(p, 'pl')).toBe('/pl/guides/');
       expect(localeEntryPath(p, 'hi')).toBe('/hi/guides/');
     }

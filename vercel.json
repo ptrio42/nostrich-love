@@ -64,16 +64,6 @@
       "permanent": true
     },
     {
-      "source": "/:lang(pl|es|de|zh|ar|hi)",
-      "destination": "/:lang/guides/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(pl|es|de|zh|ar|hi)/",
-      "destination": "/:lang/guides/",
-      "permanent": true
-    },
-    {
       "source": "/:oldLocale([a-z][a-z])/:locale([a-z][a-z])/guides",
       "destination": "/:locale/guides/",
       "permanent": true

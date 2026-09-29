@@ -22,7 +22,7 @@ description: Gdy piszemy nowy poradnik (MDX) albo przepisujemy istniejący. Uruc
 ## Czego nie robić
 
 - **Nie rób formatu „zadanie na dzień N".** Był proponowany i został odrzucony. Tematy dla deweloperów nie są domyślną ścieżką wprowadzającą; można je opisać jako opcjonalne rozwinięcie dla zainteresowanych początkujących.
-- **Nie pisz o kampaniach zewnętrznych** (posty na nostr, nagrody w satach). To terytorium Piotra, obsługiwane poza repo.
+- **Nie pisz o kampaniach zewnętrznych** (posty na nostr, nagrody w satach). To zakres ptrio42, obsługiwany poza repo.
 - Nie tłumacz terminów protokołu: `npub`, `nsec`, `relay`, `NIP` zostają.
 
 ## Zamknięcie

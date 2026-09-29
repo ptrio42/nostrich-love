@@ -3334,7 +3334,10 @@
       "userMenu": "Menu użytkownika",
       "toggleMenu": "Otwórz lub zamknij menu nawigacji",
       "mainNav": "Nawigacja główna",
-      "mobileNav": "Nawigacja mobilna"
+      "mobileNav": "Nawigacja mobilna",
+      "changeLanguage": "Zmień język",
+      "currentLanguage": "Zmień język, obecnie: {language}",
+      "selectLanguage": "Wybierz język"
     }
   },
   "aboutPage": {
@@ -3598,6 +3601,16 @@
     }
   },
   "homePage": {
+    "resume": {
+      "welcome": "Witaj ponownie!",
+      "continue": "Poziom {level}: kontynuuj naukę",
+      "reading": "Ostatnio czytany poradnik:",
+      "recently": "Niedawno",
+      "guidesCompleted": "Ukończone poradniki, poziom {level}: {done}/{total}",
+      "resume": "Wznów",
+      "viewProgress": "Zobacz postępy"
+    },
+    "organizationDescription": "Bezpłatny kurs open source dla początkujących o Nostr, zdecentralizowanym protokole społecznościowym.",
     "meta": {
       "title": "Poznaj Nostr: bezpłatny kurs dla początkujących",
       "description": "Poznaj Nostr krok po kroku w bezpłatnym kursie dla początkujących. Dowiedz się, co się zmienia, opublikuj pierwszy wpis i znajdź osoby do obserwowania. 16 poradników w siedmiu językach."
@@ -3618,12 +3631,36 @@
     },
     "comparisons": {
       "title": "Jak Nostr wypada w porównaniu?",
-      "description": "Zobacz różnice między Nostrem a Twitterem/X, Mastodonem i Bluesky."
+      "description": "Zobacz różnice między Nostrem a Twitterem/X, Mastodonem i Bluesky.",
+      "compare": "Porównaj",
+      "englishNote": "Trzy powyższe porównania są dostępne po angielsku.",
+      "deepDive": "Nostr, ActivityPub i Bluesky: porównanie trzech protokołów",
+      "cards": {
+        "twitter": {
+          "title": "Nostr a Twitter/X",
+          "description": "Kontrola nad kontem, zasięg i moderacja"
+        },
+        "mastodon": {
+          "title": "Nostr a Mastodon",
+          "description": "Serwery Nostr i instancje Mastodona działają inaczej"
+        },
+        "bluesky": {
+          "title": "Nostr a Bluesky",
+          "description": "Dwa podejścia do zdecentralizowanej tożsamości"
+        }
+      }
     },
     "closing": {
       "title": "Znajdź kolejny poradnik",
       "description": "Pełny kurs obejmuje prywatność, różne aplikacje i to, jak Nostr działa od środka.",
-      "cta": "Przejrzyj wszystkie poradniki"
+      "cta": "Przejrzyj wszystkie poradniki",
+      "moreTitle": "Znasz już Nostr? Odkryj więcej:",
+      "links": {
+        "tools": "Poznaj narzędzia",
+        "resources": "Przejrzyj materiały o Nostr",
+        "glossary": "Sprawdź pojęcie w słowniku Nostr",
+        "github": "Zobacz kod na GitHubie"
+      }
     },
     "whatChanges": {
       "title": "Co zmienia się w Nostr",

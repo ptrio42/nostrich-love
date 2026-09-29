@@ -61,7 +61,7 @@ const currentYear = new Date().getFullYear();
 // hubs were reachable only via the sitemap and hreflang, which are hints rather
 // than links, so 105 localized URLs carried no internal link equity.
 //
-// On a route that genuinely ships locale variants (guides, glossary) these
+// On a route that genuinely ships locale variants (home, guides, glossary) these
 // mirror the hreflang cluster exactly — localizedLocales() is the same source
 // of truth SEO.astro uses, so this can never advertise a 404. Everywhere else
 // they fall back to each locale's guides hub, which is the entry point a
@@ -104,7 +104,7 @@ const externalAria = (label: string) =>
       <!-- Brand -->
       <div class="lg:col-span-2">
         <a
-          href="/"
+          href={localePath('/', currentLocale)}
           class="flex items-center gap-2 mb-4"
           aria-label={t('footer.homeAria', currentLocale).replace('{site}', siteConfig.name)}
         >

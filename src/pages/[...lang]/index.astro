@@ -1,16 +1,22 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/layout/Header.astro';
-import Footer from '../components/layout/Footer.astro';
-import { ResumeBanner } from '../components/navigation/ResumeBanner';
-import { siteConfig } from '../config/site';
-import { COMPARISON_PAGES } from '../config/comparison-pages';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import { ResumeBanner } from '../../components/navigation/ResumeBanner';
+import { siteConfig } from '../../config/site';
+import { COMPARISON_PAGES } from '../../config/comparison-pages';
 import { getCollection } from 'astro:content';
-import { SKILL_LEVELS } from '../data/learning-paths';
-import { DEFAULT_LOCALE, guidePath, guidesIndexPath } from '../i18n/paths';
-import { getTranslations } from '../i18n';
+import { SKILL_LEVELS } from '../../data/learning-paths';
+import { DEFAULT_LOCALE, guidePath, guidesIndexPath, langParam, isLocale, localePath, localizedLocales } from '../../i18n/paths';
+import { locales, getLocaleConfig } from '../../config/locales';
+import { getTranslations } from '../../i18n';
 
-const translations = getTranslations(DEFAULT_LOCALE) as typeof import('../i18n/locales/en.json');
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { lang: langParam(locale) } }));
+}
+
+const currentLocale = isLocale(Astro.params.lang) ? Astro.params.lang : DEFAULT_LOCALE;
+const translations = getTranslations(currentLocale) as typeof import('../../i18n/locales/en.json');
 
 // The title template (src/config/site.ts) already appends "| Nostrich.love",
 // so the brand must NOT be repeated here — it was, producing
@@ -41,8 +47,7 @@ const jsonLd = [
     '@id': ORG_ID,
     name: siteConfig.name,
     url: siteConfig.url,
-    description:
-      'A free, open-source beginner guide to Nostr, the decentralized social protocol.',
+    description: translations.homePage.organizationDescription,
     email: siteConfig.author.email,
     logo: {
       '@type': 'ImageObject',
@@ -65,21 +70,24 @@ const jsonLd = [
     url: siteConfig.url,
     description,
     publisher: { '@id': ORG_ID },
-    inLanguage: ['en', 'pl', 'es', 'de', 'zh', 'ar', 'hi'],
+    inLanguage: locales.map((locale) => getLocaleConfig(locale).htmlLang),
   },
 ];
 
-const englishGuides = await getCollection('guides', (entry) => entry.slug.startsWith(`${DEFAULT_LOCALE}/`));
+const localeGuides = await getCollection('guides', (entry) => entry.slug.startsWith(`${currentLocale}/`));
+const guideTitles = Object.fromEntries(
+  localeGuides.map((entry) => [entry.slug.replace(`${currentLocale}/`, ''), entry.data.title])
+);
 const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
-  .map((slug) => englishGuides.find((entry) => entry.slug === `${DEFAULT_LOCALE}/${slug}`))
+  .map((slug) => localeGuides.find((entry) => entry.slug === `${currentLocale}/${slug}`))
   .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
 
 ---
 
-<Layout title={title} description={description} jsonLd={jsonLd}>
+<Layout title={title} description={description} locale={currentLocale} jsonLd={jsonLd}>
   <Header />
   
-  <ResumeBanner client:idle />
+  <ResumeBanner client:idle guideTitles={guideTitles} />
 
   <main id="main-content">
     <!-- Answer the opening problem before introducing the course. -->
@@ -92,20 +100,20 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
         </div>
         <img src="/illustrations/hero-platform-cabinet.webp" alt="" width="640" height="729" loading="eager" decoding="async" class="ms-auto h-auto w-20 sm:w-28 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-auto lg:w-64 lg:self-center" />
         <div class="lg:col-start-1 lg:row-start-2">
-          <h1 class="mt-2 max-w-measure-narrow text-balance text-display font-bold text-gray-900 dark:text-white lg:mt-9">
+          <h1 class="mt-2 max-w-measure-narrow text-balance text-display-home font-bold text-gray-900 dark:text-white lg:mt-9">
             {translations.homePage.hero.title}
           </h1>
           <p class="mt-6 max-w-measure text-lead text-gray-600 dark:text-gray-400">
             {translations.homePage.hero.description}
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a href={guidePath('what-is-nostr', DEFAULT_LOCALE)} class="inline-flex items-center justify-center rounded-md bg-primary-600 px-6 py-3 text-body font-semibold text-white transition-colors hover:bg-primary-700">
+            <a href={guidePath('what-is-nostr', currentLocale)} class="inline-flex items-center justify-center rounded-md bg-primary-600 px-6 py-3 text-body font-semibold text-white transition-colors hover:bg-primary-700">
               {translations.homePage.hero.primaryCta}
               <svg class="ms-2 h-5 w-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
-            <a href={guidesIndexPath(DEFAULT_LOCALE)} class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.hero.secondaryCta}</a>
+            <a href={guidesIndexPath(currentLocale)} class="text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.hero.secondaryCta}</a>
           </div>
         </div>
       </div>
@@ -135,7 +143,7 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
           {firstSteps.map((guide, index) => (
             <li>
               <a
-                href={guidePath(guide.slug.replace(`${DEFAULT_LOCALE}/`, ''), DEFAULT_LOCALE)}
+                href={guidePath(guide.slug.replace(`${currentLocale}/`, ''), currentLocale)}
                 class="group grid grid-cols-[2.5rem_minmax(0,1fr)_auto] gap-x-3 border-b border-gray-200 py-5 transition-colors hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:gap-x-6"
               >
                 <span class="font-display text-h2 tabular-nums text-gray-400 dark:text-gray-500" aria-hidden="true">
@@ -154,7 +162,7 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
             </li>
           ))}
         </ol>
-        <a href={guidesIndexPath(DEFAULT_LOCALE)} class="mt-6 inline-block text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.firstGuides.allGuides}</a>
+        <a href={guidesIndexPath(currentLocale)} class="mt-6 inline-block text-body-sm font-medium text-primary-text underline underline-offset-2 dark:text-primary-400">{translations.homePage.firstGuides.allGuides}</a>
       </div>
     </section>
 
@@ -182,12 +190,13 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
           {COMPARISON_PAGES.map((item) => (
             <a
               href={item.href}
+              hreflang="en"
               class="group border-t-2 border-gray-300 pt-4 transition-colors hover:border-primary-600 dark:border-gray-700 dark:hover:border-primary-400"
             >
-              <h3 class="text-h3 font-semibold text-gray-900 underline-offset-2 group-hover:underline dark:text-white">{item.label}</h3>
-              <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{item.blurb}</p>
+              <h3 class="text-h3 font-semibold text-gray-900 underline-offset-2 group-hover:underline dark:text-white">{translations.homePage.comparisons.cards[item.id].title}</h3>
+              <p class="mt-2 text-body-sm text-gray-600 dark:text-gray-400">{translations.homePage.comparisons.cards[item.id].description}</p>
               <div class="mt-4 flex items-center text-body-sm font-medium text-primary-text dark:text-primary-400">
-                Compare
+                {translations.homePage.comparisons.compare}
                 <svg class="ms-2 h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
                 </svg>
@@ -195,6 +204,9 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
             </a>
           ))}
         </div>
+        {currentLocale !== DEFAULT_LOCALE && (
+          <p class="mt-6 text-body-sm text-gray-500 dark:text-gray-400">{translations.homePage.comparisons.englishNote}</p>
+        )}
 
         <!--
           The three-way deep dive is the site's strongest asset for this audience
@@ -206,10 +218,10 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
         -->
         <p class="mt-8 text-body-sm text-gray-600 dark:text-gray-400">
           <a
-            href="/guides/protocol-comparison"
+            href={guidePath('protocol-comparison', currentLocale)}
             class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2"
           >
-            Nostr vs ActivityPub vs Bluesky: all three protocols compared
+            {translations.homePage.comparisons.deepDive}
           </a>
         </p>
       </div>
@@ -228,7 +240,7 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
           </p>
         </div>
         <a
-          href={guidesIndexPath(DEFAULT_LOCALE)}
+          href={guidesIndexPath(currentLocale)}
           class="inline-flex items-center justify-center rounded-md bg-primary-600 px-8 py-4 text-body font-semibold text-white transition-colors hover:bg-primary-700 lg:justify-self-end"
         >
           {translations.homePage.closing.cta}
@@ -243,12 +255,15 @@ const firstSteps = SKILL_LEVELS.beginner.sequence.slice(0, 4)
           topical signal. Descriptive anchor text, from the page with the most
           authority to spend.
         -->
-        <p class="text-body-sm text-gray-500 dark:text-gray-400 lg:col-span-2">
-          Already know Nostr? <a href="/tools" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">Jump to Tools</a> •
-          Browse <a href="/resources" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">Nostr resources</a> •
-          Look up a term in the <a href="/glossary" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">Nostr glossary</a> •
-          Open source on <a href="https://github.com/ptrio42/nostrich-love" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">GitHub</a>
-        </p>
+        <div class="text-body-sm text-gray-500 dark:text-gray-400 lg:col-span-2">
+          <p>{translations.homePage.closing.moreTitle}</p>
+          <ul class="mt-2 flex flex-wrap gap-x-5 gap-y-2">
+            <li><a href="/tools" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2" hreflang="en">{translations.homePage.closing.links.tools}</a></li>
+            <li><a href="/resources" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2" hreflang="en">{translations.homePage.closing.links.resources}</a></li>
+            <li><a href={localizedLocales('/glossary/').includes(currentLocale) ? localePath('/glossary/', currentLocale) : '/glossary/'} class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">{translations.homePage.closing.links.glossary}</a></li>
+            <li><a href="https://github.com/ptrio42/nostrich-love" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-text dark:text-primary-400 underline underline-offset-2">{translations.homePage.closing.links.github}</a></li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>

@@ -32,6 +32,6 @@ npm run check:labels   # tylko jeśli ruszaliśmy formularze
 - **Nie raportuj „gotowe", jeśli bramka nie przeszła.** Powiedz która i pokaż wyjście.
 - Liczby z pierwszego przebiegu (ile plików, ile wystąpień, ile testów) potwierdź drugą, niezależną metodą albo nazwij szacunkiem.
 
-## Nieodwracalne — wymagają „tak" od Piotra
+## Nieodwracalne, wymagają wyraźnej zgody ptrio42
 
-Push na `main`, deploy, publikacja zdarzenia na nostr z konta **ptrio42**, zmiany na trzech przekaźnikach. Zielone bramki nie są zgodą.
+Push na `main`, deploy, publikacja zdarzenia na nostr z konta ptrio42, zmiany na trzech przekaźnikach. Zielone bramki nie są zgodą.

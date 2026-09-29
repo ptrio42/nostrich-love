@@ -137,7 +137,7 @@ const UNMIRRORABLE: Record<string, RegExp> = {
 // the tokens you removed in the same commit. Raising a baseline means you added
 // a physical direction utility — say why in the commit message.
 // 2026-08-05, 96→97 / 178→180: the "Coming from another platform?" card grid
-// in src/pages/index.astro adds one arrow that nudges on hover, using the
+// in src/pages/[...lang]/index.astro adds one arrow that nudges on hover, using the
 // mirrored pair the four Quick Start cards directly above it already use
 // (`group-hover:translate-x-1` + `rtl:group-hover:-translate-x-1`). Correct
 // under RTL; counted here only because translate-x has no logical form.

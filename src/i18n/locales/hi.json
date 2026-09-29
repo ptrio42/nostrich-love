@@ -3334,7 +3334,10 @@
       "userMenu": "उपयोगकर्ता मेनू",
       "toggleMenu": "नेविगेशन मेनू खोलें या बंद करें",
       "mainNav": "मुख्य नेविगेशन",
-      "mobileNav": "मोबाइल नेविगेशन"
+      "mobileNav": "मोबाइल नेविगेशन",
+      "changeLanguage": "भाषा बदलें",
+      "currentLanguage": "भाषा बदलें, वर्तमान: {language}",
+      "selectLanguage": "भाषा चुनें"
     }
   },
   "aboutPage": {
@@ -3598,6 +3601,16 @@
     }
   },
   "homePage": {
+    "resume": {
+      "welcome": "वापसी पर स्वागत है!",
+      "continue": "{level} स्तर पर सीखना जारी रखें",
+      "reading": "आप यह गाइड पढ़ रहे थे:",
+      "recently": "हाल ही में",
+      "guidesCompleted": "{level} स्तर की पूरी की गई गाइड: {done}/{total}",
+      "resume": "पढ़ना जारी रखें",
+      "viewProgress": "प्रगति देखें"
+    },
+    "organizationDescription": "विकेंद्रीकृत सोशल प्रोटोकॉल Nostr को समझने के लिए शुरुआती लोगों का मुफ़्त, ओपन-सोर्स कोर्स।",
     "meta": {
       "title": "Nostr सीखें: शुरुआती लोगों के लिए मुफ़्त कोर्स",
       "description": "मुफ़्त शुरुआती कोर्स से Nostr को चरण दर चरण सीखें। जानें कि इसमें क्या बदलता है, अपनी पहली पोस्ट करें और फ़ॉलो करने के लिए लोगों को खोजें। सात भाषाओं में 16 गाइड।"
@@ -3618,12 +3631,36 @@
     },
     "comparisons": {
       "title": "Nostr की तुलना कैसे करें?",
-      "description": "Twitter/X, Mastodon और Bluesky से इसके अंतर देखें।"
+      "description": "Twitter/X, Mastodon और Bluesky से इसके अंतर देखें।",
+      "compare": "तुलना देखें",
+      "englishNote": "ऊपर दी गई तीन तुलना अंग्रेज़ी में उपलब्ध हैं।",
+      "deepDive": "Nostr, ActivityPub और Bluesky: तीनों प्रोटोकॉल की तुलना",
+      "cards": {
+        "twitter": {
+          "title": "Nostr और Twitter/X",
+          "description": "खाते पर नियंत्रण, पहुँच और मॉडरेशन की तुलना"
+        },
+        "mastodon": {
+          "title": "Nostr और Mastodon",
+          "description": "रिले और इंस्टेंस अलग तरह से काम करते हैं"
+        },
+        "bluesky": {
+          "title": "Nostr और Bluesky",
+          "description": "विकेंद्रीकृत पहचान के दो तरीके"
+        }
+      }
     },
     "closing": {
       "title": "अपनी अगली गाइड खोजें",
       "description": "पूरे कोर्स में गोपनीयता, अलग-अलग ऐप और Nostr के काम करने के तरीके को समझाया गया है।",
-      "cta": "सभी गाइड देखें"
+      "cta": "सभी गाइड देखें",
+      "moreTitle": "Nostr से परिचित हैं? आगे देखें:",
+      "links": {
+        "tools": "टूल देखें",
+        "resources": "Nostr के संसाधन पढ़ें",
+        "glossary": "Nostr शब्दावली में कोई शब्द खोजें",
+        "github": "GitHub पर सोर्स कोड देखें"
+      }
     },
     "whatChanges": {
       "title": "Nostr में क्या बदलता है",

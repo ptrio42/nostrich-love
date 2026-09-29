@@ -69,4 +69,4 @@ const isReply = (event: any): boolean =>
 
 `docs/internal/NOSTR_KNOWLEDGE.md` — 626 linii. Wczytuj przy realnej robocie protokołowej, nie przy każdej wzmiance o Nostr.
 
-**Publikacja zdarzenia z konta ptrio42 i zmiany na trzech przekaźnikach Piotra wymagają jego „tak".** Czytanie — nie.
+**Publikacja zdarzenia z konta ptrio42 i zmiany na trzech przekaźnikach wymagają wyraźnej zgody ptrio42.** Czytanie nie wymaga zgody.

@@ -152,6 +152,7 @@ line height and letter spacing.** Use the name; do not bolt a `leading-*` or
 | class | size | line height | tracking | use |
 | --- | --- | --- | --- | --- |
 | `text-display` | `clamp(2.5rem, 6vw, 3.75rem)` | 1.05 | −0.022em | hero h1, one per page at most |
+| `text-display-home` | `clamp(2.5rem, 4vw, 2.9375rem)` | 1.05 | −0.022em | home hero h1 beside the illustration, sized for all translations |
 | `text-h1` | 2.25rem | 1.12 | −0.02em | page title |
 | `text-h2` | 1.75rem | 1.22 | −0.015em | section |
 | `text-h3` | 1.3125rem | 1.32 | −0.01em | subsection, card title |
@@ -162,8 +163,8 @@ line height and letter spacing.** Use the name; do not bolt a `leading-*` or
 | `text-caption` | 0.8125rem | 1.5 | 0.005em | metadata, timestamps |
 | `text-micro` | 0.6875rem | 1.4 | 0.07em | eyebrows and labels; always with `uppercase` |
 
-`text-display` is a `clamp()`, so it needs no responsive prefixes. Do not write
-`text-4xl md:text-6xl` alongside it.
+`text-display` and `text-display-home` use `clamp()`, so they need no responsive prefixes. Do not write
+`text-4xl md:text-6xl` alongside either class.
 
 Body is 17px, not 16. System UI faces run small next to a display serif and the
 page reads thin at 16.

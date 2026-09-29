@@ -3334,7 +3334,10 @@
       "userMenu": "Benutzermenü",
       "toggleMenu": "Navigationsmenü öffnen oder schließen",
       "mainNav": "Hauptnavigation",
-      "mobileNav": "Mobile Navigation"
+      "mobileNav": "Mobile Navigation",
+      "changeLanguage": "Sprache ändern",
+      "currentLanguage": "Sprache ändern, aktuell: {language}",
+      "selectLanguage": "Sprache auswählen"
     }
   },
   "aboutPage": {
@@ -3598,6 +3601,16 @@
     }
   },
   "homePage": {
+    "resume": {
+      "welcome": "Willkommen zurück!",
+      "continue": "Lerne auf dem Niveau {level} weiter",
+      "reading": "Zuletzt gelesen:",
+      "recently": "Vor Kurzem",
+      "guidesCompleted": "Abgeschlossene Anleitungen auf Niveau {level}: {done}/{total}",
+      "resume": "Weiterlesen",
+      "viewProgress": "Fortschritt ansehen"
+    },
+    "organizationDescription": "Ein kostenloser Open-Source-Kurs für Einsteiger über Nostr, das dezentrale soziale Protokoll.",
     "meta": {
       "title": "Nostr lernen: kostenloser Kurs für Einsteiger",
       "description": "Lerne Nostr Schritt für Schritt in einem kostenlosen Einsteigerkurs. Erfahre, was sich ändert, veröffentliche deinen ersten Beitrag und finde Menschen, denen du folgen möchtest. 16 Anleitungen in sieben Sprachen."
@@ -3618,12 +3631,36 @@
     },
     "comparisons": {
       "title": "Wie unterscheidet sich Nostr?",
-      "description": "Entdecke die Unterschiede zu Twitter/X, Mastodon und Bluesky."
+      "description": "Entdecke die Unterschiede zu Twitter/X, Mastodon und Bluesky.",
+      "compare": "Vergleichen",
+      "englishNote": "Die drei Vergleiche oben sind auf Englisch verfügbar.",
+      "deepDive": "Nostr, ActivityPub und Bluesky: alle drei Protokolle im Vergleich",
+      "cards": {
+        "twitter": {
+          "title": "Nostr und Twitter/X im Vergleich",
+          "description": "Kontrolle über das Konto, Reichweite und Moderation"
+        },
+        "mastodon": {
+          "title": "Nostr und Mastodon im Vergleich",
+          "description": "Relays und Instanzen erfüllen unterschiedliche Aufgaben"
+        },
+        "bluesky": {
+          "title": "Nostr und Bluesky im Vergleich",
+          "description": "Zwei Ansätze für dezentrale Identität"
+        }
+      }
     },
     "closing": {
       "title": "Finde deine nächste Anleitung",
       "description": "Der vollständige Kurs behandelt Privatsphäre, verschiedene Apps und die Technik hinter Nostr.",
-      "cta": "Alle Anleitungen ansehen"
+      "cta": "Alle Anleitungen ansehen",
+      "moreTitle": "Du kennst Nostr schon? Entdecke mehr:",
+      "links": {
+        "tools": "Tools entdecken",
+        "resources": "Nostr-Ressourcen ansehen",
+        "glossary": "Begriff im Nostr-Glossar nachschlagen",
+        "github": "Quellcode auf GitHub ansehen"
+      }
     },
     "whatChanges": {
       "title": "Was sich bei Nostr ändert",

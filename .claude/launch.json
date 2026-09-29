@@ -10,7 +10,7 @@
     {
       "name": "sandstr-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "/Users/piotrczarnoleski/sandstr", "--", "--port", "5199", "--strictPort"],
+      "runtimeArgs": ["run", "dev", "--prefix", "../sandstr", "--", "--port", "5199", "--strictPort"],
       "port": 5199
     }
   ]

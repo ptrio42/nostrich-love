@@ -117,36 +117,12 @@ describe('vercel.json', () => {
     expect(host.test('evil-www.nostrich.love.example.com')).toBe(false);
   });
 
-  it('lands every prefixed locale on its guides hub instead of a 404', () => {
-    // /pl/, /es/, /de/, /zh/, /ar/ and /hi/ all returned 404: the homepage is an
-    // English-only route, so the locale prefixes exist for /guides and /glossary
-    // but not for the root. localeEntryPath() in src/i18n/paths.ts already sends
-    // a reader who switches language on the homepage to that locale's guides
-    // hub; this makes the bare URL agree with it.
-    //
-    // This is NOT the hreflang fix. An hreflang alternate has to be a canonical
-    // URL that answers 200, and it has to be reciprocal — /pl/guides/ already
-    // names /guides/ as its English alternate and cannot also name /. Annotating
-    // the homepage cluster needs real localized homepages.
-    const landing = config.redirects.filter(
-      (entry: { destination: string }) => entry.destination === '/:lang/guides/'
-    );
-    expect(landing).toHaveLength(2);
-
-    // Both spellings are needed: Vercel matches the source literally, which is
-    // why /en/guides and /en/guides/ are two separate entries further down.
-    expect(landing.map((entry: { source: string }) => entry.source).sort()).toEqual([
-      '/:lang(pl|es|de|zh|ar|hi)',
-      '/:lang(pl|es|de|zh|ar|hi)/',
-    ]);
-    for (const entry of landing) expect(entry.permanent).toBe(true);
-
-    // vercel.json is static JSON and cannot import src/config/locales.ts, so the
-    // locale list is duplicated here the same way astro.config.mjs duplicates it
-    // for the sitemap. This is the assertion that keeps the copy honest: adding
-    // a locale without touching vercel.json fails here rather than shipping a
-    // 404 on the new /{locale}/.
-    const declared = landing[0].source.match(/\(([^)]+)\)/)?.[1].split('|');
-    expect(declared).toEqual(locales.filter((locale) => locale !== 'en'));
+  it('does not redirect localized homepages away from their content', () => {
+    const rootPaths = locales.filter((locale) => locale !== 'en')
+      .flatMap((locale) => [`/${locale}`, `/${locale}/`]);
+    for (const path of rootPaths) {
+      expect(config.redirects.some((entry: { source: string }) => entry.source === path)).toBe(false);
+    }
+    expect(config.redirects.some((entry: { destination: string }) => entry.destination === '/:lang/guides/')).toBe(false);
   });
 });

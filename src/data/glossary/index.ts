@@ -24,7 +24,7 @@ export type GlossaryLocale = (typeof GLOSSARY_LOCALES)[number];
  * tests/glossary-parity.test.ts enforces it at runtime (against `as` casts).
  *
  * `nsec-format`/`npub-format` are the bech32-encoding entries the old page
- * rendered as "_nsec"/"_npub"; kept as distinct terms (merging is Piotr's
+ * rendered as "_nsec"/"_npub"; kept as distinct terms (merging is ptrio42's
  * call, see docs/audit-2026-07 external-funnel plan §4).
  */
 export const TERM_IDS = [

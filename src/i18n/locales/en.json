@@ -3334,7 +3334,10 @@
       "userMenu": "User menu",
       "toggleMenu": "Toggle navigation menu",
       "mainNav": "Main navigation",
-      "mobileNav": "Mobile navigation"
+      "mobileNav": "Mobile navigation",
+      "changeLanguage": "Change language",
+      "currentLanguage": "Change language, current: {language}",
+      "selectLanguage": "Select language"
     }
   },
   "aboutPage": {
@@ -3598,6 +3601,16 @@
     }
   },
   "homePage": {
+    "resume": {
+      "welcome": "Welcome back!",
+      "continue": "Continue your {level} journey",
+      "reading": "You were reading:",
+      "recently": "Recently",
+      "guidesCompleted": "{done}/{total} {level} guides completed",
+      "resume": "Resume",
+      "viewProgress": "View progress"
+    },
+    "organizationDescription": "A free, open-source beginner course about Nostr, the decentralized social protocol.",
     "meta": {
       "title": "Learn Nostr: Free Course for Beginners",
       "description": "Learn Nostr step by step with a free beginner course. Understand what changes, make your first post, and find people to follow. Read 16 guides in seven languages."
@@ -3635,12 +3648,36 @@
     },
     "comparisons": {
       "title": "How does Nostr compare?",
-      "description": "Explore the differences with Twitter/X, Mastodon, and Bluesky."
+      "description": "Explore the differences with Twitter/X, Mastodon, and Bluesky.",
+      "compare": "Compare",
+      "englishNote": "The three comparisons above are available in English.",
+      "deepDive": "Nostr, ActivityPub and Bluesky: compare all three protocols",
+      "cards": {
+        "twitter": {
+          "title": "Nostr vs Twitter/X",
+          "description": "Ownership, reach and moderation, side by side"
+        },
+        "mastodon": {
+          "title": "Nostr vs Mastodon",
+          "description": "Relays and instances work differently"
+        },
+        "bluesky": {
+          "title": "Nostr vs Bluesky",
+          "description": "Two approaches to decentralized identity"
+        }
+      }
     },
     "closing": {
       "title": "Find your next guide",
       "description": "The full course covers privacy, different apps, and how Nostr works behind the scenes.",
-      "cta": "Browse all guides"
+      "cta": "Browse all guides",
+      "moreTitle": "Already know Nostr? Explore more:",
+      "links": {
+        "tools": "Explore the tools",
+        "resources": "Browse Nostr resources",
+        "glossary": "Look up a term in the Nostr glossary",
+        "github": "View the source on GitHub"
+      }
     }
   },
   "glossary": {

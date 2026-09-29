@@ -894,7 +894,7 @@ Severity is the verifier's corrected value, not the original reporter's.
 
 **Area:** repo-hygiene · **File:** `.gitignore` · **Effort:** S
 
-**Evidence:** `git worktree list` shows /Users/piotrczarnoleski/nostr-beginner-guide/.claude/worktrees/funny-noether-f07f82 on branch claude/funny-noether-f07f82 at c0e4922. `du -sh .claude` = 65M (grown from the audit's 52M). I read .gitignore in full today: it lists dist/, .astro/, node_modules/, logs, .env, .DS_Store, .idea/, .vercel, .ai, experiments, ai-docs, ai-scripts, learning — `.claude` is absent, and `git status --porcelain` reports `?? .claude/`.
+**Evidence:** `git worktree list` shows .claude/worktrees/funny-noether-f07f82 on branch claude/funny-noether-f07f82 at c0e4922. `du -sh .claude` = 65M (grown from the audit's 52M). I read .gitignore in full today: it lists dist/, .astro/, node_modules/, logs, .env, .DS_Store, .idea/, .vercel, .ai, experiments, ai-docs, ai-scripts, learning — `.claude` is absent, and `git status --porcelain` reports `?? .claude/`.
 
 **Impact:** `git add -A` would try to commit a nested repo; every repo-wide grep, IDE index and codemod sees two copies of every doc and config, so fixes to AGENTS.md silently leave the shadow copy stale.
 

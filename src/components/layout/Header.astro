@@ -16,7 +16,7 @@ const currentLocale = splitLocale(Astro.url.pathname).locale;
 //
 // A path gets a locale prefix ONLY where the build actually emitted one.
 // localizedLocales() is the same source of truth SEO.astro uses for hreflang:
-// /guides… ships in all seven locales, /glossary in en/pl/es/de, everything
+// The homepage and /guides… ship in all seven locales, /glossary in en/pl/es/de, everything
 // else in English only. Anything it does not list keeps the English URL, which
 // is a language mismatch but a page that exists — inventing /pl/tools here
 // would add to the 106 not-found URLs Google already has for this domain.
@@ -51,7 +51,7 @@ const homeAria = t('header.aria.home', currentLocale).replace('{site}', siteConf
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3" aria-label={homeAria}>
+      <a href={localePath('/', currentLocale)} class="flex items-center gap-3" aria-label={homeAria}>
         <div class="w-10 h-10 flex-shrink-0">
           <img class="scale-[1.5]" src="/logo-header.png" width={40} height={40} alt="" />
         </div>

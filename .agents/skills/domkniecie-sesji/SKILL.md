@@ -5,7 +5,7 @@ description: Gdy kończymy sesję albo domykamy większy kawałek roboty. Urucha
 
 # Domknięcie sesji
 
-Odpalane **na hasło Piotra**, nie z własnej inicjatywy — nie widzisz końca sesji, więc nie zgaduj.
+Odpalane **na hasło ptrio42**, nie z własnej inicjatywy. Nie widzisz końca sesji, więc nie zgaduj.
 
 ## 1. Co kosztowało czas
 
@@ -16,7 +16,7 @@ Nie „co poszło dobrze". Wyłącznie tarcie, i tylko takie, z którego da się
 - założenie, które okazało się fałszywe,
 - kontekst, którego brakowało na wejściu.
 
-**1–3 punkty. Jeśli nie ma konkretu — napisz, że nie ma, i przejdź dalej.** Bez oceniania Piotra i bez „mogłeś mnie lepiej poprowadzić".
+**1-3 punkty. Jeśli nie ma konkretu, napisz, że nie ma, i przejdź dalej.** Bez oceniania ptrio42 i bez „mogłeś mnie lepiej poprowadzić".
 
 ## 2. Notatka przekazania
 
@@ -24,7 +24,7 @@ Do 10 linii, do wklejenia na start kolejnej sesji:
 
 - gdzie jesteśmy,
 - następny krok,
-- **ostatnia linia:** moje pytania bez odpowiedzi + kroki zablokowane po stronie Piotra (panel, DNS, konto, jego decyzja).
+- **ostatnia linia:** moje pytania bez odpowiedzi + kroki zablokowane po stronie ptrio42 (panel, DNS, konto, jego decyzja).
 
 Ostatnia linia to **nie** miejsce na odgrzewanie moich pomysłów ani rzeczy świadomie odrzuconych.
 
