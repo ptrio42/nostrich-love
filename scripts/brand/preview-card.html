@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nostrich.love social preview artwork</title>
+    <style>
+      @font-face {
+        font-family: "Fraunces";
+        src: url("../../public/fonts/fraunces-latin-wght-normal.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 100 900;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+      }
+
+      .card {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #faf8f2;
+      }
+
+      .wordmark {
+        position: absolute;
+        top: 38px;
+        left: 50%;
+        color: #240843;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 80px;
+        font-weight: 700;
+        letter-spacing: -0.026em;
+        line-height: 1;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      }
+
+      .wordmark span {
+        color: #8054c7;
+      }
+
+      .bird {
+        position: absolute;
+        left: 50%;
+        bottom: 9px;
+        width: 520px;
+        height: auto;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="wordmark">nostrich<span>.</span>love</div>
+      <img class="bird" src="../../public/illustrations/identity-across-apps.webp" alt="" />
+    </main>
+  </body>
+</html>

@@ -9,7 +9,7 @@ export const siteConfig = {
   description:
     "A comprehensive beginner-friendly guide to Nostr - the decentralized social protocol. Learn how to get started, generate keys, choose clients, and join the censorship-resistant social web at Nostrich.love",
   url: "https://nostrich.love",
-  ogImage: "/preview_image.png",
+  ogImage: "/brand/illustrated/preview.png",
 
   // SEO Defaults
   seo: {
@@ -17,13 +17,11 @@ export const siteConfig = {
     titleTemplate: "%s | Nostrich.love",
     defaultDescription:
       "A comprehensive beginner guide to Nostr - the decentralized social network protocol. Learn how to get started, generate keys, choose clients, and join the censorship-resistant social web at Nostrich.love",
-    defaultImage: "/preview_image.png",
-    // Intrinsic size of defaultImage, emitted as og:image:width/height so a
-    // scraper can lay the card out before the bytes arrive. Update both if the
-    // file is replaced. Was 2880x1368 / 1.13 MB; resampled to 1200 wide, which
-    // is the width every major consumer targets.
+    defaultImage: "/brand/illustrated/preview.png",
+    // Intrinsic size of the shared card, emitted as og:image:width/height.
+    // Update these values when replacing the image.
     defaultImageWidth: 1200,
-    defaultImageHeight: 570,
+    defaultImageHeight: 630,
     language: "en",
   },
 

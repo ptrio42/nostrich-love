@@ -64,14 +64,13 @@ describe('vercel.json', () => {
 
   // --- the two rules whose rationale the "//" keys used to carry -------------
 
-  it('serves unhashed public assets with a long immutable cache', () => {
-    // These filenames are stable and live outside Astro's hashed _astro/ output,
-    // so they inherited the HTML policy (max-age=0, must-revalidate) and the
-    // 262 KB share card was re-fetched from origin on every preview render.
+  it('serves versioned brand assets with a long immutable cache', () => {
+    // A new brand path prevents old immutable image URLs from keeping stale
+    // logo and share-card artwork after a redesign.
     const rule = config.headers.find((entry: { source: string }) =>
-      entry.source.includes('preview_image.png')
+      entry.source.includes('/brand/illustrated/')
     );
-    expect(rule, 'the immutable-cache rule for public/ assets is gone').toBeDefined();
+    expect(rule, 'the immutable-cache rule for brand assets is gone').toBeDefined();
     const cacheControl = rule.headers.find(
       (header: { key: string }) => header.key === 'Cache-Control'
     );

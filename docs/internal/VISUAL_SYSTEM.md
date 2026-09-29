@@ -50,6 +50,14 @@ that structure. Decoration cannot make a generic arrangement distinctive.
   `public/illustrations/`. Keep text selectable. Place art beside section
   headings or the whole statement, never in only one row of a parallel list.
   Keep it small enough on narrow screens that links remain easy to reach.
+- The site mark uses that illustrated bird's head and chest, with a deep-purple
+  outline, lilac feathers and yellow lightning-bolt beak. Its source is
+  `assets/brand/ostrich-mark.png`; public sizes and the social card live in
+  `public/brand/illustrated/`. Keep the mark readable at favicon size. The
+  social card centers the wordmark above the bird facing two app windows on a
+  plain cream field. `scripts/brand/preview-card.html` is the editable
+  composition source. Avoid glossy shading, a dark enclosing circle, and
+  screenshots of the homepage.
 - Keep the home hero's problem, concrete Nostr answer, and course introduction
   in one reading column. On wide screens, the cabinet sits beside the opening
   block. On narrow screens it follows the complete problem and answer, never
